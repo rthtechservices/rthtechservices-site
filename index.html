@@ -41,6 +41,66 @@
       box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 0 1px var(--ring) inset;
       backdrop-filter: blur(6px);
     }
+
+    /* ---------- NEW: Nav styles ---------- */
+    nav {
+      display:flex; align-items:center; gap:12px;
+      background: rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+    .nav-left{display:flex; align-items:center; gap:10px}
+    .nav-right{margin-left:auto; display:flex; align-items:center; gap:8px}
+    .nav-link, .menu-button {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-weight:600;
+    }
+    .nav-link:hover, .menu-button:hover { background: rgba(255,255,255,.05); }
+
+    /* Dropdown (pure CSS) */
+    .dropdown {
+      position: relative;
+    }
+    .dropdown[open] > summary,
+    .dropdown:hover > summary {
+      background: rgba(255,255,255,.05);
+      border-radius: 10px;
+    }
+    .dropdown > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      font-weight:600;
+    }
+    .dropdown > summary::-webkit-details-marker { display:none; }
+    .menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 220px;
+      background: color-mix(in hsl, var(--card), black 6%);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      z-index: 10;
+    }
+    .menu a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .menu a:hover { background: rgba(255,255,255,.05); }
+
     header{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
     .logo{
       width:56px; height:56px; border-radius:14px; display:grid; place-items:center;
@@ -95,6 +155,27 @@
 <body>
   <main class="wrap">
     <div class="card">
+
+      <!-- ========== NEW: Navigation bar ========== -->
+      <nav>
+        <div class="nav-left">
+          <a class="nav-link" href="/">Home</a>
+
+          <details class="dropdown">
+            <summary>Scripts ▾</summary>
+            <div class="menu" role="menu" aria-label="Scripts">
+              <a role="menuitem" href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/powershell" target="_blank" rel="noopener">PowerShell</a>
+              <a role="menuitem" href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/sql" target="_blank" rel="noopener">SQL</a>
+              <a role="menuitem" href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/utils" target="_blank" rel="noopener">Utilities</a>
+            </div>
+          </details>
+        </div>
+        <div class="nav-right">
+          <!-- room for future items (e.g., Contact, LinkedIn) -->
+        </div>
+      </nav>
+      <!-- ========== /Navigation bar ========== -->
+
       <header>
         <!-- Replace the lettermark with your logo image if desired -->
         <div class="logo" aria-hidden="true">RTH</div>
