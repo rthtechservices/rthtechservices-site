@@ -8,184 +8,116 @@
   <meta property="og:title" content="RTH Tech Services — Coming Soon">
   <meta property="og:description" content="SQL & SSRS reporting, Microsoft 365, and IT consulting. Site coming soon.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="" />
-  <meta name="theme-color" content="#4fa7db" />
+  <meta property="og:image" content="/RTH%20TSI%20Logo_ORIGINAL.png" />
+  <meta name="theme-color" content="#5CC1FF" />
   <style>
+    @font-face {
+  font-family: 'Roger';
+  src: url('/assets/fonts/Roger-Regular.woff2') format('woff2'),
+       url('/assets/fonts/Roger-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
     :root{
-      --bg1:#0b1220; /* deep blue */
-      --bg2:#111827; /* slate */
-      --card:#0f172a; /* slate-900 */
-      --acc:#4fa7db; /* user-preferred primary */
-      --acc2:#6f28db; /* user-preferred secondary */
-      --text:#e5e7eb; /* gray-200 */
-      --muted:#94a3b8; /* slate-400 */
-      --ring: rgba(79,167,219,.35);
+      --bg1:#0b1220;
+      --bg2:#111827;
+      --card:#0f172a;
+      --acc:#5CC1FF; /* brand blue */
+      --acc2:#8F00FF; /* brand purple */
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --ring: rgba(92,193,255,.35);
       --radius: 18px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      margin:0; font-family: 'Open Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background: radial-gradient(1200px 600px at 20% -10%, #14213d 0%, transparent 60%),
-                  radial-gradient(900px 500px at 120% 50%, rgba(111,40,219,.2) 0%, transparent 60%),
+                  radial-gradient(900px 500px at 120% 50%, rgba(143,0,255,.2) 0%, transparent 60%),
                   linear-gradient(160deg, var(--bg1), var(--bg2));
       display:grid; place-items:center; padding:24px;
     }
     .wrap{width:min(980px, 100%);}
     .card{
-      background:color-mix(in hsl, var(--card), black 6%);
-      border:1px solid color-mix(in hsl, var(--card), white 8%);
+      background:rgba(15,23,42,0.7);
+      border:1px solid rgba(255,255,255,.08);
       border-radius: var(--radius);
       padding: clamp(20px, 4vw, 40px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 0 1px var(--ring) inset;
-      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 20px rgba(92,193,255,.25);
+      backdrop-filter: blur(12px);
     }
-
-    /* ---------- NEW: Nav styles ---------- */
-    nav {
-      display:flex; align-items:center; gap:12px;
-      background: rgba(255,255,255,.02);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: 14px;
-      padding: 10px 12px;
-      margin-bottom: 16px;
-    }
-    .nav-left{display:flex; align-items:center; gap:10px}
-    .nav-right{margin-left:auto; display:flex; align-items:center; gap:8px}
-    .nav-link, .menu-button {
-      color: var(--text);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      font-weight:600;
-    }
-    .nav-link:hover, .menu-button:hover { background: rgba(255,255,255,.05); }
-
-    /* Dropdown (pure CSS) */
-    .dropdown {
-      position: relative;
-    }
-    .dropdown[open] > summary,
-    .dropdown:hover > summary {
-      background: rgba(255,255,255,.05);
-      border-radius: 10px;
-    }
-    .dropdown > summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 8px 12px;
-      font-weight:600;
-    }
-    .dropdown > summary::-webkit-details-marker { display:none; }
-    .menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      min-width: 220px;
-      background: color-mix(in hsl, var(--card), black 6%);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px;
-      padding: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      z-index: 10;
-    }
-    .menu a {
-      display: block;
-      color: var(--text);
-      text-decoration: none;
-      padding: 10px 10px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    .menu a:hover { background: rgba(255,255,255,.05); }
-
-    header{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-    .logo{
-      width:56px; height:56px; border-radius:14px; display:grid; place-items:center;
-      background: conic-gradient(from 180deg, var(--acc), var(--acc2));
-      box-shadow: 0 2px 14px rgba(79,167,219,.35);
-      font-weight:800; letter-spacing:.5px; font-size:20px;
-    }
-    .brand h1{margin:0; font-size:clamp(20px, 3.2vw, 28px)}
-    .brand p{margin:2px 0 0; color:var(--muted)}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; 
-      background: rgba(79,167,219,.12); color:#cfe9f7; border:1px solid rgba(79,167,219,.25);
-      font-size:14px; margin-top:12px;
-    }
+    header{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+    .logo img{height:64px; width:auto; border-radius:12px;}
+    .brand h1{margin:0; font-family: 'Roger', sans-serif; font-size:clamp(22px, 3.5vw, 32px); background:linear-gradient(90deg,var(--acc),var(--acc2)); -webkit-background-clip:text; color:transparent;}
+    .brand p{margin:2px 0 0; color:var(--muted); font-family:'Roger',sans-serif; letter-spacing:1px}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background: rgba(92,193,255,.12); color:#cfe9f7; border:1px solid rgba(92,193,255,.25); font-size:14px; margin-top:12px;}
+    nav{margin-left:auto}
+    .nav-list{list-style:none; margin:0; padding:0; display:flex; gap:18px;}
+    .nav-list li{position:relative}
+    .nav-list a{color:var(--text); text-decoration:none; font-weight:600; padding:6px 0; display:inline-block}
+    .nav-list a:hover{color:var(--acc)}
+    .dropdown{display:none; position:absolute; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:8px; top:100%; left:0; min-width:150px; z-index:10}
+    .dropdown a{display:block; padding:8px 12px}
+    .nav-list li:hover .dropdown{display:block}
     .grid{display:grid; grid-template-columns: 1fr; gap:20px; margin-top:22px}
     @media (min-width:720px){.grid{grid-template-columns: 2fr 1fr}}
-
     .section{background: rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); border-radius: var(--radius); padding:18px}
-    .section h2{margin:0 0 10px; font-size:18px}
+    .section h2{margin:0 0 10px; font-size:18px; color:var(--acc)}
     .cta-row{display:flex; gap:12px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px; text-decoration:none; 
-      background:linear-gradient(180deg, color-mix(in hsl, var(--acc), white 12%), var(--acc));
-      color:white; padding:12px 16px; border-radius:12px; font-weight:600; box-shadow: 0 6px 20px rgba(79,167,219,.35);
-      border:1px solid color-mix(in hsl, var(--acc), black 15%);
-    }
-    .btn.secondary{
-      background:transparent; color:var(--text);
-      border:1px dashed rgba(255,255,255,.25);
-    }
+    .btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; background:linear-gradient(90deg, var(--acc), var(--acc2)); color:white; padding:12px 16px; border-radius:12px; font-weight:600; box-shadow: 0 6px 20px rgba(143,0,255,.35); border:1px solid rgba(92,193,255,.25);}
+    .btn.secondary{background:transparent; color:var(--text); border:1px dashed rgba(255,255,255,.25);}
     .list{margin:0; padding-left:18px; color:var(--muted)}
     footer{margin-top:18px; color:var(--muted); font-size:13px}
-    a.link{color:#b9dfff; text-underline-offset:3px}
     .domains{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
     .chip{border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:6px 10px; font-size:12px; color:#cbd5e1}
   </style>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Rohan Hare",
-    "jobTitle":"IT Consultant & SQL/SSRS Specialist",
-    "url":"https://rthtechservices.com",
-    "email":"mailto:rohan@rthtechservices.com",
-    "sameAs":[
-      "https://github.com/", 
-      "https://www.linkedin.com/in/"
-    ]
-  }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poiret+One&display=swap" rel="stylesheet">
+  <style id="brand-overrides">
+    :root{--acc:#5CC1FF; --acc2:#8F00FF; --text:#e8eef6; --muted:#a5b4c8; --ring: rgba(92,193,255,.35)}
+    body{background: radial-gradient(1200px 600px at 15% -10%, rgba(92,193,255,.18) 0%, transparent 60%),
+                  radial-gradient(1000px 600px at 120% 40%, rgba(143,0,255,.18) 0%, transparent 60%),
+                  linear-gradient(160deg, #090d16, #0f1320);}    
+    .logo{width:64px; height:64px; border-radius:18px; overflow:hidden; background: conic-gradient(from 180deg, var(--acc), var(--acc2)); box-shadow: 0 6px 24px rgba(92,193,255,.35)}
+    .logo img{width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:screen}
+    .brand h1{font-family:'Roger', Inter, system-ui; letter-spacing:.08em}
+    .brand p{font-family:Inter; font-weight:600; letter-spacing:.2em; text-transform:uppercase}
+    .nav-list a{border-radius:10px; padding:6px 10px}
+    .nav-list a:hover{background: rgba(92,193,255,.10); color:#dbedff; border:1px solid rgba(92,193,255,.35)}
+  </style>
 </head>
 <body>
   <main class="wrap">
     <div class="card">
-
-      <!-- ========== NEW: Navigation bar ========== -->
-      <nav>
-        <div class="nav-left">
-          <a class="nav-link" href="/">Home</a>
-
-          <details class="dropdown">
-            <summary>Scripts ▾</summary>
-            <div class="menu" role="menu" aria-label="Scripts">
-              <a role="menuitem" href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/powershell" target="_blank" rel="noopener">PowerShell</a>
-              <a role="menuitem" href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/sql" target="_blank" rel="noopener">SQL</a>
-              <a role="menuitem" href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/utils" target="_blank" rel="noopener">Utilities</a>
-            </div>
-          </details>
-        </div>
-        <div class="nav-right">
-          <!-- room for future items (e.g., Contact, LinkedIn) -->
-        </div>
-      </nav>
-      <!-- ========== /Navigation bar ========== -->
-
       <header>
-        <!-- Replace the lettermark with your logo image if desired -->
-        <div class="logo" aria-hidden="true">RTH</div>
-        <div class="brand">
-          <h1>RTH Tech Services</h1>
-          <p>IT Consulting • SQL/SSRS Reporting • Microsoft 365</p>
-          <div class="pill" title="Lightweight static site">
-            <span>🚧</span> Website Coming Soon
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="logo" aria-hidden="true">
+            <!-- Place your logo image at /assets/logo-500.png in the site repo -->
+            <img src="/assets/logo-500.png" alt="RTH Tech Services logo" onerror="this.replaceWith(document.createTextNode('RTH'))"/>
+          </div>
+          <div class="brand">
+            <h1>RTH TECH SERVICES INC.</h1>
+            <p>Solutions Consultant</p>
+            <div class="pill"><span>🚧</span> Website Coming Soon</div>
           </div>
         </div>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="/index.html">Home</a></li>
+            <li>
+              <a href="#">Scripts ▾</a>
+              <div class="dropdown">
+                <a href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/powershell" target="_blank">PowerShell</a>
+                <a href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/sql" target="_blank">SQL</a>
+                <a href="https://github.com/rthtechservices/rthtechservices-scripts/tree/main/utils" target="_blank">Utilities</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
       </header>
 
       <div class="grid">
