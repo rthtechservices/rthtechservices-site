@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RTH Tech Services Inc. | IT Consultant</title>
+  <meta name="description" content="RTH Tech Services Inc. helps law firms and professional services organizations with Microsoft 365, SharePoint, reporting, automation, and practical IT consulting." />
+  <meta property="og:title" content="RTH Tech Services Inc. | IT Consultant" />
+  <meta property="og:description" content="Independent IT consulting focused on Microsoft 365, SharePoint, reporting, automation, and business systems improvement." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/logo-500.png" />
+  <meta name="theme-color" content="#4fa7db" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a1220;
+      --panel: rgba(12, 21, 38, 0.82);
+      --panel-2: rgba(17, 27, 47, 0.86);
+      --line: rgba(255,255,255,0.10);
+      --line-strong: rgba(79,167,219,0.35);
+      --text: #ecf3fb;
+      --muted: #a8bbd1;
+      --accent: #4fa7db;
+      --accent-2: #6f28db;
+      --ok: #88d6ff;
+      --shadow: 0 24px 60px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 8% -10%, rgba(79,167,219,0.28), transparent 60%),
+        radial-gradient(700px 460px at 100% 0%, rgba(111,40,219,0.18), transparent 58%),
+        linear-gradient(160deg, #08101d 0%, #0d1728 52%, #0a1220 100%);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .shell { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(8, 13, 24, 0.72); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .site-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .brand-logo { width: 48px; height: 48px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04); }
+    .brand-copy strong { display: block; font-size: 0.98rem; letter-spacing: 0.05em; }
+    .brand-copy span { display: block; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 0.95rem; padding: 10px 12px; border-radius: 12px; }
+    .nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .nav .nav-cta { color: var(--text); background: linear-gradient(135deg, rgba(79,167,219,0.24), rgba(111,40,219,0.20)); border: 1px solid rgba(79,167,219,0.28); }
+    .hero { padding: 72px 0 38px; }
+    .hero-card { position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(17,27,47,0.86), rgba(10,18,32,0.96)); border: 1px solid var(--line); border-radius: 30px; box-shadow: var(--shadow); padding: clamp(28px, 5vw, 54px); }
+    .hero-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(520px 260px at 100% 0%, rgba(79,167,219,0.18), transparent 58%), radial-gradient(380px 200px at 0% 100%, rgba(111,40,219,0.18), transparent 58%); pointer-events: none; }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.5fr 0.95fr; gap: 28px; align-items: stretch; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 999px; background: rgba(79,167,219,0.11); border: 1px solid rgba(79,167,219,0.24); color: #d8effa; font-size: 0.88rem; font-weight: 600; margin-bottom: 18px; }
+    h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 4.3rem); line-height: 1.02; letter-spacing: -0.04em; max-width: 12ch; }
+    .hero-copy p { margin: 18px 0 0; max-width: 62ch; color: var(--muted); font-size: 1.06rem; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 18px; border-radius: 14px; font-weight: 700; text-decoration: none; border: 1px solid transparent; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+    .button:hover { transform: translateY(-1px); }
+    .button.primary { color: white; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 16px 34px rgba(79,167,219,0.18); }
+    .button.secondary { color: var(--text); border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); }
+    .hero-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+    .hero-panel h2, .section h2 { margin: 0; font-size: 1.02rem; letter-spacing: 0.01em; }
+    .panel-list, .service-list, .approach-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .panel-list li, .service-list li, .approach-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--muted); }
+    .tick { width: 22px; height: 22px; border-radius: 50%; flex: 0 0 22px; display: inline-grid; place-items: center; background: rgba(79,167,219,0.14); border: 1px solid rgba(79,167,219,0.22); color: var(--ok); font-size: 0.8rem; margin-top: 1px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .stat { padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); }
+    .stat strong { display: block; font-size: 1.45rem; line-height: 1; margin-bottom: 8px; }
+    .stat span { color: var(--muted); font-size: 0.92rem; }
+    .sections { padding: 14px 0 64px; }
+    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; margin-top: 22px; }
+    .section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .section p { margin: 12px 0 0; color: var(--muted); }
+    .service-list, .approach-list { margin-top: 18px; }
+    .service-list strong, .approach-list strong { color: var(--text); }
+    .strip { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .mini { padding: 18px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 18px; }
+    .mini h3 { margin: 0 0 8px; font-size: 1rem; }
+    .mini p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .contact-card { margin-top: 22px; padding: 24px; border-radius: 24px; border: 1px solid var(--line-strong); background: linear-gradient(135deg, rgba(79,167,219,0.12), rgba(111,40,219,0.12)); }
+    .contact-card h2 { font-size: 1.4rem; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .link-chip { text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; color: var(--text); border: 1px solid rgba(255,255,255,0.14); background: rgba(8,13,24,0.32); font-weight: 600; }
+    .link-chip:hover { border-color: rgba(79,167,219,0.45); background: rgba(255,255,255,0.06); }
+    footer { padding: 0 0 34px; color: var(--muted); font-size: 0.92rem; }
+    .footer-bar { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 920px) { .hero-grid, .grid, .strip { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr; } .site-header { position: static; } }
+    @media (max-width: 620px) { .shell { width: min(var(--max), calc(100% - 20px)); } .hero { padding-top: 22px; } .site-header-inner { min-height: auto; padding: 14px 0; align-items: flex-start; flex-direction: column; } .nav { justify-content: flex-start; } .hero-card, .section, .contact-card { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell site-header-inner">
+      <a class="brand" href="#top" aria-label="RTH Tech Services home">
+        <div class="brand-logo"><img src="./assets/logo-500.png" alt="RTH Tech Services logo" onerror="this.replaceWith(document.createTextNode('RTH'))"></div>
+        <div class="brand-copy"><strong>RTH TECH SERVICES INC.</strong><span>Independent IT Consultant</span></div>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="https://github.com/rthtechservices/rthtechservices-scripts" target="_blank" rel="noreferrer">Scripts</a>
+        <a class="nav-cta" href="mailto:rohan@rthtechservices.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <div class="eyebrow">Vancouver, BC · Supporting legal and professional services organizations</div>
+              <h1>Practical IT consulting that turns loose ends into working systems.</h1>
+              <p>I help organizations improve Microsoft 365, SharePoint, reporting, business automation, and day-to-day technology operations. The focus is simple: reduce friction, tighten process, and deliver solutions people will actually use.</p>
+              <div class="hero-actions">
+                <a class="button primary" href="mailto:rohan@rthtechservices.com">Email Rohan</a>
+                <a class="button secondary" href="#services">View services</a>
+              </div>
+              <div class="stats" aria-label="Highlights">
+                <div class="stat"><strong>20+ years</strong><span>Working across Microsoft, Windows, infrastructure, and support</span></div>
+                <div class="stat"><strong>SQL + SSRS</strong><span>Deep reporting experience, including legal and operational reporting</span></div>
+                <div class="stat"><strong>Hands-on delivery</strong><span>Strategy where needed, sleeves rolled up where it counts</span></div>
+              </div>
+            </div>
+            <aside class="hero-panel" aria-label="Core capabilities">
+              <div>
+                <h2>What I typically help with</h2>
+                <ul class="panel-list" style="margin-top:16px;">
+                  <li><span class="tick">✓</span><span><strong>Microsoft 365 and SharePoint</strong><br>Tenant improvements, collaboration design, governance, and practical rollout support.</span></li>
+                  <li><span class="tick">✓</span><span><strong>Reporting and data visibility</strong><br>SQL, SSRS, business reporting, and operational dashboards that answer real questions.</span></li>
+                  <li><span class="tick">✓</span><span><strong>Automation and process improvement</strong><br>PowerShell, Power Automate, workflow redesign, and less copy-paste chaos.</span></li>
+                </ul>
+              </div>
+              <div class="contact-row">
+                <a class="link-chip" href="mailto:rohan@rthtechservices.com">rohan@rthtechservices.com</a>
+                <a class="link-chip" href="https://github.com/rthtechservices" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="sections">
+      <div class="shell">
+        <div class="grid">
+          <section class="section" id="services">
+            <h2>Services</h2>
+            <p>I work best where business process, user experience, and technical implementation all need to meet in the middle.</p>
+            <ul class="service-list">
+              <li><span class="tick">✓</span><span><strong>Microsoft 365 consulting</strong><br>SharePoint architecture, collaboration design, governance, permissions strategy, and user adoption support.</span></li>
+              <li><span class="tick">✓</span><span><strong>Reporting and data solutions</strong><br>SQL development, SSRS report design, data extraction, cleanup, and decision-ready outputs.</span></li>
+              <li><span class="tick">✓</span><span><strong>Workflow automation</strong><br>PowerShell, Power Automate, and process refinement to reduce repetitive work and improve consistency.</span></li>
+              <li><span class="tick">✓</span><span><strong>Technology advisory</strong><br>Problem solving, systems review, implementation planning, vendor coordination, and practical documentation.</span></li>
+            </ul>
+          </section>
+          <section class="section" id="approach">
+            <h2>Approach</h2>
+            <p>I tend to be brought in when the situation is somewhere between “we have a rough idea” and “this is currently held together by hope and keyboard shortcuts.”</p>
+            <ul class="approach-list">
+              <li><span class="tick">✓</span><span><strong>Business-first</strong><br>Start with the outcome, then shape the tooling around it.</span></li>
+              <li><span class="tick">✓</span><span><strong>Clear communication</strong><br>Translate between users, leadership, vendors, and technical teams without the usual smoke machine.</span></li>
+              <li><span class="tick">✓</span><span><strong>Built for reality</strong><br>Solutions should be maintainable, supportable, and workable after the meeting ends.</span></li>
+            </ul>
+          </section>
+        </div>
+        <div class="strip" aria-label="Focus areas">
+          <article class="mini"><h3>Legal and professional services</h3><p>Experience supporting reporting, workflows, and Microsoft-based business systems where accuracy, clarity, and confidentiality matter.</p></article>
+          <article class="mini"><h3>Independent, but collaborative</h3><p>Comfortable working directly with internal teams, stakeholders, managed service providers, and third-party vendors.</p></article>
+          <article class="mini"><h3>Practical modernization</h3><p>Useful upgrades beat flashy theatre. The goal is a cleaner operation, not a prettier mess.</p></article>
+        </div>
+        <section class="contact-card" id="contact">
+          <h2>Need an extra set of capable hands?</h2>
+          <p>Whether the work involves Microsoft 365, reporting, SharePoint, automation, or general systems problem-solving, I’m happy to connect.</p>
+          <div class="contact-row">
+            <a class="button primary" href="mailto:rohan@rthtechservices.com">Start a conversation</a>
+            <a class="button secondary" href="https://github.com/rthtechservices" target="_blank" rel="noreferrer">View GitHub</a>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="shell footer-bar">
+      <div>© <span id="year"></span> RTH Tech Services Inc.</div>
+      <div>Vancouver, British Columbia</div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
