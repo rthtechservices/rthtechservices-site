@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Design tokens — RTH Tech Services
+   Transcribed from the design handoff (Redesign/.../README.md "Design Tokens")
+   and theme.js. These values are final-intent, not placeholder: change them
+   here, never inline at the call site.
+   ========================================================================== */
+
+:root {
+  /* --- Surfaces ------------------------------------------------------- */
+  --bg-page: radial-gradient(900px 600px at 10% -10%, rgba(143, 0, 255, 0.07) 0%, rgba(8, 8, 10, 0) 55%),
+             linear-gradient(160deg, #0d0c11 0%, #09080b 55%, #08080a 100%);
+  --bg-base: #08080a;
+  --surface-header: rgba(9, 8, 14, 0.9);
+  --surface-footer: #0b0a11;
+  --surface-card: #121116;
+  --surface-card-alt: #15141b;
+  --surface-band: #0f0d14; /* showcase bottom CTA band */
+
+  /* --- Borders -------------------------------------------------------- */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --border-faint: rgba(255, 255, 255, 0.08);
+  --border-hairline: rgba(255, 255, 255, 0.06);
+
+  /* --- Text ----------------------------------------------------------- */
+  --text-primary: #f2f1f7;
+  --text-body: #c7c5d8;
+  --text-bio: #b4b1c6;
+  --text-muted: #9a9aae;
+  --text-faint: #75738a;
+  --text-meta: #8890a0;
+  --text-eyebrow: #a9b3c1;
+
+  /* --- Brand ---------------------------------------------------------- */
+  --blue: #5cc1ff;
+  --blue-soft: rgba(92, 193, 255, 0.12);
+  --purple: #8f00ff;
+  --purple-soft: rgba(143, 0, 255, 0.1);
+  --error: #ff9e9e;
+
+  /* --- Type ----------------------------------------------------------- */
+  --font-display: 'Roger', sans-serif;              /* wordmark ONLY — footer lockup */
+  --font-ui: 'Manrope', sans-serif;                 /* headings, nav, buttons, chips */
+  --font-body: 'BC Sans', 'Source Sans 3', sans-serif; /* body copy, meta, form fields */
+
+  /* --- Layout --------------------------------------------------------- */
+  --page-max: 1180px;
+  --page-pad: 32px;
+  --radius: 4px;
+  --radius-lg: 6px;
+  --radius-chip: 3px;
+
+  /* --- Motion --------------------------------------------------------- */
+  --ease: 0.2s ease;
+}
+
+/* Single breakpoint for the whole site (860px), per the handoff.
+   The prototype faked this with a JS resize listener; this is the real thing. */
+@media (max-width: 859px) {
+  :root {
+    --page-pad: 20px;
+  }
+}
+
+/* ==========================================================================
+   Fonts
+   Roger + BC Sans are self-hosted (see public/fonts/).
+   Manrope + Source Sans 3 load from Google Fonts in BaseLayout.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Roger';
+  src: url('/fonts/Roger-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BC Sans';
+  src: url('/fonts/BCSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BC Sans';
+  src: url('/fonts/BCSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BC Sans';
+  src: url('/fonts/BCSans-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}

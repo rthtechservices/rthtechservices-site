@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<title>{{ title }} — RTH Tech Services Inc.</title>
+<meta name="description" content="{{ summary }}"/>
+<link rel="icon" href="./assets/rth-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#08080a; }
+  .rth-cta{font-family:'Manrope',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:rgba(10,10,14,0.55);border:2px solid #5CC1FF;color:#FFFFFF;font-weight:600;font-size:15px;padding:14px 26px;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 10px rgba(92,193,255,0.15), 0 0 10px rgba(92,193,255,0.18);transition:box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;}
+  .rth-cta:hover{background:rgba(92,193,255,0.16);box-shadow:inset 0 0 16px rgba(92,193,255,0.28), 0 0 32px rgba(92,193,255,0.42), 0 0 46px rgba(143,0,255,0.14);transform:translateY(-1px);}
+  .rth-cta:focus-visible{outline:2px solid #5CC1FF;outline-offset:3px;}
+  .rth-cta:active{transform:translateY(0);box-shadow:inset 0 0 10px rgba(92,193,255,0.2), 0 0 18px rgba(92,193,255,0.3);}
+</style>
+</helmet>
+<div style="background:{{ pageBg }};min-height:100vh;font-family:'BC Sans','Source Sans 3',sans-serif;">
+  <dc-import name="Header" active="work" hint-size="100%,80px"></dc-import>
+
+  <section style="max-width:1180px;margin:0 auto;padding:{{ topPad }};">
+    <a href="Work.dc.html" style="font-family:'Manrope',sans-serif;font-size:13.5px;color:#75738A;text-decoration:none;" style-hover="color:#E7E6F0;">&larr; All work</a>
+    <div style="display:flex;align-items:center;gap:10px;margin:22px 0 14px;">
+      <span style="width:22px;height:2px;background:#5CC1FF;box-shadow:0 0 6px rgba(92,193,255,0.6);flex-shrink:0;"></span>
+      <span style="font-size:12.5px;letter-spacing:0.09em;text-transform:uppercase;color:#A9B3C1;font-weight:600;">{{ category }}</span>
+    </div>
+    <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,38px);line-height:1.2;color:#F2F1F7;margin:0 0 16px;font-weight:600;">{{ title }}</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#B4B1C6;max-width:70ch;margin:0 0 40px;">{{ summary }}</p>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 64px;">
+    <div style="width:100%;aspect-ratio:16/9;border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,0.08);">
+      <image-slot id="{{ heroSlotId }}" shape="rect" radius="5" placeholder="{{ title }} &mdash; screenshot" style="width:100%;height:100%;"></image-slot>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 72px;display:grid;grid-template-columns:{{ twoColCols }};gap:56px;">
+    <div>
+      <h2 style="font-family:'Manrope',sans-serif;font-size:23px;color:#F2F1F7;margin:0 0 18px;font-weight:600;">What it solves</h2>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <sc-for list="{{ whatItSolves }}" as="point" hint-placeholder-count="4">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#5CC1FF;margin-top:9px;flex-shrink:0;box-shadow:0 0 6px rgba(92,193,255,0.6);"></div>
+            <p style="font-size:15px;line-height:1.65;color:#C7C5D8;margin:0;">{{ point }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div>
+      <h2 style="font-family:'Manrope',sans-serif;font-size:23px;color:#F2F1F7;margin:0 0 18px;font-weight:600;">Technology stack</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <sc-for list="{{ stack }}" as="tech" hint-placeholder-count="6">
+          <span style="font-size:12.5px;font-weight:500;color:#C7C5D8;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);padding:6px 12px;border-radius:3px;">{{ tech }}</span>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 80px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:23px;color:#F2F1F7;margin:0 0 26px;font-weight:600;">Highlights</h2>
+    <div style="display:grid;grid-template-columns:{{ featureCols }};gap:26px;">
+      <sc-for list="{{ features }}" as="feat" hint-placeholder-count="3">
+        <div style="border:1px solid rgba(255,255,255,0.10);border-radius:4px;background:#121116;padding:24px 22px;">
+          <div style="font-family:'Manrope',sans-serif;font-size:16.5px;font-weight:600;color:#F2F1F7;margin-bottom:8px;">{{ feat.title }}</div>
+          <p style="font-size:14px;line-height:1.6;color:#9A9AAE;margin:0;">{{ feat.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 88px;display:flex;flex-direction:column;gap:44px;">
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="2">
+      <div>
+        <h2 style="font-family:'Manrope',sans-serif;font-size:21px;color:#F2F1F7;margin:0 0 12px;font-weight:600;">{{ sec.heading }}</h2>
+        <p style="font-size:15px;line-height:1.75;color:#B4B1C6;margin:0;max-width:78ch;">{{ sec.body }}</p>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="background:#0F0D14;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div style="max-width:1180px;margin:0 auto;padding:52px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:'Manrope',sans-serif;font-size:21px;color:#F2F1F7;font-weight:600;margin-bottom:6px;">Have a similar problem to solve?</div>
+        <div style="font-size:14.5px;color:#9A9AAE;">Let&rsquo;s talk about what a practical solution would look like for your organization.</div>
+      </div>
+      <a class="rth-cta" href="Contact.dc.html">Discuss a project</a>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:2200},&quot;category&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Case Study&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Project Title&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;summary&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;heroSlotId&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;whatItSolves&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[]&quot;},&quot;stack&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[]&quot;},&quot;features&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{title:string,body:string}[]&quot;},&quot;sections&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{heading:string,body:string}[]&quot;}}">
+class Component extends DCLogic {
+  state = { isMobile: false };
+  async componentDidMount() {
+    const theme = await import('./theme.js');
+    this._theme = theme;
+    this._cleanup = theme.attachResponsive(this);
+    this.forceUpdate();
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const t = this._theme;
+    return {
+      category: this.props.category || '',
+      title: this.props.title || '',
+      summary: this.props.summary || '',
+      heroSlotId: this.props.heroSlotId || 'showcase-hero',
+      whatItSolves: this.props.whatItSolves || [],
+      stack: this.props.stack || [],
+      features: this.props.features || [],
+      sections: this.props.sections || [],
+      pageBg: t ? t.colors.bgGradient : 'linear-gradient(160deg, #0d0c11 0%, #09080b 55%, #08080a 100%)',
+      topPad: isMobile ? '48px 20px 0' : '56px 32px 0',
+      twoColCols: isMobile ? '1fr' : '0.9fr 1.1fr',
+      featureCols: isMobile ? '1fr' : 'repeat(3,1fr)',
+      ctaStyle: t ? t.neonButtonStyle() : '',
+      ctaHoverStyle: t ? t.neonButtonHoverStyle : '',
+      focusRingStyle: t ? t.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

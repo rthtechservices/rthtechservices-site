@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<title>Scripts Library — RTH Tech Services Inc.</title>
+<meta name="description" content="A filterable library of PowerShell, SQL and Python tools for administration, migration, diagnostics and reporting."/>
+<link rel="icon" href="./assets/rth-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<style>
+  body { margin:0; background:#08080a; }
+  input.rth-search:focus { outline:none; border-color:#5CC1FF !important; box-shadow:0 0 8px rgba(92,193,255,0.2); }
+  .rth-card{transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;}
+  .rth-card:hover{border-color:#5CC1FF !important;box-shadow:0 0 0 1px rgba(92,193,255,.65), 0 0 20px rgba(92,193,255,.24), 0 0 36px rgba(92,193,255,.12) !important;transform:translateY(-2px);}
+  .rth-card:focus-visible{outline:2px solid #5CC1FF;outline-offset:2px;}
+</style>
+</helmet>
+<div style="background:{{ pageBg }};min-height:100vh;font-family:'BC Sans','Source Sans 3',sans-serif;position:relative;">
+  <dc-import name="Header" active="scripts" hint-size="100%,80px"></dc-import>
+
+  <section style="max-width:1180px;margin:0 auto;padding:{{ topPad }};">
+    <div style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:#75738A;font-weight:600;margin-bottom:16px;">Automation &amp; Systems Administration Toolkit</div>
+    <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(26px,4vw,32px);color:#F2F1F7;margin:0 0 16px;font-weight:600;">Scripts library</h1>
+    <p style="font-size:15.5px;line-height:1.7;color:#B4B1C6;max-width:70ch;margin:0 0 12px;">A curated library of PowerShell, SQL and Python tools for administration, migration, diagnostics, reporting and repeatable operational support. Filter by language, platform, function or complexity, or search by title and keyword.</p>
+    <p style="font-size:12.5px;color:#75738A;margin:0 0 28px;">Entries below are demonstration examples illustrating the type of tooling used in this work, not a list of deployed client artifacts.</p>
+    <input class="rth-search" type="text" value="{{ search }}" oninput="{{ onSearch }}" placeholder="Search by title, technology or keyword&hellip;" aria-label="Search scripts" style="width:100%;box-sizing:border-box;padding:13px 16px;border:1px solid rgba(255,255,255,0.14);border-radius:3px;font-size:15px;font-family:'BC Sans','Source Sans 3',sans-serif;background:#121116;color:#F2F1F7;margin-bottom:28px;"/>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 20px;display:flex;flex-direction:column;gap:14px;">
+    <sc-for list="{{ filterGroups }}" as="group" hint-placeholder-count="5">
+      <div style="display:flex;align-items:{{ filterAlign }};gap:12px;flex-wrap:wrap;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#75738A;width:110px;flex-shrink:0;">{{ group.label }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <sc-for list="{{ group.options }}" as="opt" hint-placeholder-count="4">
+            <button class="rth-chip" onclick="{{ opt.onClick }}" style="{{ opt.style }}" style-focus="{{ focusRingStyle }}">{{ opt.value }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:20px 32px 100px;">
+    <div style="font-size:13.5px;color:#75738A;margin-bottom:20px;">{{ resultCount }}</div>
+    <div style="display:grid;grid-template-columns:{{ cardCols }};gap:22px;">
+      <sc-for list="{{ filteredScripts }}" as="s" hint-placeholder-count="6">
+        <button class="rth-card" onclick="{{ s.onOpen }}" style="text-align:left;cursor:pointer;border:1px solid rgba(255,255,255,0.10);border-radius:4px;background:#121116;padding:22px 24px;font-family:'BC Sans','Source Sans 3',sans-serif;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;">
+            <div style="font-family:'Manrope',sans-serif;font-size:17px;font-weight:600;color:#F2F1F7;">{{ s.title }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#75738A;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);padding:3px 9px;border-radius:3px;white-space:nowrap;">Demonstration</span>
+              <span style="font-size:11px;font-weight:600;color:#C7C5D8;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);padding:4px 10px;border-radius:3px;white-space:nowrap;">{{ s.availability }}</span>
+            </div>
+          </div>
+          <p style="font-size:14px;line-height:1.6;color:#9A9AAE;margin:0 0 14px;">{{ s.summary }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;">
+            <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ s.language }}</span>
+            <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ s.platform }}</span>
+            <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ s.func }}</span>
+            <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ s.complexity }}</span>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:60px 0;color:#75738A;font-size:14.5px;">No scripts match the current filters. Try clearing a filter or search term.</div>
+    </sc-if>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,300px"></dc-import>
+
+  <sc-if value="{{ activeScript }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ activeScript.title }} details" onclick="{{ closeModal }}" onkeydown="{{ onModalKeyDown }}" style="position:fixed;inset:0;background:rgba(5,4,9,0.72);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:{{ modalOuterPad }};overflow-y:auto;">
+      <div onclick="{{ stopClick }}" style="background:#121116;border:1px solid rgba(255,255,255,0.14);border-radius:5px;max-width:640px;width:100%;padding:{{ modalInnerPad }};position:relative;font-family:'BC Sans','Source Sans 3',sans-serif;">
+        <button onclick="{{ closeModal }}" aria-label="Close dialog" style="position:absolute;top:22px;right:22px;background:none;border:none;font-size:20px;color:#75738A;cursor:pointer;line-height:1;" style-focus="{{ focusRingStyle }}">&times;</button>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#75738A;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);padding:3px 9px;border-radius:3px;">Demonstration</span>
+        <h2 style="font-family:'Manrope',sans-serif;font-size:22px;color:#F2F1F7;margin:14px 0 8px;font-weight:600;">{{ activeScript.title }}</h2>
+        <p style="font-size:14.5px;line-height:1.6;color:#C7C5D8;margin:0 0 20px;">{{ activeScript.summary }}</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Prerequisites</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#C7C5D8;margin:0;">{{ activeScript.prereqs }}</p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Safety considerations</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#C7C5D8;margin:0;">{{ activeScript.safety }}</p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Availability</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#C7C5D8;margin:0;">{{ activeScript.availability }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    scripts: [],
+    search: '',
+    filters: { language: null, platform: null, func: null, complexity: null, availability: null },
+    activeId: null,
+    isMobile: false
+  };
+
+  async componentDidMount() {
+    const [dataMod, theme] = await Promise.all([import('./site-data.js'), import('./theme.js')]);
+    this._theme = theme;
+    this.setState({ scripts: dataMod.scripts });
+    this._cleanup = theme.attachResponsive(this);
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+
+  setFilter(key, value) {
+    this.setState(s => ({ filters: { ...s.filters, [key]: s.filters[key] === value ? null : value } }));
+  }
+
+  renderVals() {
+    const { scripts, search, filters, isMobile, activeId } = this.state;
+    const t = this._theme;
+    const dims = [
+      { key: 'language', label: 'Language' },
+      { key: 'platform', label: 'Platform' },
+      { key: 'func', label: 'Function' },
+      { key: 'complexity', label: 'Complexity' },
+      { key: 'availability', label: 'Availability' }
+    ];
+
+    const filterGroups = dims.map(d => {
+      const values = Array.from(new Set(scripts.map(s => s[d.key]))).sort();
+      const options = values.map(v => {
+        const active = filters[d.key] === v;
+        return { value: v, onClick: () => this.setFilter(d.key, v), style: t ? t.filterChipStyle(active) : '' };
+      });
+      return { ...d, options };
+    });
+
+    const q = search.trim().toLowerCase();
+    const filteredScripts = scripts.filter(s => {
+      if (filters.language && s.language !== filters.language) return false;
+      if (filters.platform && s.platform !== filters.platform) return false;
+      if (filters.func && s.func !== filters.func) return false;
+      if (filters.complexity && s.complexity !== filters.complexity) return false;
+      if (filters.availability && s.availability !== filters.availability) return false;
+      if (q && !(s.title.toLowerCase().includes(q) || s.summary.toLowerCase().includes(q) || s.language.toLowerCase().includes(q) || s.platform.toLowerCase().includes(q))) return false;
+      return true;
+    }).map(s => ({ ...s, onOpen: () => this.setState({ activeId: s.id }) }));
+
+    const activeScriptRaw = activeId ? scripts.find(s => s.id === activeId) : null;
+    const activeScript = activeScriptRaw ? {
+      ...activeScriptRaw,
+      prereqs: `Access to a ${activeScriptRaw.platform} environment appropriate for ${activeScriptRaw.func.toLowerCase()} tasks, and permissions scoped to what the script needs.`,
+      safety: 'Review the script before running it in a production environment; test against a non-production target first where possible.'
+    } : null;
+
+    return {
+      search,
+      onSearch: (e) => this.setState({ search: e.target.value }),
+      filterGroups,
+      filteredScripts,
+      resultCount: `${filteredScripts.length} of ${scripts.length} scripts`,
+      noResults: scripts.length > 0 && filteredScripts.length === 0,
+      pageBg: t ? t.colors.bgGradient : 'linear-gradient(160deg, #0d0c11 0%, #09080b 55%, #08080a 100%)',
+      topPad: isMobile ? '48px 20px 8px' : '60px 32px 8px',
+      cardCols: isMobile ? '1fr' : 'repeat(2,1fr)',
+      filterAlign: isMobile ? 'flex-start' : 'center',
+      focusRingStyle: t ? t.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;',
+      activeScript,
+      closeModal: () => this.setState({ activeId: null }),
+      stopClick: (e) => e.stopPropagation(),
+      onModalKeyDown: (e) => { if (e.key === 'Escape') this.setState({ activeId: null }); },
+      modalOuterPad: isMobile ? '24px 12px' : '60px 24px',
+      modalInnerPad: isMobile ? '30px 24px 32px' : '40px 44px 44px'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

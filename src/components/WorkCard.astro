@@ -1,0 +1,80 @@
+---
+import type { WorkItem } from '../data/work';
+
+interface Props {
+  item: WorkItem;
+  /** Show the tag chip row (used on the Work index, not on Home). */
+  showTags?: boolean;
+}
+const { item, showTags = false } = Astro.props;
+---
+
+<a class="rth-card work-card" href={item.href}>
+  <div class="thumb">
+    <!-- Placeholder: real screenshot/photography pending. -->
+    <div class="rth-image-slot">{item.title}</div>
+  </div>
+  <div class="body">
+    <div class="title">{item.title}</div>
+    <div class="tagline">{item.tagline}</div>
+    <p class="summary">{item.summary}</p>
+    {
+      showTags && (
+        <div class="tags">
+          {item.tags.map((tag) => (
+            <span class="rth-chip">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</a>
+
+<style>
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .thumb {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+
+  .body {
+    padding: 20px 22px 24px;
+  }
+
+  .title {
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .tagline {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--text-meta);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .summary {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+</style>

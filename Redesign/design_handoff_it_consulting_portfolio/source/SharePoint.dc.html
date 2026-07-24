@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<dc-import name="ShowcaseLayout"
+  category="Microsoft 365"
+  title="SharePoint &amp; Microsoft 365 Solutions"
+  summary="{{ summary }}"
+  hero-slot-id="sharepoint-hero"
+  what-it-solves="{{ whatItSolves }}"
+  stack="{{ stack }}"
+  features="{{ features }}"
+  sections="{{ sections }}"
+  hint-size="100%,3000px">
+</dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      summary: 'Governance, document-management and workflow solutions built using SharePoint Online, Power Automate, Microsoft 365 and custom formatting or SPFx components &mdash; an umbrella of related work spanning several organizations.',
+      whatItSolves: [
+        'Document libraries with inconsistent permissions and no clear ownership of what should be approved for external use.',
+        'No searchable, governed record of approved templates, forms or reference documents.',
+        'Manual routing of documents for review and approval, with status tracked in email.',
+        'Financial and compliance records without a clear, enforced retention structure.'
+      ],
+      stack: ['SharePoint Online', 'Power Automate', 'Microsoft 365', 'SPFx', 'PowerShell'],
+      features: [
+        { title: 'Approved Source Register', body: 'A governed, searchable register of approved documents and templates, replacing informal shared drives with clear ownership and version control.' },
+        { title: 'OCR & search workflows', body: 'Automated OCR intake so scanned documents become searchable content rather than opaque files sitting in a library.' },
+        { title: 'Financial-record retention', body: 'A retention structure enforcing how long financial records are kept and when they are archived, aligned to policy rather than habit.' }
+      ],
+      sections: [
+        { heading: 'Governance model', body: 'Each solution in this umbrella follows the same underlying model: a defined ownership structure for content, explicit approval workflows built in Power Automate, and permission structures that are reviewed rather than inherited by accident. This keeps the pattern consistent even as it is applied to different document types across organizations.' },
+        { heading: 'Selected automations', body: 'Beyond the Approved Source Register, the umbrella includes document-approval routing, automated retention and archival flows, and several SPFx components delivering custom formatting where out-of-the-box SharePoint views were insufficient.' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

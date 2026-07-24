@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<dc-import name="ShowcaseLayout"
+  category="Infrastructure"
+  title="Infrastructure, Remote Management &amp; Resilience"
+  summary="{{ summary }}"
+  hero-slot-id="infra-hero"
+  what-it-solves="{{ whatItSolves }}"
+  stack="{{ stack }}"
+  features="{{ features }}"
+  sections="{{ sections }}"
+  hint-size="100%,3000px">
+</dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      summary: 'Practical infrastructure solutions covering remote administration, database platforms, backup workflows, monitoring, recovery planning and resilient access to distributed systems.',
+      whatItSolves: [
+        'No reliable fallback path to reach systems remotely when a primary VPN or remote-access tool fails.',
+        'Backup jobs that run but are never actually verified, discovered only when a restore is needed.',
+        'Database platforms (PostgreSQL, Docker-hosted services) with no consistent health monitoring.',
+        'Recovery plans that exist as documents but have never been tested end-to-end.'
+      ],
+      stack: ['RustDesk', 'Tailscale', 'PostgreSQL', 'Docker', 'Bash', 'Monitoring'],
+      features: [
+        { title: 'Remote-management fail-safe', body: 'A layered approach combining Tailscale mesh networking with RustDesk as a fallback, so remote access survives a single tool or provider outage.' },
+        { title: 'Backup verification, not just backup', body: 'Automated checksum verification of backup archives, closing the gap between "the job ran" and "the backup is actually restorable".' },
+        { title: 'Practical monitoring', body: 'Lightweight monitoring for Docker-hosted services and PostgreSQL health, tuned to flag real problems instead of alert fatigue.' }
+      ],
+      sections: [
+        { heading: 'Resilience philosophy', body: 'The guiding principle across this work is that a single point of failure in access or backup is a hidden liability until the day it matters. Every remote-access and backup solution here is built with an explicit, tested fallback path rather than assumed reliability.' },
+        { heading: 'Selected components', body: 'This includes a Tailscale/RustDesk remote-access fail-safe, containerized service deployment on Docker with health checks, PostgreSQL monitoring, and a tested backup verification and recovery workflow &mdash; kept as a coherent resilience story rather than a miscellaneous tool list.' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

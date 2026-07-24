@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<dc-import name="ShowcaseLayout"
+  category="Financial Systems"
+  title="Fiscal Desk"
+  summary="{{ summary }}"
+  hero-slot-id="fiscaldesk-hero"
+  what-it-solves="{{ whatItSolves }}"
+  stack="{{ stack }}"
+  features="{{ features }}"
+  sections="{{ sections }}"
+  hint-size="100%,3000px">
+</dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      summary: 'A custom invoicing and financial-record application, built on PostgreSQL, for generating service invoices and tracking disbursements and billing narratives.',
+      whatItSolves: [
+        'Invoice generation and disbursement tracking not well served by off-the-shelf billing software for this workflow.',
+        'A need for a financial record that keeps invoice, disbursement and narrative data together.'
+      ],
+      stack: ['PostgreSQL', 'SQL', 'Document Generation'],
+      features: [
+        { title: 'Invoice generation', body: 'Generates professional service invoices from underlying billing and disbursement data.' },
+        { title: 'PostgreSQL data model', body: 'Invoice, disbursement and narrative data is stored in PostgreSQL as the system of record.' }
+      ],
+      sections: [
+        { heading: 'Overview', body: 'Fiscal Desk is a PostgreSQL-based invoicing and financial-record application. Further architecture and workflow detail will be documented here as it is confirmed.' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

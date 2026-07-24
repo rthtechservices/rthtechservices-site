@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<title>Contact — Rohan Hare, RTH Tech Services Inc.</title>
+<meta name="description" content="Discuss a project with Rohan Hare of RTH Tech Services Inc. — consulting and development services in Vancouver, BC and remote."/>
+<link rel="icon" href="./assets/rth-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<style>
+  body { margin:0; background:#08080a; }
+  input.rth-input:focus, textarea.rth-input:focus { outline:none; border-color:#5CC1FF !important; box-shadow:0 0 8px rgba(92,193,255,0.2); }
+  .rth-cta{font-family:'Manrope',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:rgba(10,10,14,0.55);border:2px solid #5CC1FF;color:#FFFFFF;font-weight:600;font-size:15px;padding:14px 26px;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 10px rgba(92,193,255,0.15), 0 0 10px rgba(92,193,255,0.18);transition:box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;}
+  .rth-cta:hover{background:rgba(92,193,255,0.16);box-shadow:inset 0 0 16px rgba(92,193,255,0.28), 0 0 32px rgba(92,193,255,0.42), 0 0 46px rgba(143,0,255,0.14);transform:translateY(-1px);}
+  .rth-cta:focus-visible{outline:2px solid #5CC1FF;outline-offset:3px;}
+  .rth-cta:active{transform:translateY(0);box-shadow:inset 0 0 10px rgba(92,193,255,0.2), 0 0 18px rgba(92,193,255,0.3);}
+  .rth-cta:disabled{opacity:0.6;cursor:default;}
+</style>
+</helmet>
+<div style="background:{{ pageBg }};min-height:100vh;font-family:'BC Sans','Source Sans 3',sans-serif;">
+  <dc-import name="Header" active="contact" hint-size="100%,80px"></dc-import>
+
+  <section style="max-width:1180px;margin:0 auto;padding:{{ heroPad }};display:grid;grid-template-columns:{{ heroCols }};gap:64px;align-items:start;">
+    <div>
+      <div style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:#75738A;font-weight:600;margin-bottom:16px;">Contact</div>
+      <h1 style="font-family:'Manrope',sans-serif;font-size:32px;color:#F2F1F7;margin:0 0 18px;font-weight:600;">Let&rsquo;s discuss a project.</h1>
+      <p style="font-size:15.5px;line-height:1.75;color:#B4B1C6;margin:0 0 36px;max-width:48ch;">Available for consulting, contract work and selected technical projects. The most useful first message is a short description of the operational problem you're trying to solve.</p>
+      <div style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;">
+        <div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#75738A;margin-bottom:6px;">Email</div>
+          <a href="mailto:rohan@rthtechservices.com" style="font-size:15.5px;color:#F2F1F7;text-decoration:none;font-weight:500;">rohan@rthtechservices.com</a>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#75738A;margin-bottom:6px;">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/rohanhare/" target="_blank" rel="noopener noreferrer" style="font-size:15.5px;color:#F2F1F7;text-decoration:none;font-weight:500;">linkedin.com/in/rohanhare</a>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#75738A;margin-bottom:6px;">Location</div>
+          <div style="font-size:15.5px;color:#F2F1F7;font-weight:500;">Vancouver, British Columbia, Canada</div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#75738A;margin-bottom:6px;">Business</div>
+          <div style="font-size:15.5px;color:#F2F1F7;font-weight:500;">RTH Tech Services Inc.</div>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ isSuccess }}" hint-placeholder-val="{{ false }}">
+      <div role="status" style="background:#121116;border:1px solid rgba(92,193,255,0.35);border-radius:4px;padding:44px 36px;text-align:center;">
+        <div style="font-family:'Manrope',sans-serif;font-size:19px;color:#F2F1F7;font-weight:600;margin-bottom:10px;">Message sent.</div>
+        <p style="font-size:14.5px;color:#9A9AAE;margin:0;">Thanks for reaching out &mdash; I&rsquo;ll reply within one to two business days.</p>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isNotSuccess }}" hint-placeholder-val="{{ true }}">
+      <form name="contact" method="POST" action="#" novalidate="{{ true }}" onsubmit="{{ onSubmit }}" style="background:#121116;border:1px solid rgba(255,255,255,0.10);border-radius:4px;padding:36px;display:flex;flex-direction:column;gap:20px;">
+        <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+          <div role="alert" style="font-size:13.5px;color:#FF9E9E;background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.3);border-radius:3px;padding:10px 14px;">Something went wrong sending your message. Please try again or email directly.</div>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:20px;">
+          <div>
+            <label for="contact-name" style="display:block;font-size:12.5px;font-weight:600;color:#C7C5D8;margin-bottom:8px;">Name</label>
+            <input class="rth-input" id="contact-name" name="name" type="text" autocomplete="name" required="{{ true }}" aria-invalid="{{ nameInvalid }}" value="{{ values.name }}" oninput="{{ onField('name') }}" placeholder="Jane Smith" style="width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid {{ nameBorder }};border-radius:3px;font-size:14.5px;font-family:'BC Sans','Source Sans 3',sans-serif;background:#0B0A11;color:#F2F1F7;"/>
+          </div>
+          <div>
+            <label for="contact-email" style="display:block;font-size:12.5px;font-weight:600;color:#C7C5D8;margin-bottom:8px;">Email</label>
+            <input class="rth-input" id="contact-email" name="email" type="email" autocomplete="email" required="{{ true }}" aria-invalid="{{ emailInvalid }}" value="{{ values.email }}" oninput="{{ onField('email') }}" placeholder="jane@company.com" style="width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid {{ emailBorder }};border-radius:3px;font-size:14.5px;font-family:'BC Sans','Source Sans 3',sans-serif;background:#0B0A11;color:#F2F1F7;"/>
+          </div>
+        </div>
+        <div>
+          <label for="contact-org" style="display:block;font-size:12.5px;font-weight:600;color:#C7C5D8;margin-bottom:8px;">Organization</label>
+          <input class="rth-input" id="contact-org" name="organization" type="text" autocomplete="organization" value="{{ values.org }}" oninput="{{ onField('org') }}" placeholder="Company or firm name" style="width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid rgba(255,255,255,0.14);border-radius:3px;font-size:14.5px;font-family:'BC Sans','Source Sans 3',sans-serif;background:#0B0A11;color:#F2F1F7;"/>
+        </div>
+        <div>
+          <label for="contact-message" style="display:block;font-size:12.5px;font-weight:600;color:#C7C5D8;margin-bottom:8px;">What are you trying to solve?</label>
+          <textarea class="rth-input" id="contact-message" name="message" rows="5" required="{{ true }}" aria-invalid="{{ messageInvalid }}" value="{{ values.message }}" oninput="{{ onField('message') }}" placeholder="A short description of the problem, timeline and any relevant context." style="width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid {{ messageBorder }};border-radius:3px;font-size:14.5px;font-family:'BC Sans','Source Sans 3',sans-serif;background:#0B0A11;color:#F2F1F7;resize:vertical;"></textarea>
+        </div>
+        <button class="rth-cta" type="submit" disabled="{{ isSubmitting }}" style="align-self:flex-start;">{{ submitLabel }}</button>
+      </form>
+    </sc-if>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    isMobile: false,
+    values: { name: '', email: '', org: '', message: '' },
+    touched: {},
+    status: 'idle'
+  };
+
+  async componentDidMount() {
+    const theme = await import('./theme.js');
+    this._theme = theme;
+    this._cleanup = theme.attachResponsive(this);
+    this.forceUpdate();
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+
+  onField(key) {
+    return (e) => this.setState(s => ({ values: { ...s.values, [key]: e.target.value } }));
+  }
+
+  isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const { values } = this.state;
+    const invalid = !values.name.trim() || !this.isValidEmail(values.email) || !values.message.trim();
+    if (invalid) {
+      this.setState({ touched: { name: true, email: true, message: true }, status: 'idle' });
+      return;
+    }
+    this.setState({ status: 'submitting' });
+    // NOTE: no form backend is wired up yet — replace this simulated call with a
+    // real static-site-compatible endpoint (fetch POST to your form service of choice).
+    setTimeout(() => this.setState({ status: 'success' }), 500);
+  }
+
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const t = this._theme;
+    const { values, touched, status } = this.state;
+    const nameInvalid = touched.name && !values.name.trim();
+    const emailInvalid = touched.email && !this.isValidEmail(values.email);
+    const messageInvalid = touched.message && !values.message.trim();
+    const borderFor = (invalid) => invalid ? '#FF9E9E' : 'rgba(255,255,255,0.14)';
+
+    return {
+      isMobile,
+      heroPad: isMobile ? '48px 20px 64px' : '64px 32px 100px',
+      heroCols: isMobile ? '1fr' : '0.9fr 1.1fr',
+      fieldCols: isMobile ? '1fr' : '1fr 1fr',
+      values,
+      onField: (key) => this.onField(key),
+      onSubmit: (e) => this.onSubmit(e),
+      nameInvalid, emailInvalid, messageInvalid,
+      nameBorder: borderFor(nameInvalid),
+      emailBorder: borderFor(emailInvalid),
+      messageBorder: borderFor(messageInvalid),
+      isSubmitting: status === 'submitting',
+      isSuccess: status === 'success',
+      isNotSuccess: status !== 'success',
+      isError: status === 'error',
+      submitLabel: status === 'submitting' ? 'Sending…' : 'Send inquiry',
+      ctaStyle: t ? t.neonButtonStyle() : '',
+      ctaHoverStyle: t ? t.neonButtonHoverStyle : '',
+      focusRingStyle: t ? t.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

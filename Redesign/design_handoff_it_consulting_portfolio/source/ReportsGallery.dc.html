@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<title>Reports Gallery — RTH Tech Services Inc.</title>
+<meta name="description" content="Financial, legal-operations and IT reporting examples spanning SSRS, Power BI and SQL-generated output, using anonymized or synthetic data."/>
+<link rel="icon" href="./assets/rth-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#08080a; }
+  .rth-card{transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;}
+  .rth-card:hover{border-color:#5CC1FF !important;box-shadow:0 0 0 1px rgba(92,193,255,.65), 0 0 20px rgba(92,193,255,.24), 0 0 36px rgba(92,193,255,.12) !important;transform:translateY(-2px);}
+  .rth-card:focus-visible{outline:2px solid #5CC1FF;outline-offset:2px;}
+</style>
+</helmet>
+<div style="background:{{ pageBg }};min-height:100vh;font-family:'BC Sans','Source Sans 3',sans-serif;position:relative;">
+  <dc-import name="Header" active="reports" hint-size="100%,80px"></dc-import>
+
+  <section style="max-width:1180px;margin:0 auto;padding:{{ topPad }};">
+    <div style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:#75738A;font-weight:600;margin-bottom:16px;">Reporting Portfolio</div>
+    <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(26px,4vw,32px);color:#F2F1F7;margin:0 0 16px;font-weight:600;">Reports gallery</h1>
+    <p style="font-size:15.5px;line-height:1.7;color:#B4B1C6;max-width:70ch;margin:0 0 12px;">Financial, legal-operations and IT reporting examples spanning SSRS, Power BI and SQL-generated output. All figures shown are anonymized or synthetic.</p>
+    <p style="font-size:12.5px;color:#75738A;margin:0 0 28px;">These are demonstration examples, not a record of deployed client deliverables. Select a report to see its business question, data sources and methodology.</p>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 20px;display:flex;flex-direction:column;gap:14px;">
+    <sc-for list="{{ filterGroups }}" as="group" hint-placeholder-count="4">
+      <div style="display:flex;align-items:{{ filterAlign }};gap:12px;flex-wrap:wrap;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#75738A;width:110px;flex-shrink:0;">{{ group.label }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <sc-for list="{{ group.options }}" as="opt" hint-placeholder-count="4">
+            <button class="rth-chip" onclick="{{ opt.onClick }}" style="{{ opt.style }}" style-focus="{{ focusRingStyle }}">{{ opt.value }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:20px 32px 100px;">
+    <div style="font-size:13.5px;color:#75738A;margin-bottom:20px;">{{ resultCount }}</div>
+    <div style="display:grid;grid-template-columns:{{ cardCols }};gap:22px;">
+      <sc-for list="{{ filteredReports }}" as="r" hint-placeholder-count="6">
+        <button class="rth-card" onclick="{{ r.onOpen }}" style="text-align:left;cursor:pointer;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,0.10);border-radius:4px;background:#121116;overflow:hidden;font-family:'BC Sans','Source Sans 3',sans-serif;">
+          <div style="width:100%;aspect-ratio:16/10;">
+            <image-slot id="{{ r.slotId }}" shape="rect" placeholder="{{ r.title }} &mdash; sample screenshot" style="width:100%;height:100%;"></image-slot>
+          </div>
+          <div style="padding:20px 22px 22px;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;">
+              <div style="font-family:'Manrope',sans-serif;font-size:17px;font-weight:600;color:#F2F1F7;">{{ r.title }}</div>
+              <span style="font-size:11px;font-weight:600;color:#C7C5D8;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);padding:4px 10px;border-radius:3px;white-space:nowrap;">{{ r.outputType }}</span>
+            </div>
+            <p style="font-size:14px;line-height:1.6;color:#9A9AAE;margin:0 0 14px;">{{ r.question }}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;">
+              <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ r.platform }}</span>
+              <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ r.func }}</span>
+              <span style="color:#C7C5D8;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:3px;font-weight:500;">{{ r.audience }}</span>
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#75738A;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);padding:4px 9px;border-radius:3px;">Demonstration</span>
+            </div>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:60px 0;color:#75738A;font-size:14.5px;">No reports match the current filters. Try clearing a filter.</div>
+    </sc-if>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,300px"></dc-import>
+
+  <sc-if value="{{ activeReport }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ activeReport.title }} details" onclick="{{ closeModal }}" onkeydown="{{ onModalKeyDown }}" style="position:fixed;inset:0;background:rgba(5,4,9,0.72);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:{{ modalOuterPad }};overflow-y:auto;">
+      <div onclick="{{ stopClick }}" style="background:#121116;border:1px solid rgba(255,255,255,0.14);border-radius:5px;max-width:700px;width:100%;padding:{{ modalInnerPad }};position:relative;font-family:'BC Sans','Source Sans 3',sans-serif;">
+        <button onclick="{{ closeModal }}" aria-label="Close dialog" style="position:absolute;top:22px;right:22px;background:none;border:none;font-size:20px;color:#75738A;cursor:pointer;line-height:1;z-index:1;" style-focus="{{ focusRingStyle }}">&times;</button>
+        <div style="width:100%;aspect-ratio:16/9;border-radius:4px;overflow:hidden;margin-bottom:22px;">
+          <image-slot id="{{ activeReport.modalSlotId }}" shape="rect" placeholder="{{ activeReport.title }} &mdash; sample screenshot" style="width:100%;height:100%;"></image-slot>
+        </div>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#75738A;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);padding:3px 9px;border-radius:3px;">Demonstration</span>
+        <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#A9B3C1;font-weight:600;margin:14px 0 12px;">{{ activeReport.platform }} &middot; {{ activeReport.outputType }}</div>
+        <h2 style="font-family:'Manrope',sans-serif;font-size:22px;color:#F2F1F7;margin:0 0 20px;font-weight:600;">{{ activeReport.title }}</h2>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Business question</div>
+            <p style="font-size:15px;line-height:1.65;color:#C7C5D8;margin:0;">{{ activeReport.question }}</p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Audience</div>
+            <p style="font-size:15px;line-height:1.65;color:#C7C5D8;margin:0;">{{ activeReport.audience }}</p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Data sources</div>
+            <p style="font-size:15px;line-height:1.65;color:#C7C5D8;margin:0;">{{ activeReport.sources }}</p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Key calculations</div>
+            <p style="font-size:15px;line-height:1.65;color:#C7C5D8;margin:0;">{{ activeReport.calculations }}</p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#75738A;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Intended use</div>
+            <p style="font-size:15px;line-height:1.65;color:#C7C5D8;margin:0;">{{ activeReport.outcome }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    reports: [],
+    filters: { platform: null, func: null, outputType: null, audience: null },
+    activeId: null,
+    isMobile: false
+  };
+  _lastTrigger = null;
+
+  async componentDidMount() {
+    const [dataMod, theme] = await Promise.all([import('./site-data.js'), import('./theme.js')]);
+    this._theme = theme;
+    this.setState({ reports: dataMod.reports.map(r => ({ ...r, slotId: 'report-card-' + r.id, modalSlotId: 'report-modal-' + r.id })) });
+    this._cleanup = theme.attachResponsive(this);
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+
+  setFilter(key, value) {
+    this.setState(s => ({ filters: { ...s.filters, [key]: s.filters[key] === value ? null : value } }));
+  }
+
+  openReport(id, e) {
+    this._lastTrigger = e && e.currentTarget;
+    this.setState({ activeId: id });
+  }
+  closeModal() {
+    this.setState({ activeId: null });
+    if (this._lastTrigger && this._lastTrigger.focus) this._lastTrigger.focus();
+  }
+
+  renderVals() {
+    const { reports, filters, activeId, isMobile } = this.state;
+    const t = this._theme;
+    const dims = [
+      { key: 'platform', label: 'Platform' },
+      { key: 'func', label: 'Function' },
+      { key: 'outputType', label: 'Output Type' },
+      { key: 'audience', label: 'Audience' }
+    ];
+
+    const filterGroups = dims.map(d => {
+      const values = Array.from(new Set(reports.map(r => r[d.key]))).sort();
+      const options = values.map(v => {
+        const active = filters[d.key] === v;
+        return { value: v, onClick: () => this.setFilter(d.key, v), style: t ? t.filterChipStyle(active) : '' };
+      });
+      return { ...d, options };
+    });
+
+    const filteredReports = reports.filter(r => {
+      if (filters.platform && r.platform !== filters.platform) return false;
+      if (filters.func && r.func !== filters.func) return false;
+      if (filters.outputType && r.outputType !== filters.outputType) return false;
+      if (filters.audience && r.audience !== filters.audience) return false;
+      return true;
+    }).map(r => ({ ...r, onOpen: (e) => this.openReport(r.id, e) }));
+
+    const activeReport = activeId ? reports.find(r => r.id === activeId) : null;
+
+    return {
+      filterGroups,
+      filteredReports,
+      resultCount: `${filteredReports.length} of ${reports.length} reports`,
+      noResults: reports.length > 0 && filteredReports.length === 0,
+      pageBg: t ? t.colors.bgGradient : 'linear-gradient(160deg, #0d0c11 0%, #09080b 55%, #08080a 100%)',
+      topPad: isMobile ? '48px 20px 8px' : '60px 32px 8px',
+      cardCols: isMobile ? '1fr' : 'repeat(2,1fr)',
+      filterAlign: isMobile ? 'flex-start' : 'center',
+      focusRingStyle: t ? t.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;',
+      activeReport,
+      closeModal: () => this.closeModal(),
+      stopClick: (e) => e.stopPropagation(),
+      onModalKeyDown: (e) => { if (e.key === 'Escape') this.closeModal(); },
+      modalOuterPad: isMobile ? '24px 12px' : '60px 24px',
+      modalInnerPad: isMobile ? '30px 24px 32px' : '40px 44px 44px'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

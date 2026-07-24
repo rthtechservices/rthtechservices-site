@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<title>About Rohan Hare — RTH Tech Services Inc.</title>
+<meta name="description" content="IT consultant, systems analyst and solutions developer specializing in automation, reporting and Microsoft 365 for professional-services organizations."/>
+<link rel="icon" href="./assets/rth-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#08080a; }
+  .rth-cta{font-family:'Manrope',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:rgba(10,10,14,0.55);border:2px solid #5CC1FF;color:#FFFFFF;font-weight:600;font-size:15px;padding:14px 26px;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 10px rgba(92,193,255,0.15), 0 0 10px rgba(92,193,255,0.18);transition:box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;}
+  .rth-cta:hover{background:rgba(92,193,255,0.16);box-shadow:inset 0 0 16px rgba(92,193,255,0.28), 0 0 32px rgba(92,193,255,0.42), 0 0 46px rgba(143,0,255,0.14);transform:translateY(-1px);}
+  .rth-cta:focus-visible{outline:2px solid #5CC1FF;outline-offset:3px;}
+  .rth-cta:active{transform:translateY(0);box-shadow:inset 0 0 10px rgba(92,193,255,0.2), 0 0 18px rgba(92,193,255,0.3);}
+</style>
+</helmet>
+<div style="background:{{ pageBg }};min-height:100vh;font-family:'BC Sans','Source Sans 3',sans-serif;">
+  <dc-import name="Header" active="about" hint-size="100%,80px"></dc-import>
+
+  <section style="max-width:1180px;margin:0 auto;padding:{{ heroPad }};display:grid;grid-template-columns:{{ heroCols }};gap:{{ heroGap }};align-items:start;">
+    <div style="position:relative;width:100%;aspect-ratio:3/4;">
+      <div style="position:absolute;inset:-10%;background:radial-gradient(closest-side, rgba(92,193,255,0.10), rgba(143,0,255,0.05) 60%, transparent 75%);z-index:0;"></div>
+      <image-slot id="about-portrait" shape="rect" placeholder="Portrait photo of Rohan Hare, transparent background" style="width:100%;height:100%;position:relative;z-index:1;"></image-slot>
+    </div>
+    <div>
+      <div style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:#75738A;font-weight:600;margin-bottom:16px;">About</div>
+      <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(26px,4vw,34px);color:#F2F1F7;margin:0 0 22px;font-weight:600;">Rohan Hare</h1>
+      <p style="font-size:16px;line-height:1.8;color:#C7C5D8;margin:0 0 20px;">I design and implement practical technology solutions for organizations with complex operational, reporting and information-management needs. My work spans business process automation, data and reporting, Microsoft&nbsp;365, SharePoint, Power Platform, SQL, infrastructure, systems integration and custom application development.</p>
+      <p style="font-size:16px;line-height:1.8;color:#C7C5D8;margin:0 0 20px;">I specialize in turning inefficient, fragmented or overly manual processes into reliable systems that are easier to operate, support and scale. My approach combines technical implementation with business analysis, documentation, governance and long-term maintainability.</p>
+      <p style="font-size:16px;line-height:1.8;color:#C7C5D8;margin:0 0 34px;">Through RTH Tech Services Inc., I provide consulting and development services to professional-services firms, property-management organizations and other businesses that need experienced technical problem-solving without unnecessary enterprise theatre.</p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;">
+        <a class="rth-cta" href="Contact.dc.html">Discuss a project</a>
+        <a href="Work.dc.html" style="text-decoration:none;color:#E7E6F0;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;border-bottom:2px solid rgba(255,255,255,0.25);padding-bottom:3px;align-self:center;" style-hover="border-bottom-color:#5CC1FF;color:#F2F1F7;" style-focus="{{ focusRingStyle }}">View selected work</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 96px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:24px;color:#F2F1F7;margin:0 0 32px;font-weight:600;border-top:1px solid rgba(255,255,255,0.08);padding-top:40px;">How I work</h2>
+    <div style="display:grid;grid-template-columns:{{ howCols }};gap:28px;">
+      <div>
+        <div style="font-family:'Manrope',sans-serif;font-size:17px;font-weight:600;color:#F2F1F7;margin-bottom:8px;">Business analysis first</div>
+        <p style="font-size:14.5px;line-height:1.65;color:#9A9AAE;margin:0;">Every engagement starts with understanding the actual operational problem, not just the requested feature, so the solution addresses root causes.</p>
+      </div>
+      <div>
+        <div style="font-family:'Manrope',sans-serif;font-size:17px;font-weight:600;color:#F2F1F7;margin-bottom:8px;">Built for handoff</div>
+        <p style="font-size:14.5px;line-height:1.65;color:#9A9AAE;margin:0;">Documentation and governance are part of delivery, not an afterthought &mdash; systems remain supportable after the engagement ends.</p>
+      </div>
+      <div>
+        <div style="font-family:'Manrope',sans-serif;font-size:17px;font-weight:600;color:#F2F1F7;margin-bottom:8px;">No unnecessary complexity</div>
+        <p style="font-size:14.5px;line-height:1.65;color:#9A9AAE;margin:0;">The right-sized solution for the organization &mdash; not the most impressive architecture, and not enterprise tooling the team can't maintain.</p>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isMobile: false };
+  async componentDidMount() {
+    const theme = await import('./theme.js');
+    this._theme = theme;
+    this._cleanup = theme.attachResponsive(this);
+    this.forceUpdate();
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const t = this._theme;
+    return {
+      pageBg: t ? t.colors.bgGradient : 'linear-gradient(160deg, #0d0c11 0%, #09080b 55%, #08080a 100%)',
+      heroPad: isMobile ? '48px 20px 56px' : '64px 32px 88px',
+      heroCols: isMobile ? '1fr' : '0.85fr 1.15fr',
+      heroGap: isMobile ? '36px' : '64px',
+      howCols: isMobile ? '1fr' : 'repeat(3,1fr)',
+      ctaStyle: t ? t.neonButtonStyle() : '',
+      ctaHoverStyle: t ? t.neonButtonHoverStyle : '',
+      focusRingStyle: t ? t.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

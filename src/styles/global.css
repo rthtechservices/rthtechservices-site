@@ -1,0 +1,274 @@
+/* ==========================================================================
+   Global base + shared components (.rth-cta, .rth-card, chips)
+   Depends on tokens.css.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-base);
+  background-image: var(--bg-page);
+  background-attachment: fixed;
+  color: var(--text-body);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Site-wide reduced-motion honour, per the handoff. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Layout helpers
+   -------------------------------------------------------------------------- */
+
+.rth-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.rth-shell > main {
+  flex: 1;
+}
+
+.rth-container {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-left: var(--page-pad);
+  padding-right: var(--page-pad);
+  width: 100%;
+}
+
+/* Skip link — keyboard users land here first. */
+.rth-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  padding: 12px 18px;
+  border: 1px solid var(--blue);
+  border-radius: var(--radius);
+}
+.rth-skip:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   CTA button — .rth-cta
+   Exact values from the handoff's "CTA button" token block.
+   -------------------------------------------------------------------------- */
+
+.rth-cta {
+  font-family: var(--font-ui);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  background: rgba(10, 10, 14, 0.55);
+  border: 2px solid var(--blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 26px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: inset 0 0 10px rgba(92, 193, 255, 0.15), 0 0 10px rgba(92, 193, 255, 0.18);
+  transition: box-shadow var(--ease), background var(--ease), transform 0.15s ease;
+}
+
+.rth-cta--sm {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+.rth-cta:hover {
+  background: rgba(92, 193, 255, 0.16);
+  box-shadow: inset 0 0 16px rgba(92, 193, 255, 0.28), 0 0 32px rgba(92, 193, 255, 0.42),
+    0 0 46px rgba(143, 0, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.rth-cta:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.rth-cta:active {
+  transform: translateY(0);
+  box-shadow: inset 0 0 10px rgba(92, 193, 255, 0.2), 0 0 18px rgba(92, 193, 255, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Card — .rth-card
+   -------------------------------------------------------------------------- */
+
+.rth-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-card);
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+
+.rth-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px rgba(92, 193, 255, 0.65), 0 0 20px rgba(92, 193, 255, 0.24),
+    0 0 36px rgba(92, 193, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.rth-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Chips
+   -------------------------------------------------------------------------- */
+
+/* Neutral metadata chip (tech stack, tags, card meta). */
+.rth-chip {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: var(--radius-chip);
+}
+
+/* Interactive filter chip (Scripts Library / Reports Gallery). */
+.rth-filter-chip {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: var(--radius-chip);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface-card);
+  color: var(--text-muted);
+  transition: border-color var(--ease), background var(--ease), color var(--ease),
+    box-shadow var(--ease);
+}
+
+.rth-filter-chip:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.rth-filter-chip[aria-pressed='true'] {
+  font-weight: 600;
+  border-color: var(--blue);
+  background: rgba(92, 193, 255, 0.14);
+  color: #eaf6ff;
+  box-shadow: 0 0 10px rgba(92, 193, 255, 0.3);
+}
+
+.rth-filter-chip:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* "Demonstration" / availability badge. */
+.rth-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 3px 9px;
+  border-radius: var(--radius-chip);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Category eyebrow (showcase pages) — blue accent bar + label
+   -------------------------------------------------------------------------- */
+
+.rth-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.rth-eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: var(--blue);
+  box-shadow: 0 0 6px rgba(92, 193, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.rth-eyebrow > span {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Image placeholder — stands in for photography that hasn't been supplied.
+   Mirrors the prototype's <image-slot>. Delete once real imagery lands.
+   -------------------------------------------------------------------------- */
+
+.rth-image-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.02) 10px,
+    rgba(255, 255, 255, 0.04) 10px,
+    rgba(255, 255, 255, 0.04) 20px
+  );
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  color: var(--text-faint);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  text-align: center;
+  padding: 12px;
+}

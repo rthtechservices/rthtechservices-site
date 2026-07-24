@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<link rel="icon" href="./assets/rth-logo.png">
+<style>
+  @media (prefers-reduced-motion: reduce) { .rth-cta, a.rth-nav-link { transition:none !important; } }
+  .rth-cta{font-family:'Manrope',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:rgba(10,10,14,0.55);border:2px solid #5CC1FF;color:#FFFFFF;font-weight:600;font-size:15px;padding:14px 26px;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 10px rgba(92,193,255,0.15), 0 0 10px rgba(92,193,255,0.18);transition:box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;}
+  .rth-cta--sm{padding:10px 18px;font-size:14px;}
+  .rth-cta:hover{background:rgba(92,193,255,0.16);box-shadow:inset 0 0 16px rgba(92,193,255,0.28), 0 0 32px rgba(92,193,255,0.42), 0 0 46px rgba(143,0,255,0.14);transform:translateY(-1px);}
+  .rth-cta:focus-visible{outline:2px solid #5CC1FF;outline-offset:3px;}
+  .rth-cta:active{transform:translateY(0);box-shadow:inset 0 0 10px rgba(92,193,255,0.2), 0 0 18px rgba(92,193,255,0.3);}
+  .rth-card{transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;}
+  .rth-card:hover{border-color:#5CC1FF !important;box-shadow:0 0 0 1px rgba(92,193,255,.65), 0 0 20px rgba(92,193,255,.24), 0 0 36px rgba(92,193,255,.12) !important;transform:translateY(-2px);}
+  .rth-card:focus-visible{outline:2px solid #5CC1FF;outline-offset:2px;}
+</style>
+</helmet>
+<header style="position:sticky;top:0;z-index:50;background:rgba(9,8,14,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.08);">
+  <div style="max-width:1180px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'BC Sans','Source Sans 3',sans-serif;">
+    <a href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;" aria-label="Rohan Hare — home">
+      <img src="./assets/rth-logo.png" alt="RTH Tech Services logo" style="width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 4px rgba(92,193,255,0.3));"/>
+      <div>
+        <div style="font-family:'Manrope',sans-serif;font-size:18px;font-weight:600;letter-spacing:0.01em;line-height:1.1;color:#F2F1F7;">Rohan Hare</div>
+        <div style="font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:#75738A;margin-top:2px;">RTH Tech Services Inc.</div>
+      </div>
+    </a>
+
+    <nav aria-label="Primary" style="{{ navDisplayStyle }}align-items:center;gap:22px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <a class="rth-nav-link" href="{{ item.href }}" style="{{ item.linkStyle }}" style-hover="{{ item.linkHoverStyle }}" style-focus="{{ focusRingStyle }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+
+    <a class="rth-cta rth-cta--sm" href="Contact.dc.html" style="{{ ctaDisplayStyle }}">Discuss a project</a>
+
+    <button type="button" aria-label="{{ menuButtonLabel }}" aria-expanded="{{ mobileMenuOpen }}" onclick="{{ toggleMenu }}" style="{{ hamburgerStyle }}" style-focus="{{ focusRingStyle }}">
+      <span style="{{ hamburgerBarStyle }}"></span>
+      <span style="{{ hamburgerBarStyle }}"></span>
+      <span style="{{ hamburgerBarStyle }}"></span>
+    </button>
+  </div>
+
+  <sc-if value="{{ showMobilePanel }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Mobile" style="display:flex;flex-direction:column;gap:2px;padding:8px 24px 20px;border-top:1px solid rgba(255,255,255,0.08);">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <a href="{{ item.href }}" style="{{ item.mobileLinkStyle }}" onclick="{{ closeMenu }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+  </sc-if>
+</header>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;&quot;,&quot;work&quot;,&quot;scripts&quot;,&quot;reports&quot;,&quot;about&quot;,&quot;contact&quot;]}}">
+const THEME_URL = './theme.js';
+
+class Component extends DCLogic {
+  state = { isMobile: false, mobileMenuOpen: false };
+
+  async componentDidMount() {
+    const theme = await import(THEME_URL);
+    this._theme = theme;
+    this._cleanup = theme.attachResponsive(this);
+  }
+  componentWillUnmount() {
+    if (this._cleanup) this._cleanup();
+  }
+
+  toggleMenu() { this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })); }
+  closeMenu() { this.setState({ mobileMenuOpen: false }); }
+
+  renderVals() {
+    const active = this.props.active || '';
+    const isMobile = this.state.isMobile;
+    const base = [
+      { label: 'Work', href: 'Work.dc.html', key: 'work' },
+      { label: 'Scripts Library', href: 'ScriptsLibrary.dc.html', key: 'scripts' },
+      { label: 'Reports Gallery', href: 'ReportsGallery.dc.html', key: 'reports' },
+      { label: 'About', href: 'About.dc.html', key: 'about' },
+      { label: 'Contact', href: 'Contact.dc.html', key: 'contact' }
+    ];
+    const navItems = base.map(i => {
+      const isActive = i.key === active;
+      return {
+        ...i,
+        linkStyle: `font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;text-decoration:none;white-space:nowrap;padding-bottom:5px;border-bottom:2px solid ${isActive ? '#5CC1FF' : 'transparent'};color:${isActive ? '#F2F1F7' : '#9A9AAE'};`,
+        linkHoverStyle: 'color:#F2F1F7;',
+        mobileLinkStyle: `font-family:'Manrope',sans-serif;display:block;padding:12px 4px;font-size:15px;text-decoration:none;color:${isActive ? '#F2F1F7' : '#C7C5D8'};border-bottom:1px solid rgba(255,255,255,0.06);`
+      };
+    });
+
+    const focusRing = this._theme ? this._theme.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;';
+
+    return {
+      navItems,
+      navDisplayStyle: `display:${isMobile ? 'none' : 'flex'};`,
+      ctaDisplayStyle: isMobile ? 'display:none;' : 'display:inline-flex;',
+      focusRingStyle: focusRing,
+      hamburgerStyle: `display:${isMobile ? 'flex' : 'none'};flex-direction:column;gap:5px;background:none;border:1px solid rgba(255,255,255,0.14);border-radius:4px;padding:10px;cursor:pointer;`,
+      hamburgerBarStyle: 'width:18px;height:2px;background:#F2F1F7;display:block;',
+      menuButtonLabel: this.state.mobileMenuOpen ? 'Close menu' : 'Open menu',
+      mobileMenuOpen: this.state.mobileMenuOpen,
+      showMobilePanel: isMobile && this.state.mobileMenuOpen,
+      toggleMenu: () => this.toggleMenu(),
+      closeMenu: () => this.closeMenu()
+    };
+  }
+}
+
+</script>
+</body>
+</html>
