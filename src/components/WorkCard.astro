@@ -3,13 +3,14 @@ import type { WorkItem } from '../data/work';
 
 interface Props {
   item: WorkItem;
-  /** Show the tag chip row (used on the Work index, not on Home). */
-  showTags?: boolean;
+  /** 'compact' = Home's 3-up grid. 'full' = Work index: 16:9, bigger type, tags. */
+  variant?: 'compact' | 'full';
 }
-const { item, showTags = false } = Astro.props;
+const { item, variant = 'compact' } = Astro.props;
+const showTags = variant === 'full';
 ---
 
-<a class="rth-card work-card" href={item.href}>
+<a class:list={['rth-card', 'work-card', variant]} href={item.href}>
   <div class="thumb">
     <!-- Placeholder: real screenshot/photography pending. -->
     <div class="rth-image-slot">{item.title}</div>
@@ -76,5 +77,23 @@ const { item, showTags = false } = Astro.props;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 16px;
+  }
+
+  /* Work index variant — larger thumb and type than Home's 3-up grid. */
+  .full .thumb {
+    aspect-ratio: 16 / 9;
+  }
+  .full .body {
+    padding: 24px 26px 28px;
+  }
+  .full .title {
+    font-size: 20px;
+  }
+  .full .tagline {
+    margin-bottom: 12px;
+  }
+  .full .summary {
+    font-size: 14.5px;
+    line-height: 1.65;
   }
 </style>

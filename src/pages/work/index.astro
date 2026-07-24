@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { workItems } from '../../data/work';
+---
+
+<BaseLayout
+  title="Work — Rohan Hare, RTH Tech Services Inc."
+  description="Case studies in systems, automation and reporting for professional-services and property-management organizations."
+  active="work"
+>
+  <section class="rth-container intro">
+    <p class="eyebrow">Selected Work</p>
+    <h1>Case studies &amp; systems built to solve real operational problems.</h1>
+    <p class="lede">
+      A cross-section of applications, reporting systems and infrastructure work delivered for
+      professional-services and property-management organizations. Each project below links to a
+      full case study covering the problem, the approach and the outcome.
+    </p>
+  </section>
+
+  <section class="rth-container grid-wrap">
+    <div class="card-grid">
+      {workItems.map((item) => <WorkCard item={item} variant="full" />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    padding-top: 56px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin: 0 0 16px;
+    font-family: var(--font-body);
+  }
+
+  h1 {
+    font-family: var(--font-ui);
+    font-size: clamp(28px, 4vw, 36px);
+    color: var(--text-primary);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-bio);
+    max-width: 70ch;
+    margin: 0 0 48px;
+  }
+
+  .grid-wrap {
+    padding-bottom: 100px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  @media (max-width: 859px) {
+    .intro {
+      padding-top: 48px;
+    }
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
