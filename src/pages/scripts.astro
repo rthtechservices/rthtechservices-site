@@ -1,0 +1,471 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { scripts, filterDimensions, REPO_URL } from '../data/scripts';
+
+// Distinct values per dimension, for the chip rows.
+const groups = filterDimensions.map((dim) => ({
+  ...dim,
+  options: [...new Set(scripts.map((s) => s[dim.key]))].sort(),
+}));
+---
+
+<BaseLayout
+  title="Scripts Library — RTH Tech Services Inc."
+  description="A filterable library of published PowerShell and Python tools for administration, diagnostics, reporting and automation."
+  active="scripts"
+>
+  <section class="rth-container intro">
+    <p class="eyebrow">Automation &amp; Systems Administration Toolkit</p>
+    <h1>Scripts library</h1>
+    <p class="lede">
+      A curated library of PowerShell and Python tools for administration, diagnostics, reporting
+      and repeatable operational support. Filter by language, runtime, function or validation
+      status, or search by title and keyword.
+    </p>
+    <p class="note">
+      Every script below is published and source-reviewed for embedded credentials, private
+      endpoints and environment-specific identifiers. Read the
+      <a href={REPO_URL} target="_blank" rel="noopener noreferrer">full library on GitHub</a> for
+      source, usage examples and parameters.
+    </p>
+
+    <label class="visually-hidden" for="script-search">Search scripts</label>
+    <input
+      id="script-search"
+      class="rth-search"
+      type="search"
+      placeholder="Search by title, technology or keyword&hellip;"
+      autocomplete="off"
+    />
+  </section>
+
+  <section class="rth-container filters">
+    {
+      groups.map((group) => (
+        <div class="filter-row">
+          <span class="filter-label">{group.label}</span>
+          <div class="filter-chips">
+            {group.options.map((opt) => (
+              <button
+                type="button"
+                class="rth-filter-chip"
+                data-dim={group.key}
+                data-value={opt}
+                aria-pressed="false"
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="rth-container results">
+    <p class="count" aria-live="polite" data-total={scripts.length}>
+      {scripts.length} of {scripts.length} scripts
+    </p>
+
+    <div class="card-grid">
+      {
+        scripts.map((s) => (
+          <button
+            type="button"
+            class="rth-card script-card"
+            data-language={s.language}
+            data-runtime={s.runtime}
+            data-func={s.func}
+            data-validation={s.validation}
+            data-search={`${s.title} ${s.summary} ${s.language} ${s.runtime} ${s.func}`.toLowerCase()}
+            aria-haspopup="dialog"
+            data-dialog={`dlg-${s.id}`}
+          >
+            <span class="card-head">
+              <span class="card-title">{s.title}</span>
+              <span class="card-badges">
+                <span class="rth-badge">{s.runtime}</span>
+                <span class:list={['rth-badge', s.validation === 'Validated' && 'ok']}>
+                  {s.validation}
+                </span>
+              </span>
+            </span>
+            <span class="card-summary">{s.summary}</span>
+            <span class="card-meta">
+              <span class="meta-chip">{s.language}</span>
+              <span class="meta-chip">{s.func}</span>
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <p class="empty" hidden>No scripts match the current filters. Try clearing a filter or search term.</p>
+  </section>
+
+  {/* One native <dialog> per script: Escape-to-close and focus return come free. */}
+  {
+    scripts.map((s) => (
+      <dialog id={`dlg-${s.id}`} class="script-dialog" aria-labelledby={`dlg-${s.id}-title`}>
+        <form method="dialog">
+          <button class="dialog-close" aria-label="Close dialog" value="close">
+            &times;
+          </button>
+        </form>
+
+        <div class="dialog-badges">
+          <span class="rth-badge">{s.runtime}</span>
+          <span class:list={['rth-badge', s.validation === 'Validated' && 'ok']}>
+            {s.validation}
+          </span>
+        </div>
+
+        <h2 id={`dlg-${s.id}-title`}>{s.title}</h2>
+        <p class="dialog-summary">{s.summary}</p>
+
+        <div class="dialog-fields">
+          <div>
+            <div class="field-label">Review notes</div>
+            <p>{s.review}</p>
+          </div>
+          <div>
+            <div class="field-label">Validation status</div>
+            <p>{s.validationDetail}</p>
+          </div>
+          <div>
+            <div class="field-label">Safety considerations</div>
+            <p>{s.safety}</p>
+          </div>
+        </div>
+
+        <a class="rth-cta rth-cta--sm" href={`${REPO_URL}/blob/main/${s.path}`} target="_blank" rel="noopener noreferrer">
+          View source on GitHub
+        </a>
+      </dialog>
+    ))
+  }
+</BaseLayout>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* --- Intro --- */
+  .intro {
+    padding-top: 60px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+  h1 {
+    font-family: var(--font-ui);
+    font-size: clamp(26px, 4vw, 32px);
+    color: var(--text-primary);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-bio);
+    max-width: 70ch;
+    margin: 0 0 12px;
+  }
+  .note {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-faint);
+    max-width: 70ch;
+    margin: 0 0 28px;
+  }
+  .note a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .note a:hover {
+    text-decoration: underline;
+  }
+
+  .rth-search {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-chip);
+    font-size: 15px;
+    font-family: var(--font-body);
+    background: var(--surface-card);
+    color: var(--text-primary);
+    margin-bottom: 28px;
+  }
+  .rth-search:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 8px rgba(92, 193, 255, 0.2);
+  }
+
+  /* --- Filters --- */
+  .filters {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    width: 110px;
+    flex-shrink: 0;
+  }
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* --- Results --- */
+  .results {
+    padding-top: 20px;
+    padding-bottom: 100px;
+  }
+  .count {
+    font-size: 13.5px;
+    color: var(--text-faint);
+    margin: 0 0 20px;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .script-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    cursor: pointer;
+    padding: 22px 24px;
+    font-family: var(--font-body);
+  }
+  .script-card[hidden] {
+    display: none;
+  }
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-family: var(--font-ui);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .card-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+  .rth-badge.ok {
+    color: #a8d8b0;
+    border-color: rgba(168, 216, 176, 0.28);
+  }
+  .card-summary {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+  }
+  .meta-chip {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-body);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: var(--radius-chip);
+  }
+
+  .empty {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-faint);
+    font-size: 14.5px;
+  }
+
+  /* --- Dialog --- */
+  .script-dialog {
+    background: var(--surface-card);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 5px;
+    max-width: 640px;
+    width: 100%;
+    padding: 40px 44px 44px;
+    color: var(--text-body);
+    font-family: var(--font-body);
+    position: relative;
+  }
+  .script-dialog::backdrop {
+    background: rgba(5, 4, 9, 0.72);
+  }
+  .dialog-close {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-faint);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .dialog-close:hover {
+    color: var(--text-primary);
+  }
+  .dialog-close:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+  .dialog-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .script-dialog h2 {
+    font-family: var(--font-ui);
+    font-size: 22px;
+    color: var(--text-primary);
+    margin: 14px 0 8px;
+    font-weight: 600;
+  }
+  .dialog-summary {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    margin: 0 0 20px;
+  }
+  .dialog-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .dialog-fields p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    margin: 0;
+  }
+
+  @media (max-width: 859px) {
+    .intro {
+      padding-top: 48px;
+    }
+    .filter-row {
+      align-items: flex-start;
+    }
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+    .script-dialog {
+      padding: 30px 24px 32px;
+    }
+  }
+</style>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>('#script-search')!;
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.rth-filter-chip')];
+  const cards = [...document.querySelectorAll<HTMLButtonElement>('.script-card')];
+  const count = document.querySelector<HTMLElement>('.count')!;
+  const empty = document.querySelector<HTMLElement>('.empty')!;
+  const total = Number(count.dataset.total);
+
+  // One active value per dimension; clicking the active chip again clears it.
+  const active = new Map<string, string>();
+
+  function apply() {
+    const q = search.value.trim().toLowerCase();
+    let shown = 0;
+
+    for (const card of cards) {
+      const matches =
+        [...active].every(([dim, value]) => card.dataset[dim] === value) &&
+        (!q || card.dataset.search!.includes(q));
+      card.hidden = !matches;
+      if (matches) shown++;
+    }
+
+    count.textContent = `${shown} of ${total} scripts`;
+    empty.hidden = shown > 0;
+  }
+
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      const { dim, value } = chip.dataset as { dim: string; value: string };
+      const isActive = active.get(dim) === value;
+
+      if (isActive) active.delete(dim);
+      else active.set(dim, value);
+
+      // Only one chip per dimension can be pressed.
+      for (const other of chips) {
+        if (other.dataset.dim === dim) {
+          other.setAttribute('aria-pressed', String(!isActive && other === chip));
+        }
+      }
+      apply();
+    });
+  }
+
+  search.addEventListener('input', apply);
+
+  // Native <dialog> gives us Escape-to-close and focus return for free.
+  for (const card of cards) {
+    card.addEventListener('click', () => {
+      document.querySelector<HTMLDialogElement>(`#${card.dataset.dialog}`)?.showModal();
+    });
+  }
+
+  // Backdrop click closes — the dialog element itself is the backdrop area.
+  for (const dlg of document.querySelectorAll<HTMLDialogElement>('.script-dialog')) {
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+  }
+</script>
