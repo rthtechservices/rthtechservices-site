@@ -462,10 +462,17 @@ const groups = filterDimensions.map((dim) => ({
     });
   }
 
-  // Backdrop click closes — the dialog element itself is the backdrop area.
   for (const dlg of document.querySelectorAll<HTMLDialogElement>('.script-dialog')) {
+    // Backdrop click closes — the dialog element itself is the backdrop area.
     dlg.addEventListener('click', (e) => {
       if (e.target === dlg) dlg.close();
+    });
+
+    // <dialog> closes on Escape natively, but that relies on the browser's
+    // CloseWatcher. Belt-and-braces so keyboard users are never trapped;
+    // double-close is a harmless no-op.
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') dlg.close();
     });
   }
 </script>

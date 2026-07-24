@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const EMAIL = 'rohan@rthtechservices.com';
+const SUBJECT = encodeURIComponent('Project enquiry');
+
+const details = [
+  { label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/rohanhare',
+    href: 'https://www.linkedin.com/in/rohanhare/',
+    external: true,
+  },
+  { label: 'Location', value: 'Vancouver, British Columbia, Canada' },
+  { label: 'Business', value: 'RTH Tech Services Inc.' },
+];
+---
+
+<BaseLayout
+  title="Contact — Rohan Hare, RTH Tech Services Inc."
+  description="Discuss a project with Rohan Hare of RTH Tech Services Inc. — consulting and development services in Vancouver, BC and remote."
+  active="contact"
+>
+  <section class="rth-container hero">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h1>Let&rsquo;s discuss a project.</h1>
+      <p class="lede">
+        Available for consulting, contract work and selected technical projects. The most useful
+        first message is a short description of the operational problem you&rsquo;re trying to
+        solve.
+      </p>
+
+      <dl class="details">
+        {
+          details.map((d) => (
+            <div>
+              <dt>{d.label}</dt>
+              <dd>
+                {d.href ? (
+                  <a
+                    href={d.href}
+                    target={d.external ? '_blank' : undefined}
+                    rel={d.external ? 'noopener noreferrer' : undefined}
+                  >
+                    {d.value}
+                  </a>
+                ) : (
+                  d.value
+                )}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    {/* ponytail: mailto instead of a form — no backend on GitHub Pages, and a
+        form was explicitly deferred past v1. Swap in a real endpoint later. */}
+    <div class="panel">
+      <h2>Start the conversation</h2>
+      <p>
+        Email is the fastest way to reach me. Include a short description of the problem, your
+        timeline, and any relevant context about the systems involved.
+      </p>
+      <a class="rth-cta" href={`mailto:${EMAIL}?subject=${SUBJECT}`}>Email me directly</a>
+      <p class="reply">I reply within one to two business days.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: 64px;
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+
+  h1 {
+    font-family: var(--font-ui);
+    font-size: 32px;
+    color: var(--text-primary);
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-bio);
+    margin: 0 0 36px;
+    max-width: 48ch;
+  }
+
+  /* --- Contact details --- */
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid var(--border-faint);
+    padding-top: 28px;
+    margin: 0;
+  }
+  .details dt {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+  .details dd {
+    font-size: 15.5px;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0;
+  }
+  .details a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--ease);
+  }
+  .details a:hover {
+    color: var(--blue);
+  }
+  .details a:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  /* --- Right-hand panel (stands in for the deferred form) --- */
+  .panel {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+  }
+  .panel h2 {
+    font-family: var(--font-ui);
+    font-size: 19px;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .panel p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0 0 24px;
+  }
+  .panel .reply {
+    font-size: 13px;
+    color: var(--text-faint);
+    margin: 20px 0 0;
+  }
+
+  @media (max-width: 859px) {
+    .hero {
+      padding-top: 48px;
+      padding-bottom: 64px;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .panel {
+      padding: 28px 24px;
+    }
+  }
+</style>
