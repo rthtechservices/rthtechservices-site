@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<title>Work — Rohan Hare, RTH Tech Services Inc.</title>
+<meta name="description" content="Case studies in systems, automation and reporting for professional-services and property-management organizations."/>
+<link rel="icon" href="./assets/rth-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Roger';src:url('./fonts/Roger-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'BC Sans';src:url('./fonts/BCSans-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+</style>
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#08080a; }
+  .rth-card{transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;}
+  .rth-card:hover{border-color:#5CC1FF !important;box-shadow:0 0 0 1px rgba(92,193,255,.65), 0 0 20px rgba(92,193,255,.24), 0 0 36px rgba(92,193,255,.12) !important;transform:translateY(-2px);}
+  .rth-card:focus-visible{outline:2px solid #5CC1FF;outline-offset:2px;}
+</style>
+</helmet>
+<div style="background:{{ pageBg }};min-height:100vh;">
+  <dc-import name="Header" active="work" hint-size="100%,80px"></dc-import>
+  <section style="max-width:1180px;margin:0 auto;padding:{{ topPad }};">
+    <div style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:#75738A;font-weight:600;margin-bottom:16px;font-family:'BC Sans','Source Sans 3',sans-serif;">Selected Work</div>
+    <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,36px);color:#F2F1F7;margin:0 0 16px;font-weight:600;">Case studies &amp; systems built to solve real operational problems.</h1>
+    <p style="font-family:'BC Sans','Source Sans 3',sans-serif;font-size:16px;line-height:1.7;color:#B4B1C6;max-width:70ch;margin:0 0 48px;">A cross-section of applications, reporting systems and infrastructure work delivered for professional-services and property-management organizations. Each project below links to a full case study covering the problem, the approach and the outcome.</p>
+  </section>
+  <section style="max-width:1180px;margin:0 auto;padding:0 32px 100px;">
+    <div style="display:grid;grid-template-columns:{{ cardCols }};gap:30px;">
+      <sc-for list="{{ workItems }}" as="item" hint-placeholder-count="6">
+        <a class="rth-card" href="{{ item.href }}" style="display:flex;flex-direction:column;text-decoration:none;border:1px solid rgba(255,255,255,0.10);border-radius:4px;background:#121116;overflow:hidden;font-family:'BC Sans','Source Sans 3',sans-serif;">
+          <div style="width:100%;aspect-ratio:16/9;">
+            <image-slot id="{{ item.slotId }}" shape="rect" placeholder="{{ item.title }}" style="width:100%;height:100%;"></image-slot>
+          </div>
+          <div style="padding:24px 26px 28px;">
+            <div style="font-family:'Manrope',sans-serif;font-size:20px;font-weight:600;color:#F2F1F7;margin-bottom:6px;">{{ item.title }}</div>
+            <div style="font-size:13.5px;color:#8890A0;font-weight:500;margin-bottom:12px;">{{ item.tagline }}</div>
+            <p style="font-size:14.5px;line-height:1.65;color:#9A9AAE;margin:0 0 16px;">{{ item.summary }}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <sc-for list="{{ item.tags }}" as="tag" hint-placeholder-count="2">
+                <span style="font-size:12px;font-weight:500;color:#C7C5D8;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);padding:5px 11px;border-radius:3px;">{{ tag }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+  <dc-import name="Footer" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { workItems: [], isMobile: false };
+  async componentDidMount() {
+    const [dataMod, theme] = await Promise.all([import('./site-data.js'), import('./theme.js')]);
+    this._theme = theme;
+    this.setState({ workItems: dataMod.workItems.map(i => ({ ...i, slotId: 'work-card-' + i.id })) });
+    this._cleanup = theme.attachResponsive(this);
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const t = this._theme;
+    return {
+      workItems: this.state.workItems,
+      pageBg: t ? t.colors.bgGradient : 'linear-gradient(160deg, #0d0c11 0%, #09080b 55%, #08080a 100%)',
+      topPad: isMobile ? '48px 20px 8px' : '64px 32px 12px',
+      cardCols: isMobile ? '1fr' : 'repeat(2,1fr)',
+      focusRingStyle: t ? t.neonButtonFocusStyle : 'outline:2px solid #5CC1FF;'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

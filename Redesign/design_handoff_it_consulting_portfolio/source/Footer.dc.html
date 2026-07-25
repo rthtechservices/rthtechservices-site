@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<footer style="background:#0B0A11;border-top:1px solid rgba(255,255,255,0.08);margin-top:96px;font-family:'BC Sans','Source Sans 3',sans-serif;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#5CC1FF,#8F00FF,transparent);opacity:0.5;"></div>
+  <div style="max-width:1180px;margin:0 auto;padding:56px 32px 36px;display:grid;grid-template-columns:{{ colTemplate }};gap:48px;">
+    <div>
+      <div style="font-family:'Roger',sans-serif;font-size:24px;letter-spacing:0.02em;color:#F2F1F7;line-height:1.1;">RTH TECH SERVICES</div>
+      <div style="font-family:'Manrope',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#8890A0;margin-top:8px;">Solutions Consultant</div>
+      <p style="font-size:14.5px;line-height:1.7;color:#75738A;max-width:38ch;margin:16px 0 0;">Systems, automation and reporting that solve real operational problems &mdash; without unnecessary enterprise theatre.</p>
+    </div>
+    <div>
+      <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#75738A;margin-bottom:14px;">Site</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="Work.dc.html" style="font-size:14px;color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">Work</a>
+        <a href="ScriptsLibrary.dc.html" style="font-size:14px;color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">Scripts Library</a>
+        <a href="ReportsGallery.dc.html" style="font-size:14px;color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">Reports Gallery</a>
+        <a href="About.dc.html" style="font-size:14px;color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">About</a>
+        <a href="Contact.dc.html" style="font-size:14px;color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#75738A;margin-bottom:14px;">Contact</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:#C7C5D8;">
+        <a href="mailto:rohan@rthtechservices.com" style="color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">rohan@rthtechservices.com</a>
+        <a href="https://www.linkedin.com/in/rohanhare/" target="_blank" rel="noopener noreferrer" style="color:#C7C5D8;text-decoration:none;" style-hover="color:#F2F1F7;" style-focus="outline:2px solid #5CC1FF;outline-offset:2px;">linkedin.com/in/rohanhare</a>
+        <span style="color:#75738A;">Vancouver, British Columbia, Canada</span>
+        <span style="color:#75738A;">Available for consulting &amp; contract work</span>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:0 auto;padding:20px 32px;border-top:1px solid rgba(255,255,255,0.06);font-size:12.5px;color:#75738A;">
+    &copy; 2026 RTH Tech Services Inc. All rights reserved.
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isMobile: false };
+  async componentDidMount() {
+    const theme = await import('./theme.js');
+    this._cleanup = theme.attachResponsive(this);
+  }
+  componentWillUnmount() { if (this._cleanup) this._cleanup(); }
+  renderVals() {
+    return { colTemplate: this.state.isMobile ? '1fr' : '1.3fr 0.9fr 1fr' };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<dc-import name="ShowcaseLayout"
+  category="Reporting &amp; Analytics"
+  title="Enterprise Reporting &amp; Forecasting"
+  summary="{{ summary }}"
+  hero-slot-id="reporting-hero"
+  what-it-solves="{{ whatItSolves }}"
+  stack="{{ stack }}"
+  features="{{ features }}"
+  sections="{{ sections }}"
+  hint-size="100%,3000px">
+</dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      summary: 'A portfolio of SQL Server Reporting Services solutions for legal and professional-services environments, including financial forecasting, matter analysis, operational reporting and executive dashboards.',
+      whatItSolves: [
+        'Financial forecasts assembled by hand each month from several disconnected exports, with no consistent methodology.',
+        'Executives and practice leaders lacking a single reliable view of firm performance until well after month-end.',
+        'Matter-level profitability trends invisible until a matter was already over budget.',
+        'Report requests that each took custom development time instead of drawing on a shared, governed data layer.'
+      ],
+      stack: ['SSRS', 'SQL Server', 'T-SQL', 'Power BI', 'Data Warehousing'],
+      features: [
+        { title: 'Matter profitability forecasting', body: 'Projects matter-level performance against budget using realized rates and burn-rate trend, surfacing risk before write-off.' },
+        { title: 'Executive dashboards', body: 'Consolidates revenue, AR aging and WIP conversion into a single monthly view built for leadership review.' },
+        { title: 'Governed reporting layer', body: 'A shared semantic layer over the SQL Server warehouse means new reports draw on the same trusted definitions.' }
+      ],
+      sections: [
+        { heading: 'Approach', body: 'Rather than building each report from raw tables, the underlying data is modelled once into a governed reporting layer of views and calculated fields, so financial definitions (realization, utilization, WIP conversion) are consistent everywhere they appear. SSRS reports and Power BI dashboards both consume this layer.' },
+        { heading: 'Selected reports in this portfolio', body: 'The full set spans a matter profitability forecast, timekeeper utilization summary, executive financial dashboard, client-facing billing package, and several operational and data-quality reports &mdash; each documented individually in the Reports Gallery with its business question, audience and methodology.' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

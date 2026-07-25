@@ -1,0 +1,150 @@
+---
+import { navItems } from '../data/nav';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="accent-line" aria-hidden="true"></div>
+
+  <div class="rth-container footer-grid">
+    <div>
+      <div class="wordmark">RTH TECH SERVICES</div>
+      <div class="role">Solutions Consultant</div>
+      <p class="blurb">
+        Systems, automation and reporting that solve real operational problems &mdash; without
+        unnecessary enterprise theatre.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="col-title">Site</h2>
+      <div class="link-stack">
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </div>
+    </div>
+
+    <div>
+      <h2 class="col-title">Contact</h2>
+      <div class="link-stack">
+        <a href="mailto:rohan@rthtechservices.com">rohan@rthtechservices.com</a>
+        <a
+          href="https://www.linkedin.com/in/rohanhare/"
+          target="_blank"
+          rel="noopener noreferrer">linkedin.com/in/rohanhare</a
+        >
+        <span>Vancouver, British Columbia, Canada</span>
+        <span>Available for consulting &amp; contract work</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rth-container legal">
+    &copy; {year} RTH Tech Services Inc. All rights reserved.
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface-footer);
+    border-top: 1px solid var(--border-faint);
+    margin-top: 96px;
+    font-family: var(--font-body);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* The one purple accent in the footer: a hairline gradient rule. */
+  .accent-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
+    opacity: 0.5;
+  }
+
+  .footer-grid {
+    padding-top: 56px;
+    padding-bottom: 36px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr 1fr;
+    gap: 48px;
+  }
+
+  /* ROGER is used exactly once on the site — here. Not a gradient. */
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .role {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-meta);
+    margin-top: 8px;
+  }
+
+  .blurb {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-faint);
+    max-width: 38ch;
+    margin: 16px 0 0;
+  }
+
+  .col-title {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 14px;
+  }
+
+  .link-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-body);
+  }
+  .link-stack a {
+    color: var(--text-body);
+    text-decoration: none;
+    transition: color var(--ease);
+    width: fit-content;
+  }
+  .link-stack a:hover {
+    color: var(--text-primary);
+  }
+  .link-stack a:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .link-stack span {
+    color: var(--text-faint);
+  }
+
+  .legal {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid var(--border-hairline);
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 859px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+</style>

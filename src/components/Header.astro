@@ -1,0 +1,236 @@
+---
+import { navItems } from '../data/nav';
+
+interface Props {
+  active?: string;
+}
+const { active = '' } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="rth-container header-inner">
+    <a href="/" class="brand" aria-label="Rohan Hare — home">
+      <img src="/assets/rth-logo.png" alt="" width="36" height="36" class="brand-mark" />
+      <span class="brand-text">
+        <span class="brand-name">Rohan Hare</span>
+        <span class="brand-co">RTH Tech Services Inc.</span>
+      </span>
+    </a>
+
+    <nav aria-label="Primary" class="primary-nav">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="nav-link"
+            aria-current={item.key === active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a class="rth-cta rth-cta--sm header-cta" href="/contact/">Discuss a project</a>
+
+    <button
+      type="button"
+      class="hamburger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" aria-label="Mobile" class="mobile-nav" hidden>
+    {
+      navItems.map((item) => (
+        <a href={item.href} aria-current={item.key === active ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a class="rth-cta rth-cta--sm mobile-cta" href="/contact/">Discuss a project</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface-header);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-faint);
+  }
+
+  .header-inner {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    font-family: var(--font-body);
+  }
+
+  /* --- Brand lockup --- */
+  .brand {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(92, 193, 255, 0.3));
+  }
+  .brand-text {
+    display: block;
+  }
+  .brand-name {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    color: var(--text-primary);
+  }
+  .brand-co {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+  .brand:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  /* --- Desktop nav --- */
+  .primary-nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .nav-link {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    transition: color var(--ease), border-color var(--ease);
+  }
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+  .nav-link[aria-current='page'] {
+    color: var(--text-primary);
+    border-bottom-color: var(--blue);
+  }
+  .nav-link:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  /* --- Hamburger (mobile only) --- */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    padding: 10px;
+    cursor: pointer;
+  }
+  .hamburger span {
+    width: 18px;
+    height: 2px;
+    background: var(--text-primary);
+    display: block;
+  }
+  .hamburger:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  /* --- Mobile dropdown panel --- */
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px var(--page-pad) 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+  .mobile-nav[hidden] {
+    display: none;
+  }
+  .mobile-nav a:not(.rth-cta) {
+    font-family: var(--font-ui);
+    display: block;
+    padding: 12px 4px;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--text-body);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+  .mobile-nav a[aria-current='page'] {
+    color: var(--text-primary);
+  }
+  .mobile-nav a:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .mobile-cta {
+    margin-top: 16px;
+    align-self: flex-start;
+  }
+
+  /* Single breakpoint, per the handoff. */
+  @media (max-width: 859px) {
+    .primary-nav,
+    .header-cta {
+      display: none;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle. Kept tiny and dependency-free — this is the only
+  // JS the header needs now that responsive behaviour lives in CSS.
+  const btn = document.querySelector<HTMLButtonElement>('.hamburger');
+  const panel = document.querySelector<HTMLElement>('#mobile-nav');
+
+  if (btn && panel) {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      panel.hidden = open;
+    });
+
+    // Close on Escape, and return focus to the toggle.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        panel.hidden = true;
+        btn.focus();
+      }
+    });
+  }
+</script>

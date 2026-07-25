@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<dc-import name="ShowcaseLayout"
+  category="Desktop Application"
+  title="TaskDesk"
+  summary="{{ summary }}"
+  hero-slot-id="taskdesk-hero"
+  what-it-solves="{{ whatItSolves }}"
+  stack="{{ stack }}"
+  features="{{ features }}"
+  sections="{{ sections }}"
+  hint-size="100%,3000px">
+</dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      summary: 'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow management.',
+      whatItSolves: [
+        'Task and project status scattered across email, spreadsheets and verbal handoffs, with no single source of truth.',
+        'No consistent, queryable record of task status and history for day-to-day operational work.'
+      ],
+      stack: ['Python', 'PostgreSQL', 'SQL'],
+      features: [
+        { title: 'Structured task model', body: 'Tasks are tracked with defined fields and status rather than free-text notes.' },
+        { title: 'PostgreSQL-backed data', body: 'Task and workflow data is stored in PostgreSQL, enabling direct querying rather than relying on spreadsheets.' }
+      ],
+      sections: [
+        { heading: 'Overview', body: 'TaskDesk is a Python desktop application backed by a PostgreSQL database. Additional architecture and feature detail will be added here as the project documentation is finalized.' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+---
+import type { WorkItem } from '../data/work';
+
+interface Props {
+  item: WorkItem;
+  /** 'compact' = Home's 3-up grid. 'full' = Work index: 16:9, bigger type, tags. */
+  variant?: 'compact' | 'full';
+}
+const { item, variant = 'compact' } = Astro.props;
+const showTags = variant === 'full';
+---
+
+<a class:list={['rth-card', 'work-card', variant]} href={item.href}>
+  <div class="thumb">
+    <img src={item.image} alt={`${item.title} — screenshot`} loading="lazy" decoding="async" />
+  </div>
+  <div class="body">
+    <div class="title">{item.title}</div>
+    <div class="tagline">{item.tagline}</div>
+    <p class="summary">{item.summary}</p>
+    {
+      showTags && (
+        <div class="tags">
+          {item.tags.map((tag) => (
+            <span class="rth-chip">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</a>
+
+<style>
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .thumb {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface-card-alt);
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .body {
+    padding: 20px 22px 24px;
+  }
+
+  .title {
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .tagline {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--text-meta);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .summary {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  /* Work index variant — larger thumb and type than Home's 3-up grid. */
+  .full .thumb {
+    aspect-ratio: 16 / 9;
+  }
+  .full .body {
+    padding: 24px 26px 28px;
+  }
+  .full .title {
+    font-size: 20px;
+  }
+  .full .tagline {
+    margin-bottom: 12px;
+  }
+  .full .summary {
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+</style>
