@@ -25,10 +25,7 @@ const howIWork = [
   <section class="rth-container hero">
     <div class="portrait">
       <div class="glow" aria-hidden="true"></div>
-      <!-- Placeholder: designed for a transparent-background cutout photo. -->
-      <div class="rth-image-slot portrait-slot">
-        Portrait photo of Rohan Hare, transparent background
-      </div>
+      <img class="portrait-slot" src="/images/portrait-about.png" alt="Rohan Hare" />
     </div>
 
     <div>
@@ -103,6 +100,9 @@ const howIWork = [
   .portrait-slot {
     position: relative;
     z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .eyebrow {

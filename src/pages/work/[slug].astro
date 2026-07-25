@@ -10,6 +10,7 @@ export function getStaticPaths() {
 }
 
 const { study } = Astro.props;
+const heroImage = `/images/work-${study.slug}.jpg`;
 ---
 
 <BaseLayout title={`${study.title} — RTH Tech Services Inc.`} description={study.summary} active="work">
@@ -22,8 +23,7 @@ const { study } = Astro.props;
 
   <section class="rth-container hero-wrap">
     <div class="hero">
-      <!-- Placeholder: real screenshot pending. -->
-      <div class="rth-image-slot">{study.title} &mdash; screenshot</div>
+      <img src={heroImage} alt={`${study.title} — screenshot`} fetchpriority="high" />
     </div>
   </section>
 
@@ -130,6 +130,13 @@ const { study } = Astro.props;
     aspect-ratio: 16 / 9;
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    background: var(--surface-card-alt);
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* --- What it solves / stack --- */

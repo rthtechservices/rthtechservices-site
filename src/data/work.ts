@@ -13,6 +13,8 @@ export interface WorkItem {
   summary: string;
   href: string;
   tags: string[];
+  /** Lives in public/images/. Doubles as the case-study hero. */
+  image: string;
 }
 
 export const workItems: WorkItem[] = [
@@ -23,6 +25,7 @@ export const workItems: WorkItem[] = [
     summary:
       'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow.',
     href: '/work/taskdesk/',
+    image: '/images/work-taskdesk.jpg',
     tags: ['Desktop App', 'Python', 'PostgreSQL'],
   },
   {
@@ -32,6 +35,7 @@ export const workItems: WorkItem[] = [
     summary:
       'A custom invoicing and financial-record application, built on PostgreSQL, for generating service invoices and tracking disbursements and billing narratives.',
     href: '/work/fiscal-desk/',
+    image: '/images/work-fiscal-desk.jpg',
     tags: ['Financial Systems', 'PostgreSQL', 'Document Generation'],
   },
   {
@@ -41,6 +45,7 @@ export const workItems: WorkItem[] = [
     summary:
       'A portfolio of SQL Server Reporting Services solutions covering financial forecasting, matter analysis, operational reporting, and executive dashboards.',
     href: '/work/reporting/',
+    image: '/images/work-reporting.jpg',
     tags: ['SSRS', 'Forecasting', 'Dashboards'],
   },
   {
@@ -50,6 +55,7 @@ export const workItems: WorkItem[] = [
     summary:
       'Governance, document-management and workflow solutions built on SharePoint Online, Power Automate, Microsoft 365 and custom SPFx components.',
     href: '/work/sharepoint/',
+    image: '/images/work-sharepoint.jpg',
     tags: ['SharePoint', 'Power Automate', 'Governance'],
   },
   {
@@ -59,6 +65,7 @@ export const workItems: WorkItem[] = [
     summary:
       'Practical infrastructure work covering remote administration, database platforms, backup workflows, monitoring and resilient access to distributed systems.',
     href: '/work/infrastructure/',
+    image: '/images/work-infrastructure.jpg',
     tags: ['Infrastructure', 'Monitoring', 'Backup & Recovery'],
   },
   {
@@ -68,6 +75,7 @@ export const workItems: WorkItem[] = [
     summary:
       'A curated, filterable library of scripts and tools for administration, migration, diagnostics, reporting and repeatable operational support.',
     href: '/scripts/',
+    image: '/images/work-scripts.jpg',
     tags: ['PowerShell', 'SQL', 'Python'],
   },
 ];

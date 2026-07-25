@@ -12,8 +12,7 @@ const showTags = variant === 'full';
 
 <a class:list={['rth-card', 'work-card', variant]} href={item.href}>
   <div class="thumb">
-    <!-- Placeholder: real screenshot/photography pending. -->
-    <div class="rth-image-slot">{item.title}</div>
+    <img src={item.image} alt={`${item.title} — screenshot`} loading="lazy" decoding="async" />
   </div>
   <div class="body">
     <div class="title">{item.title}</div>
@@ -42,6 +41,13 @@ const showTags = variant === 'full';
   .thumb {
     width: 100%;
     aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface-card-alt);
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .body {
