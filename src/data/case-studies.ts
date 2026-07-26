@@ -58,14 +58,14 @@ export const caseStudies: CaseStudy[] = [
     summary:
       'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow management across clients and projects.',
     context:
-      'Consulting work generates a continuous stream of tasks, open threads, source files, and partial progress across multiple clients and projects simultaneously. Generic task managers were not designed for this pattern — they lack the queryable data model and operational context retention that make it possible to resume complex work reliably after an interruption.',
+      'Consulting work generates a continuous stream of tasks, open threads, source files, and partial progress across multiple clients and projects simultaneously. The task managers I evaluated were not structured around this pattern — they lacked the queryable data model needed to retain operational context reliably when moving between clients or returning to paused work.',
     whatItSolves: [
       'Task and project status scattered across email, spreadsheets and verbal handoffs, with no single source of truth.',
       'No consistent, queryable record of task status and history for day-to-day operational work.',
       'Difficulty retaining operational context — notes, related files, and partially completed steps — when moving between clients or returning to paused work.',
     ],
     stack: ['Python', 'PostgreSQL', 'SQL'],
-    role: 'Sole designer, developer, and day-to-day user. TaskDesk was built to solve an operational problem in my own consulting practice, which means the requirements come from real use rather than a specification document.',
+    role: 'Built and used in my own consulting practice. Requirements come from real operational use rather than a specification document.',
     features: [
       {
         title: 'Structured task model',
@@ -83,11 +83,11 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: 'Why a custom application',
-        body: 'Off-the-shelf task managers treat tasks as isolated items. Consulting work is relational: a task belongs to a project, a project belongs to a client, and the value is in the thread of notes, decisions, and linked files that accumulate over time. TaskDesk is structured around that relational model rather than retrofitting it.',
+        body: 'The task managers I evaluated treat tasks as isolated items. Consulting work is relational: a task belongs to a project, a project belongs to a client, and the value is in the thread of notes, decisions, and linked files that accumulate over time. TaskDesk is structured around that relational model rather than retrofitting it.',
       },
       {
         heading: 'Current status',
-        body: 'TaskDesk is in production and in daily use. The application continues to evolve — new capabilities are added as genuine operational needs emerge, not as planned features ahead of their usefulness.',
+        body: 'TaskDesk is in production and actively evolving. New capabilities are added as genuine operational needs emerge, not as planned features ahead of their usefulness.',
       },
     ],
   },
@@ -99,14 +99,14 @@ export const caseStudies: CaseStudy[] = [
     summary:
       'A custom invoicing and financial-record application, built on PostgreSQL, for professional-services billing — tracking time, fees, disbursements, tax treatment, billing narratives, and generating multi-page invoices.',
     context:
-      'Professional-services billing involves mixed tax treatment, pass-through disbursements, detailed billing narratives, and a need for financial records that stay connected to the underlying time and fee entries. Off-the-shelf invoicing products were not designed for this pattern, and adapting them created more friction than building a model that matched the workflow from the start.',
+      'Professional-services billing involves mixed tax treatment, pass-through disbursements, detailed billing narratives, and a need for financial records that stay connected to the underlying time and fee entries. The billing workflow in this practice did not map well to the invoicing products I evaluated, so Fiscal Desk was built around the actual billing model from the start.',
     whatItSolves: [
       'Invoice generation and disbursement tracking not well served by off-the-shelf billing software for this workflow.',
       'Mixed GST and tax treatment requiring explicit handling rather than a flat-rate assumption.',
       'A need for a financial record that keeps invoice, disbursement, billing narrative, and supporting detail together in a queryable form.',
     ],
     stack: ['PostgreSQL', 'SQL', 'Document Generation'],
-    role: 'Sole designer, developer, and day-to-day user. Requirements are driven by real billing and financial-record needs in my consulting practice.',
+    role: 'Built and used in my own consulting practice. Requirements are driven by real billing and financial-record needs.',
     features: [
       {
         title: 'Invoice generation',
@@ -114,11 +114,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'Disbursement and pass-through tracking',
-        body: 'Disbursements and pass-through costs are recorded and associated with the relevant matter, keeping the financial record complete.',
+        body: 'Disbursements and pass-through costs are recorded against the billing record, keeping the financial picture complete.',
       },
       {
         title: 'GST and mixed tax treatment',
-        body: 'Tax treatment is handled explicitly for each line, supporting the mixed GST scenarios common in professional-services billing.',
+        body: 'The application handles mixed GST scenarios common in professional-services billing rather than applying a flat-rate assumption.',
       },
       {
         title: 'PostgreSQL data model',
@@ -128,7 +128,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: 'Why a custom application',
-        body: 'Billing software designed for product sales or flat-rate services does not map well to professional-services time and fees. Fiscal Desk was built around the actual billing model — time entries, disbursements, narratives, mixed tax treatment — rather than forcing that model into a product built for different assumptions.',
+        body: 'The billing workflow in this practice — professional-services time and fees, disbursements, narratives, mixed tax treatment — did not fit the products I evaluated. Fiscal Desk was built around that workflow rather than bending the workflow to fit available tooling.',
       },
       {
         heading: 'Current status',

@@ -24,7 +24,7 @@ const heroImage = `/images/work-${study.slug}.jpg`;
         {study.status}
       </div>
     )}
-    <p class="summary">{study.summary}</p>
+    <p class={`summary${study.context ? '' : ' summary--no-context'}`}>{study.summary}</p>
     {study.context && (
       <p class="context">{study.context}</p>
     )}
@@ -210,6 +210,11 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     font-weight: 600;
   }
 
+  /* When no context paragraph follows, preserve the original 40px gap to the hero. */
+  .summary--no-context {
+    margin-bottom: 40px;
+  }
+
   .context {
     font-size: 15px;
     line-height: 1.75;
@@ -219,7 +224,7 @@ const heroImage = `/images/work-${study.slug}.jpg`;
   }
 
   /* When no context paragraph follows, the intro bottom spacing comes from the
-     adjacent hero-wrap section's own padding-bottom — no extra rule needed. */
+     .summary--no-context modifier class above. */
 
   /* --- Hero image --- */
   .hero-wrap {
