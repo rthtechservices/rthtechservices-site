@@ -2,11 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { workItems } from '../data/work';
+
+const experience = [
+  {
+    title: 'Enterprise operations',
+    body: 'Technical project delivery, formal change, resilience, governance and business continuity in environments including Powerex, a subsidiary of BC Hydro.',
+  },
+  {
+    title: 'Legal & professional services',
+    body: 'Reporting, SQL, matter-centric systems, workflow and legal technology across Harper Grey LLP, Farris LLP, RBS LLP and JFK Law LLP.',
+  },
+  {
+    title: 'Operational data & systems',
+    body: 'Database analysis, information quality and practical systems work shaped by roles in organizations such as Tourism Whistler.',
+  },
+  {
+    title: 'Consulting & product development',
+    body: 'Owner-operated consulting, automation and production software built through RTH Tech Services Inc., including TaskDesk and Fiscal Desk.',
+  },
+];
 ---
 
 <BaseLayout
   title="Rohan Hare — IT Consultant, Systems Analyst & Solutions Developer"
-  description="Practical systems, automation and reporting solutions for professional-services and property-management organizations, delivered through RTH Tech Services Inc."
+  description="Rohan Hare builds practical reporting, automation, Microsoft 365 and custom software solutions through RTH Tech Services Inc. in Vancouver, BC."
 >
   <section class="rth-container hero">
     <div>
@@ -17,12 +36,14 @@ import { workItems } from '../data/work';
         >
       </h1>
       <p class="bio">
-        I design and implement practical technology solutions for organizations with complex
-        operational, reporting and information-management needs &mdash; spanning business process
-        automation, data and reporting, Microsoft&nbsp;365, SharePoint, Power Platform, SQL,
-        infrastructure and custom application development. Through RTH Tech Services Inc., I work
-        with professional-services firms, property-management organizations and other businesses
-        that need experienced technical problem-solving without unnecessary enterprise theatre.
+        I build practical systems for organizations where the work is complicated, the data is
+        messy, and the off-the-shelf answer never quite fits. Since beginning my IT career in 2005,
+        I&rsquo;ve worked across enterprise operations, legal and professional-services reporting,
+        Microsoft&nbsp;365, automation and custom software development.
+      </p>
+      <p class="principle">
+        The common thread is simple: understand the real problem, build something supportable, and
+        leave the organization with fewer moving parts than it started with.
       </p>
       <div class="cta-row">
         <a class="rth-cta" href="/contact/">Discuss a project</a>
@@ -36,9 +57,34 @@ import { workItems } from '../data/work';
     </div>
   </section>
 
+  <section class="rth-container experience" aria-labelledby="experience-heading">
+    <div class="section-head experience-head">
+      <div>
+        <p class="section-kicker">Experience in context</p>
+        <h2 id="experience-heading">Different environments. The same practical standard.</h2>
+      </div>
+    </div>
+    <div class="experience-grid">
+      {
+        experience.map((item) => (
+          <article class="experience-item">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
   <section class="rth-container latest">
     <div class="section-head">
-      <h2>Latest work</h2>
+      <div>
+        <h2>Latest work</h2>
+        <p class="work-note">
+          Real operational needs, production tools and active builds &mdash; not concept mock-ups
+          presented as finished products.
+        </p>
+      </div>
       <a class="view-all" href="/work/">View all work &rarr;</a>
     </div>
     <div class="card-grid">
@@ -51,14 +97,15 @@ import { workItems } from '../data/work';
   /* --- Hero --- */
   .hero {
     padding-top: 76px;
-    padding-bottom: 88px;
+    padding-bottom: 80px;
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 64px;
     align-items: center;
   }
 
-  .eyebrow {
+  .eyebrow,
+  .section-kicker {
     font-size: 13px;
     letter-spacing: 0.09em;
     text-transform: uppercase;
@@ -91,7 +138,16 @@ import { workItems } from '../data/work';
     font-size: 16.5px;
     line-height: 1.75;
     color: var(--text-bio);
-    max-width: 56ch;
+    max-width: 58ch;
+    margin: 0 0 16px;
+  }
+
+  .principle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 58ch;
     margin: 0 0 34px;
   }
 
@@ -121,8 +177,6 @@ import { workItems } from '../data/work';
     outline-offset: 3px;
   }
 
-  /* The supplied portrait is a transparent cutout, so it gets the ambient
-     glow treatment rather than the framed ring the design assumed. */
   .portrait {
     position: relative;
     width: 100%;
@@ -147,6 +201,53 @@ import { workItems } from '../data/work';
     object-fit: contain;
   }
 
+  /* --- Experience --- */
+  .experience {
+    padding-bottom: 92px;
+  }
+
+  .experience-head {
+    align-items: end;
+  }
+
+  .section-kicker {
+    margin-bottom: 10px;
+  }
+
+  .experience h2 {
+    font-family: var(--font-ui);
+    font-size: clamp(22px, 3vw, 28px);
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .experience-item {
+    border-left: 2px solid rgba(92, 193, 255, 0.55);
+    padding-left: 18px;
+  }
+
+  .experience-item h3 {
+    font-family: var(--font-ui);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+
+  .experience-item p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
   /* --- Latest work --- */
   .latest {
     padding-bottom: 100px;
@@ -156,6 +257,7 @@ import { workItems } from '../data/work';
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    gap: 32px;
     border-bottom: 1px solid var(--border-faint);
     padding-bottom: 20px;
     margin-bottom: 36px;
@@ -167,6 +269,14 @@ import { workItems } from '../data/work';
     color: var(--text-primary);
     margin: 0;
     font-weight: 600;
+  }
+
+  .work-note {
+    max-width: 66ch;
+    margin: 8px 0 0;
+    color: var(--text-faint);
+    font-size: 13.5px;
+    line-height: 1.55;
   }
 
   .view-all {
@@ -188,6 +298,13 @@ import { workItems } from '../data/work';
     gap: 28px;
   }
 
+  @media (max-width: 1040px) {
+    .experience-grid {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 32px;
+    }
+  }
+
   @media (max-width: 859px) {
     .hero {
       padding-top: 48px;
@@ -195,8 +312,15 @@ import { workItems } from '../data/work';
       grid-template-columns: 1fr;
       gap: 36px;
     }
+    .experience {
+      padding-bottom: 64px;
+    }
+    .experience-grid,
     .card-grid {
       grid-template-columns: 1fr;
+    }
+    .section-head {
+      align-items: flex-start;
     }
   }
 </style>

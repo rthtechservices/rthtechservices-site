@@ -27,9 +27,9 @@ const details = [
       <p class="eyebrow">Contact</p>
       <h1>Let&rsquo;s discuss a project.</h1>
       <p class="lede">
-        Available for consulting, contract work and selected technical projects. The most useful
-        first message is a short description of the operational problem you&rsquo;re trying to
-        solve.
+        I&rsquo;m open to consulting, contract work and selected technical projects. The most useful
+        first message is a short description of the operational problem you&rsquo;re trying to solve,
+        the systems involved and any important timing or constraints.
       </p>
 
       <dl class="details">
@@ -56,16 +56,17 @@ const details = [
       </dl>
     </div>
 
-    {/* ponytail: mailto instead of a form — no backend on GitHub Pages, and a
-        form was explicitly deferred past v1. Swap in a real endpoint later. */}
     <div class="panel">
       <h2>Start the conversation</h2>
       <p>
         Email is the fastest way to reach me. Include a short description of the problem, your
-        timeline, and any relevant context about the systems involved.
+        timeline and any relevant context about the systems or people involved.
       </p>
       <a class="rth-cta" href={`mailto:${EMAIL}?subject=${SUBJECT}`}>Email me directly</a>
-      <p class="reply">I reply within one to two business days.</p>
+      <p class="reply">
+        I normally reply within one business day and can usually arrange an initial conversation
+        within two to three business days.
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -102,10 +103,9 @@ const details = [
     line-height: 1.75;
     color: var(--text-bio);
     margin: 0 0 36px;
-    max-width: 48ch;
+    max-width: 52ch;
   }
 
-  /* --- Contact details --- */
   .details {
     display: flex;
     flex-direction: column;
@@ -114,6 +114,7 @@ const details = [
     padding-top: 28px;
     margin: 0;
   }
+
   .details dt {
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -121,32 +122,36 @@ const details = [
     color: var(--text-faint);
     margin-bottom: 6px;
   }
+
   .details dd {
     font-size: 15.5px;
     color: var(--text-primary);
     font-weight: 500;
     margin: 0;
   }
+
   .details a {
     color: var(--text-primary);
     text-decoration: none;
     transition: color var(--ease);
   }
+
   .details a:hover {
     color: var(--blue);
   }
+
   .details a:focus-visible {
     outline: 2px solid var(--blue);
     outline-offset: 3px;
   }
 
-  /* --- Right-hand panel (stands in for the deferred form) --- */
   .panel {
     background: var(--surface-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 36px;
   }
+
   .panel h2 {
     font-family: var(--font-ui);
     font-size: 19px;
@@ -154,12 +159,14 @@ const details = [
     font-weight: 600;
     margin: 0 0 12px;
   }
+
   .panel p {
     font-size: 14.5px;
     line-height: 1.7;
     color: var(--text-muted);
     margin: 0 0 24px;
   }
+
   .panel .reply {
     font-size: 13px;
     color: var(--text-faint);
@@ -173,6 +180,7 @@ const details = [
       grid-template-columns: 1fr;
       gap: 40px;
     }
+
     .panel {
       padding: 28px 24px;
     }

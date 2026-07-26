@@ -1,25 +1,80 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const careerStages = [
+  {
+    title: 'Support & systems administration',
+    body: 'The early years built the habits that still matter: reproduce the problem, inspect the environment, understand dependencies, and fix the cause rather than the symptom.',
+  },
+  {
+    title: 'Data, SQL & reporting',
+    body: 'Database analysis grew into SQL Server, SSRS and the work of turning business questions into reliable definitions, queries and reporting people can trust.',
+  },
+  {
+    title: 'Enterprise operations & delivery',
+    body: 'Enterprise IT added formal change, risk, resilience, stakeholder coordination, documentation, testing and the reality that technically correct is not always operationally successful.',
+  },
+  {
+    title: 'Consulting & product development',
+    body: 'Independent consulting brought the pieces together: clarify the need, choose a supportable architecture, build the solution, explain it clearly and remain accountable for how it behaves.',
+  },
+];
+
+const environments = [
+  {
+    title: 'Powerex, a subsidiary of BC Hydro',
+    body: 'Enterprise IT operations, technical project delivery, governance, resilience, business continuity and work involving formal processes and cross-functional stakeholders.',
+  },
+  {
+    title: 'Harper Grey, Farris, RBS & JFK Law',
+    body: 'Legal and professional-services reporting, SQL, matter data, financial analysis, document workflows, collaboration and legal technology where accuracy and confidentiality are non-negotiable.',
+  },
+  {
+    title: 'Tourism Whistler',
+    body: 'Database analysis and operational information in a destination organization, where useful data had to connect directly to day-to-day business needs.',
+  },
+  {
+    title: 'Escala & owner-operated organizations',
+    body: 'Practical Microsoft 365, infrastructure, records, automation, hardware and vendor work designed to remain manageable for small teams and non-technical users.',
+  },
+];
+
+const selectedExperience = [
+  'Across Harper Grey LLP, Farris LLP and RBS LLP, I have worked with a combined portfolio of more than 400 SSRS reports, SQL analyses and Excel reporting workbooks.',
+  'I have designed and supported reporting around Thomson Reuters Elite 3E data, including financial, matter, timekeeper, WIP, accounts-receivable, profitability and forecasting requirements.',
+  'My Microsoft 365 work spans SharePoint, Power Automate, document governance, external collaboration, searchable records and custom user experiences where out-of-the-box tools are not enough.',
+  'At Powerex, I worked in enterprise IT operations and project environments where resilience, access, formal change, documentation and business continuity were part of delivery rather than optional extras.',
+  'Through RTH Tech Services Inc., I act as a practical point of accountability across business analysis, reporting, automation, Microsoft platforms, infrastructure and technical planning.',
+  'TaskDesk and Fiscal Desk are production applications that continue to evolve as their workflows, data models and supporting capabilities are refined.',
+];
+
 const howIWork = [
   {
     title: 'Business analysis first',
     body: 'Every engagement starts with understanding the actual operational problem, not just the requested feature, so the solution addresses root causes.',
   },
   {
-    title: 'Built for handoff',
-    body: 'Documentation and governance are part of delivery, not an afterthought — systems remain supportable after the engagement ends.',
+    title: 'Practical architecture',
+    body: "The right-sized solution for the organization — not the most impressive architecture, and not enterprise tooling the team can't realistically maintain.",
   },
   {
-    title: 'No unnecessary complexity',
-    body: "The right-sized solution for the organization — not the most impressive architecture, and not enterprise tooling the team can't maintain.",
+    title: 'Traceable decisions',
+    body: 'Requirements, assumptions, changes and operational decisions are documented so the solution can be understood later rather than reconstructed from folklore.',
+  },
+  {
+    title: 'Built for handoff',
+    body: 'Documentation and governance are part of delivery, not an afterthought — systems should remain supportable after the engagement ends.',
+  },
+  {
+    title: 'Useful communication',
+    body: 'Technical detail matters, but it has to be translated into risks, options, decisions and next actions that the audience can actually use.',
   },
 ];
 ---
 
 <BaseLayout
   title="About Rohan Hare — RTH Tech Services Inc."
-  description="IT consultant, systems analyst and solutions developer specializing in automation, reporting and Microsoft 365 for professional-services organizations."
+  description="Rohan Hare is a Vancouver IT consultant with a career beginning in 2005 across enterprise operations, legal reporting, Microsoft 365, automation and custom software."
   active="about"
 >
   <section class="rth-container hero">
@@ -32,21 +87,31 @@ const howIWork = [
       <p class="eyebrow">About</p>
       <h1>Rohan Hare</h1>
       <p>
-        I design and implement practical technology solutions for organizations with complex
-        operational, reporting and information-management needs. My work spans business process
-        automation, data and reporting, Microsoft&nbsp;365, SharePoint, Power Platform, SQL,
-        infrastructure, systems integration and custom application development.
+        Most of my career has been spent in the space between technology and operations: the point
+        where a business knows something is inefficient, unreliable or harder than it should be,
+        but the solution does not fit neatly into one product or job description.
       </p>
       <p>
-        I specialize in turning inefficient, fragmented or overly manual processes into reliable
-        systems that are easier to operate, support and scale. My approach combines technical
-        implementation with business analysis, documentation, governance and long-term
-        maintainability.
+        I began my IT career in May 2005 in hands-on support and systems administration. Over time,
+        that work expanded into SQL Server, enterprise reporting, SharePoint, infrastructure,
+        automation, technical project delivery, business continuity, governance and custom software
+        development. The titles changed; the underlying role did not. I was usually expected to
+        understand how the pieces connected, find the actual cause of the problem and make the
+        result usable by people who did not want a lecture on the machinery underneath it.
+      </p>
+      <p>
+        I have worked inside large enterprise environments, with legal and professional-services
+        firms, in tourism, with property-management organizations and with smaller businesses where
+        one person may be responsible for an entire technology estate. Those environments demand
+        different tools, but reward the same habits: listen carefully, verify assumptions, document
+        decisions, protect the organization from avoidable risk and do not build something more
+        complicated than the team can realistically support.
       </p>
       <p class="last">
-        Through RTH Tech Services Inc., I provide consulting and development services to
-        professional-services firms, property-management organizations and other businesses that
-        need experienced technical problem-solving without unnecessary enterprise theatre.
+        Today, RTH Tech Services Inc. is the vehicle through which I take on selected consulting and
+        development work. I am most useful when a problem crosses boundaries &mdash; data and
+        workflow, reporting and business interpretation, infrastructure and access, or technology
+        and the people who have to live with it afterward.
       </p>
       <div class="cta-row">
         <a class="rth-cta" href="/contact/">Discuss a project</a>
@@ -55,15 +120,70 @@ const howIWork = [
     </div>
   </section>
 
-  <section class="rth-container how">
-    <h2>How I work</h2>
+  <section class="rth-container section-block" aria-labelledby="through-line-heading">
+    <div class="section-intro">
+      <p class="eyebrow">The career through-line</p>
+      <h2 id="through-line-heading">Broad experience, built one connected layer at a time.</h2>
+      <p>
+        My background is broad, but it is not random. Each stage added another part of the same core
+        capability: understanding operational systems well enough to improve them responsibly.
+      </p>
+    </div>
+    <div class="career-grid">
+      {
+        careerStages.map((item) => (
+          <article class="content-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="rth-container section-block" aria-labelledby="environments-heading">
+    <div class="section-intro">
+      <p class="eyebrow">Where I have worked</p>
+      <h2 id="environments-heading">Environments that shaped my approach.</h2>
+      <p>
+        Employer and client names provide context, but the useful part is what those environments
+        required: accuracy, judgement, adaptability and systems that keep working after delivery.
+      </p>
+    </div>
+    <div class="environment-grid">
+      {
+        environments.map((item) => (
+          <article class="environment-item">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="rth-container section-block selected" aria-labelledby="selected-heading">
+    <div class="section-intro">
+      <p class="eyebrow">Selected experience</p>
+      <h2 id="selected-heading">A few useful points of scale and responsibility.</h2>
+    </div>
+    <ul class="experience-list">
+      {selectedExperience.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section class="rth-container how" aria-labelledby="how-heading">
+    <div class="section-intro">
+      <p class="eyebrow">Working principles</p>
+      <h2 id="how-heading">How I work</h2>
+    </div>
     <div class="how-grid">
       {
         howIWork.map((item) => (
-          <div>
-            <div class="how-title">{item.title}</div>
-            <p class="how-body">{item.body}</p>
-          </div>
+          <article class="how-item">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
         ))
       }
     </div>
@@ -75,12 +195,11 @@ const howIWork = [
     padding-top: 64px;
     padding-bottom: 88px;
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
+    grid-template-columns: 0.82fr 1.18fr;
     gap: 64px;
     align-items: start;
   }
 
-  /* Ambient glow behind the cutout portrait — not a frame. */
   .portrait {
     position: relative;
     width: 100%;
@@ -111,12 +230,12 @@ const howIWork = [
     text-transform: uppercase;
     color: var(--text-faint);
     font-weight: 600;
-    margin: 0 0 16px;
+    margin: 0 0 14px;
   }
 
   h1 {
     font-family: var(--font-ui);
-    font-size: clamp(26px, 4vw, 34px);
+    font-size: clamp(28px, 4vw, 36px);
     color: var(--text-primary);
     margin: 0 0 22px;
     font-weight: 600;
@@ -158,45 +277,139 @@ const howIWork = [
     outline-offset: 3px;
   }
 
-  /* --- How I work --- */
+  .section-block,
   .how {
     padding-bottom: 96px;
   }
-  .how h2 {
-    font-family: var(--font-ui);
-    font-size: 24px;
-    color: var(--text-primary);
-    margin: 0 0 32px;
-    font-weight: 600;
+
+  .section-intro {
     border-top: 1px solid var(--border-faint);
     padding-top: 40px;
+    margin-bottom: 32px;
   }
-  .how-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
-  .how-title {
+
+  .section-intro h2 {
     font-family: var(--font-ui);
-    font-size: 17px;
+    font-size: clamp(23px, 3vw, 28px);
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .section-intro > p:last-child {
+    max-width: 72ch;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+
+  .content-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-card);
+    padding: 24px 22px;
+  }
+
+  .content-card h3,
+  .environment-item h3,
+  .how-item h3 {
+    font-family: var(--font-ui);
+    font-size: 16.5px;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 8px;
+    margin: 0 0 9px;
   }
-  .how-body {
-    font-size: 14.5px;
+
+  .content-card p,
+  .environment-item p,
+  .how-item p {
+    font-size: 14px;
     line-height: 1.65;
     color: var(--text-muted);
     margin: 0;
   }
 
+  .environment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 56px;
+    row-gap: 34px;
+  }
+
+  .environment-item {
+    border-left: 2px solid rgba(92, 193, 255, 0.55);
+    padding-left: 20px;
+  }
+
+  .experience-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 34px;
+  }
+
+  .experience-list li {
+    position: relative;
+    padding: 0 0 0 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  .experience-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 6px rgba(92, 193, 255, 0.55);
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+  }
+
+  .how-item {
+    padding-top: 18px;
+    border-top: 2px solid rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 1080px) {
+    .career-grid,
+    .how-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 859px) {
     .hero {
       padding-top: 48px;
-      padding-bottom: 56px;
+      padding-bottom: 64px;
       grid-template-columns: 1fr;
       gap: 36px;
     }
+    .section-block,
+    .how {
+      padding-bottom: 64px;
+    }
+    .career-grid,
+    .environment-grid,
+    .experience-list,
     .how-grid {
       grid-template-columns: 1fr;
     }
