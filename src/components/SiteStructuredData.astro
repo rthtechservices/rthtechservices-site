@@ -1,0 +1,90 @@
+---
+const site = (Astro.site?.toString() ?? 'https://rthtechservices.com').replace(/\/$/, '');
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site}/#website`,
+      url: `${site}/`,
+      name: 'RTH Tech Services Inc.',
+      description:
+        'Consulting portfolio and technical resource library for Rohan Hare and RTH Tech Services Inc.',
+      publisher: { '@id': `${site}/#organization` },
+      inLanguage: 'en-CA',
+    },
+    {
+      '@type': ['ProfessionalService', 'Organization'],
+      '@id': `${site}/#organization`,
+      name: 'RTH Tech Services Inc.',
+      url: `${site}/`,
+      logo: `${site}/assets/rth-logo.png`,
+      email: 'rohan@rthtechservices.com',
+      founder: { '@id': `${site}/#rohan-hare` },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Vancouver',
+        addressRegion: 'BC',
+        addressCountry: 'CA',
+      },
+      areaServed: ['Canada', 'Remote'],
+      knowsAbout: [
+        'IT consulting',
+        'Systems analysis',
+        'SQL Server Reporting Services',
+        'SQL',
+        'PowerShell automation',
+        'Microsoft 365',
+        'SharePoint Online',
+        'Power Automate',
+        'PostgreSQL',
+        'Python application development',
+        'Technical project delivery',
+      ],
+      sameAs: [
+        'https://www.linkedin.com/in/rohanhare/',
+        'https://github.com/rthtechservices',
+      ],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site}/#rohan-hare`,
+      name: 'Rohan Hare',
+      givenName: 'Rohan',
+      familyName: 'Hare',
+      url: `${site}/about/`,
+      image: `${site}/images/portrait-about.png`,
+      jobTitle: 'IT Consultant, Systems Analyst and Solutions Developer',
+      worksFor: { '@id': `${site}/#organization` },
+      homeLocation: {
+        '@type': 'Place',
+        name: 'Vancouver, British Columbia, Canada',
+      },
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'RMIT University',
+      },
+      sameAs: [
+        'https://www.linkedin.com/in/rohanhare/',
+        'https://github.com/rthtechservices',
+      ],
+      knowsAbout: [
+        'Enterprise IT operations',
+        'Legal technology',
+        'Reporting and analytics',
+        'SQL Server',
+        'SSRS',
+        'Microsoft 365',
+        'SharePoint',
+        'PowerShell',
+        'Python',
+        'PostgreSQL',
+        'Business process automation',
+      ],
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
