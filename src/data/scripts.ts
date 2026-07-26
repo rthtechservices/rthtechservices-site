@@ -32,7 +32,12 @@ export interface Script {
   /** Operational cautions. Repo-wide guidance plus anything script-specific. */
   safety: string;
   // --- Optional metadata; populate only where supportable from repository content ---
-  /** Broad operational risk level. */
+  /**
+   * Broad operational risk level. Classification guidance:
+   * - `low`    — read-only or monitoring operations with no persistent side-effects.
+   * - `medium` — operations that write, modify, or delete files/resources on the local system.
+   * - `high`   — operations that require explicit written authorization (e.g. network scanning).
+   */
   riskLevel?: 'low' | 'medium' | 'high';
   /** ISO 8601 date of the last source review. */
   lastReviewed?: string;
