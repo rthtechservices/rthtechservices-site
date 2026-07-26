@@ -13,8 +13,10 @@ export interface WorkItem {
   summary: string;
   href: string;
   tags: string[];
-  /** Lives in public/images/. Doubles as the case-study hero. */
-  image: string;
+  /** Controls whether this item appears in the homepage "Latest work" section. */
+  showOnHome: boolean;
+  /** Optional card image in public/images/. */
+  image?: string;
 }
 
 export const workItems: WorkItem[] = [
@@ -26,6 +28,7 @@ export const workItems: WorkItem[] = [
       'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow.',
     href: '/work/taskdesk/',
     image: '/images/work-taskdesk.jpg',
+    showOnHome: true,
     tags: ['Desktop App', 'Python', 'PostgreSQL'],
   },
   {
@@ -36,6 +39,7 @@ export const workItems: WorkItem[] = [
       'A custom invoicing and financial-record application, built on PostgreSQL, for generating service invoices and tracking disbursements and billing narratives.',
     href: '/work/fiscal-desk/',
     image: '/images/work-fiscal-desk.jpg',
+    showOnHome: true,
     tags: ['Financial Systems', 'PostgreSQL', 'Document Generation'],
   },
   {
@@ -46,17 +50,28 @@ export const workItems: WorkItem[] = [
       'A portfolio of SQL Server Reporting Services solutions covering financial forecasting, matter analysis, operational reporting, and executive dashboards.',
     href: '/work/reporting/',
     image: '/images/work-reporting.jpg',
+    showOnHome: true,
     tags: ['SSRS', 'Forecasting', 'Dashboards'],
   },
   {
-    id: 'sharepoint',
-    title: 'SharePoint & Microsoft 365 Solutions',
-    tagline: 'Governance, document management and workflow automation',
+    id: 'jfk-scc-monitor',
+    title: 'JFK Law LLP — SCC Decision Monitor',
+    tagline: 'Hourly legal publication monitoring and triage',
     summary:
-      'Governance, document-management and workflow solutions built on SharePoint Online, Power Automate, Microsoft 365 and custom SPFx components.',
-    href: '/work/sharepoint/',
-    image: '/images/work-sharepoint.jpg',
-    tags: ['SharePoint', 'Power Automate', 'Governance'],
+      'A production internal monitoring workflow that checks Supreme Court of Canada publications every hour and alerts legal users when configured matter-specific criteria are matched.',
+    href: '/work/jfk-scc-monitor/',
+    showOnHome: true,
+    tags: ['SharePoint Online', 'Power Automate', 'RSS'],
+  },
+  {
+    id: 'escala-water-sensor-automation',
+    title: 'Escala Residences — Water Sensor Automation',
+    tagline: 'Leak alerts routed into service requests within seconds',
+    summary:
+      'A production workflow that parses water-leak sensor alerts, creates pre-populated service requests in the existing property-management queue, and closes requests automatically when sensors return to normal.',
+    href: '/work/escala-water-sensor-automation/',
+    showOnHome: true,
+    tags: ['Microsoft 365', 'Power Automate', 'Property Management'],
   },
   {
     id: 'infrastructure',
@@ -66,6 +81,7 @@ export const workItems: WorkItem[] = [
       'Practical infrastructure work covering remote administration, database platforms, backup workflows, monitoring and resilient access to distributed systems.',
     href: '/work/infrastructure/',
     image: '/images/work-infrastructure.jpg',
+    showOnHome: false,
     tags: ['Infrastructure', 'Monitoring', 'Backup & Recovery'],
   },
   {
@@ -76,6 +92,9 @@ export const workItems: WorkItem[] = [
       'A curated, filterable library of scripts and tools for administration, migration, diagnostics, reporting and repeatable operational support.',
     href: '/scripts/',
     image: '/images/work-scripts.jpg',
+    showOnHome: true,
     tags: ['PowerShell', 'SQL', 'Python'],
   },
 ];
+
+export const featuredWorkItems: WorkItem[] = workItems.filter((item) => item.showOnHome);
