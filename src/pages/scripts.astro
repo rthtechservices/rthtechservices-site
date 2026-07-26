@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { scripts, filterDimensions, REPO_URL } from '../data/scripts';
+import { scripts, filterDimensions, REPO_URL, scriptSourceUrl } from '../data/scripts';
 
 // Distinct values per dimension, for the chip rows.
 const groups = filterDimensions.map((dim) => ({
@@ -118,6 +118,11 @@ const groups = filterDimensions.map((dim) => ({
           <span class:list={['rth-badge', s.validation === 'Validated' && 'ok']}>
             {s.validation}
           </span>
+          {s.riskLevel && (
+            <span class:list={['rth-badge', `risk-${s.riskLevel}`]}>
+              Risk: {s.riskLevel}
+            </span>
+          )}
         </div>
 
         <h2 id={`dlg-${s.id}-title`}>{s.title}</h2>
@@ -136,9 +141,39 @@ const groups = filterDimensions.map((dim) => ({
             <div class="field-label">Safety considerations</div>
             <p>{s.safety}</p>
           </div>
+          {s.testedOn && (
+            <div>
+              <div class="field-label">Tested on</div>
+              <p>{s.testedOn}</p>
+            </div>
+          )}
+          {s.lastReviewed && (
+            <div>
+              <div class="field-label">Last reviewed</div>
+              <p>{s.lastReviewed}</p>
+            </div>
+          )}
+          {s.outputExample && (
+            <div>
+              <div class="field-label">Output example</div>
+              <p>{s.outputExample}</p>
+            </div>
+          )}
+          {s.relatedProject && (
+            <div>
+              <div class="field-label">Related project</div>
+              <p>{s.relatedProject}</p>
+            </div>
+          )}
         </div>
 
-        <a class="rth-cta rth-cta--sm" href={`${REPO_URL}/blob/main/${s.path}`} target="_blank" rel="noopener noreferrer">
+        <a
+          class="rth-cta rth-cta--sm"
+          href={scriptSourceUrl(s.path)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View source for ${s.title} on GitHub`}
+        >
           View source on GitHub
         </a>
       </dialog>
@@ -291,6 +326,18 @@ const groups = filterDimensions.map((dim) => ({
   .rth-badge.ok {
     color: #a8d8b0;
     border-color: rgba(168, 216, 176, 0.28);
+  }
+  .rth-badge.risk-low {
+    color: #a8d8b0;
+    border-color: rgba(168, 216, 176, 0.28);
+  }
+  .rth-badge.risk-medium {
+    color: #e8c97a;
+    border-color: rgba(232, 201, 122, 0.28);
+  }
+  .rth-badge.risk-high {
+    color: #e8897a;
+    border-color: rgba(232, 137, 122, 0.28);
   }
   .card-summary {
     font-size: 14px;

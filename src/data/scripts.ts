@@ -11,11 +11,16 @@
 
 export const REPO_URL = 'https://github.com/rthtechservices/rthtechservices-scripts';
 
+/** Returns the exact GitHub blob URL for a script at the given repo-relative path. */
+export function scriptSourceUrl(path: string): string {
+  return `${REPO_URL}/blob/main/${path}`;
+}
+
 export interface Script {
   id: string;
   title: string;
   summary: string;
-  language: 'PowerShell' | 'Python';
+  language: 'PowerShell' | 'Python' | 'SQL';
   runtime: string;
   func: string;
   validation: 'Validated' | 'Testing pending';
@@ -26,6 +31,22 @@ export interface Script {
   validationDetail: string;
   /** Operational cautions. Repo-wide guidance plus anything script-specific. */
   safety: string;
+  // --- Optional metadata; populate only where supportable from repository content ---
+  /**
+   * Broad operational risk level. Classification guidance:
+   * - `low`    — read-only or monitoring operations with no persistent side-effects.
+   * - `medium` — operations that write, modify, or delete files/resources on the local system.
+   * - `high`   — operations that require explicit written authorization (e.g. network scanning).
+   */
+  riskLevel?: 'low' | 'medium' | 'high';
+  /** ISO 8601 date of the last source review. */
+  lastReviewed?: string;
+  /** Environment or platform the script was tested on. */
+  testedOn?: string;
+  /** Short description or excerpt of expected output. */
+  outputExample?: string;
+  /** Name of a related portfolio project, if applicable. */
+  relatedProject?: string;
 }
 
 const RESPONSIBLE_USE =
