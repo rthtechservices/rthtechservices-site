@@ -7,16 +7,46 @@
  * never confirmed. Fill them in; don't invent them.
  *
  * `slug` must match the href in work.ts.
+ *
+ * Optional fields (status, context, constraints, role, decisions, outcomes,
+ * screenshots, confidentialityNote) are rendered only when populated —
+ * empty headings and blank sections are never produced.
  */
+
+/** Allowed project-status values — kept narrow so labelling stays honest.
+ *  The em dash (—) is an intentional typographic choice consistent with the
+ *  site's design language and is valid UTF-8 in TypeScript source files.
+ */
+export type ProjectStatus =
+  | 'Production — actively evolving'
+  | 'Under review'
+  | 'To be determined';
+
 export interface CaseStudy {
   slug: string;
   category: string;
   title: string;
   summary: string;
+  /** Optional short project-status label shown near the introduction. */
+  status?: ProjectStatus;
   whatItSolves: string[];
   stack: string[];
   features: { title: string; body: string }[];
   sections: { heading: string; body: string }[];
+  /** Background on the environment and workflow that existed before this work. */
+  context?: string;
+  /** Technical, operational, or organisational limits that shaped the solution. */
+  constraints?: string[];
+  /** What Rohan personally analysed, designed, built, coordinated, or supported. */
+  role?: string;
+  /** Key architectural or approach decisions and the reasoning behind them. */
+  decisions?: { title: string; body: string }[];
+  /** Measured results or clear operational outcomes where evidence exists. */
+  outcomes?: string[];
+  /** Sanitised screenshot references. All images must be approved before commit. */
+  screenshots?: { src: string; alt: string; caption?: string }[];
+  /** Explains any demonstration or transformed data used in screenshots or examples. */
+  confidentialityNote?: string;
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -24,13 +54,18 @@ export const caseStudies: CaseStudy[] = [
     slug: 'taskdesk',
     category: 'Desktop Application',
     title: 'TaskDesk',
+    status: 'Production — actively evolving',
     summary:
-      'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow management.',
+      'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow management across clients and projects.',
+    context:
+      'Consulting work generates a continuous stream of tasks, open threads, source files, and partial progress across multiple clients and projects simultaneously. The task managers I evaluated were not structured around this pattern — they lacked the queryable data model needed to retain operational context reliably when moving between clients or returning to paused work.',
     whatItSolves: [
       'Task and project status scattered across email, spreadsheets and verbal handoffs, with no single source of truth.',
       'No consistent, queryable record of task status and history for day-to-day operational work.',
+      'Difficulty retaining operational context — notes, related files, and partially completed steps — when moving between clients or returning to paused work.',
     ],
     stack: ['Python', 'PostgreSQL', 'SQL'],
+    role: 'Built and used in my own consulting practice. Requirements come from real operational use rather than a specification document.',
     features: [
       {
         title: 'Structured task model',
@@ -40,11 +75,19 @@ export const caseStudies: CaseStudy[] = [
         title: 'PostgreSQL-backed data',
         body: 'Task and workflow data is stored in PostgreSQL, enabling direct querying rather than relying on spreadsheets.',
       },
+      {
+        title: 'Operational context retention',
+        body: 'Each task carries its associated notes, source files, and progress state — so returning to paused work does not require reconstructing what was in progress.',
+      },
     ],
     sections: [
       {
-        heading: 'Overview',
-        body: 'TaskDesk is a Python desktop application backed by a PostgreSQL database. Additional architecture and feature detail will be added here as the project documentation is finalized.',
+        heading: 'Why a custom application',
+        body: 'The task managers I evaluated treat tasks as isolated items. Consulting work is relational: a task belongs to a project, a project belongs to a client, and the value is in the thread of notes, decisions, and linked files that accumulate over time. TaskDesk is structured around that relational model rather than retrofitting it.',
+      },
+      {
+        heading: 'Current status',
+        body: 'TaskDesk is in production and actively evolving. New capabilities are added as genuine operational needs emerge, not as planned features ahead of their usefulness.',
       },
     ],
   },
@@ -52,27 +95,44 @@ export const caseStudies: CaseStudy[] = [
     slug: 'fiscal-desk',
     category: 'Financial Systems',
     title: 'Fiscal Desk',
+    status: 'Production — actively evolving',
     summary:
-      'A custom invoicing and financial-record application, built on PostgreSQL, for generating service invoices and tracking disbursements and billing narratives.',
+      'A custom invoicing and financial-record application, built on PostgreSQL, for professional-services billing — tracking time, fees, disbursements, tax treatment, billing narratives, and generating multi-page invoices.',
+    context:
+      'Professional-services billing involves mixed tax treatment, pass-through disbursements, detailed billing narratives, and a need for financial records that stay connected to the underlying time and fee entries. The billing workflow in this practice did not map well to the invoicing products I evaluated, so Fiscal Desk was built around the actual billing model from the start.',
     whatItSolves: [
       'Invoice generation and disbursement tracking not well served by off-the-shelf billing software for this workflow.',
-      'A need for a financial record that keeps invoice, disbursement and narrative data together.',
+      'Mixed GST and tax treatment requiring explicit handling rather than a flat-rate assumption.',
+      'A need for a financial record that keeps invoice, disbursement, billing narrative, and supporting detail together in a queryable form.',
     ],
     stack: ['PostgreSQL', 'SQL', 'Document Generation'],
+    role: 'Built and used in my own consulting practice. Requirements are driven by real billing and financial-record needs.',
     features: [
       {
         title: 'Invoice generation',
-        body: 'Generates professional service invoices from underlying billing and disbursement data.',
+        body: 'Generates professional-service invoices from underlying time, fee, and disbursement data, including multi-page output and supporting detail.',
+      },
+      {
+        title: 'Disbursement and pass-through tracking',
+        body: 'Disbursements and pass-through costs are recorded against the billing record, keeping the financial picture complete.',
+      },
+      {
+        title: 'GST and mixed tax treatment',
+        body: 'The application handles mixed GST scenarios common in professional-services billing rather than applying a flat-rate assumption.',
       },
       {
         title: 'PostgreSQL data model',
-        body: 'Invoice, disbursement and narrative data is stored in PostgreSQL as the system of record.',
+        body: 'Invoice, disbursement, and narrative data is stored in PostgreSQL as the system of record, enabling direct querying and reconciliation.',
       },
     ],
     sections: [
       {
-        heading: 'Overview',
-        body: 'Fiscal Desk is a PostgreSQL-based invoicing and financial-record application. Further architecture and workflow detail will be documented here as it is confirmed.',
+        heading: 'Why a custom application',
+        body: 'The billing workflow in this practice — professional-services time and fees, disbursements, narratives, mixed tax treatment — did not fit the products I evaluated. Fiscal Desk was built around that workflow rather than bending the workflow to fit available tooling.',
+      },
+      {
+        heading: 'Current status',
+        body: 'Fiscal Desk is in production and in active use. It continues to evolve as billing and financial-record requirements develop.',
       },
     ],
   },
