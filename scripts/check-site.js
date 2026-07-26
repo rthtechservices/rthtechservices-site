@@ -34,7 +34,7 @@
  */
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
+import { join, resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -90,7 +90,7 @@ function resolveInDist(rawPath) {
   const stripped = pathname.replace(/\/+$/, ''); // remove trailing slashes
 
   const candidates = [
-    join(distDir, pathname),                   // exact
+    join(distDir, stripped),                   // exact
     join(distDir, stripped, 'index.html'),     // directory format
     join(distDir, stripped + '.html'),         // flat HTML
   ];
@@ -184,8 +184,8 @@ function main() {
 
   for (const file of files) {
     const html = readFileSync(file, 'utf8');
-    // Display path relative to dist root, with forward slashes.
-    const page = '/' + file.slice(distDir.length + 1).replace(/\\/g, '/');
+    // Display path relative to dist root, with forward slashes (cross-platform).
+    const page = '/' + relative(distDir, file).replace(/\\/g, '/');
 
     // --- Metadata checks ---
 
