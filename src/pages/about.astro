@@ -48,6 +48,32 @@ const selectedExperience = [
   'TaskDesk and Fiscal Desk are production applications that continue to evolve as their workflows, data models and supporting capabilities are refined.',
 ];
 
+const selectedRoles = [
+  {
+    title: 'Database Analyst — Tourism Whistler',
+    body: 'Database analysis, operational information and data quality in a destination and tourism organization.',
+  },
+  {
+    title: 'Enterprise IT operations and project delivery — Powerex, a subsidiary of BC Hydro',
+    body: 'Enterprise operations, technical project delivery, formal change, resilience, business continuity, governance and documentation.',
+  },
+  {
+    title: 'Legal reporting and technology consulting — Harper Grey LLP, Farris LLP, RBS LLP and JFK Law LLP',
+    body: 'SQL, SSRS, reporting, legal technology, workflow and Microsoft 365 in environments where clarity and accuracy matter.',
+  },
+  {
+    title: 'Principal — RTH Tech Services Inc.',
+    body: 'Selected consulting, systems analysis, reporting, automation, Microsoft 365 and custom internal software.',
+  },
+];
+
+const credentials = [
+  'ITIL Foundation Certificate in IT Service Management',
+  'Microsoft Certified Technology Specialist: SharePoint 2010, Configuration',
+  'Microsoft Certified Technology Specialist: SQL Server 2008, Implementation and Maintenance',
+  'RMIT University, 2003–2004',
+];
+
 const howIWork = [
   {
     title: 'Business analysis first',
@@ -170,6 +196,36 @@ const howIWork = [
     <ul class="experience-list">
       {selectedExperience.map((item) => <li>{item}</li>)}
     </ul>
+  </section>
+
+  <section class="rth-container section-block roles-credentials" aria-labelledby="roles-credentials-heading">
+    <div class="section-intro">
+      <p class="eyebrow">Selected roles & credentials</p>
+      <h2 id="roles-credentials-heading">Compact context, without turning this page into a CV.</h2>
+      <p>
+        These entries are intentionally concise. They add role context and historical credentials,
+        while practical work and current project outcomes remain the primary evidence.
+      </p>
+    </div>
+    <div class="roles-credentials-grid">
+      <div>
+        <h3 class="subheading">Role context</h3>
+        <ul class="roles-list">
+          {selectedRoles.map((item) => (
+            <li>
+              <strong>{item.title}</strong>
+              <p>{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="subheading">Credentials & education</h3>
+        <ul class="credential-list">
+          {credentials.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section class="rth-container how" aria-labelledby="how-heading">
@@ -378,6 +434,62 @@ const howIWork = [
     box-shadow: 0 0 6px rgba(92, 193, 255, 0.55);
   }
 
+  .roles-credentials-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .subheading {
+    margin: 0 0 14px;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+  }
+
+  .roles-list,
+  .credential-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .roles-list li,
+  .credential-list li {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-card);
+    padding: 14px 16px;
+  }
+
+  .roles-list li strong {
+    display: block;
+    margin: 0 0 6px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+
+  .roles-list li p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .credential-list li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
   .how-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -410,6 +522,7 @@ const howIWork = [
     .career-grid,
     .environment-grid,
     .experience-list,
+    .roles-credentials-grid,
     .how-grid {
       grid-template-columns: 1fr;
     }
