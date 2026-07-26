@@ -218,10 +218,8 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     margin: 0 0 40px;
   }
 
-  /* When there is no context paragraph, restore the bottom margin on summary */
-  .summary:last-child {
-    margin-bottom: 40px;
-  }
+  /* When no context paragraph follows, the intro bottom spacing comes from the
+     adjacent hero-wrap section's own padding-bottom — no extra rule needed. */
 
   /* --- Hero image --- */
   .hero-wrap {

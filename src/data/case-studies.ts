@@ -13,7 +13,10 @@
  * empty headings and blank sections are never produced.
  */
 
-/** Allowed project-status values — kept narrow so labelling stays honest. */
+/** Allowed project-status values — kept narrow so labelling stays honest.
+ *  The em dash (—) is an intentional typographic choice consistent with the
+ *  site's design language and is valid UTF-8 in TypeScript source files.
+ */
 export type ProjectStatus =
   | 'Production — actively evolving'
   | 'Under review'
