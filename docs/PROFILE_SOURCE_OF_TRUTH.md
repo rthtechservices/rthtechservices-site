@@ -133,7 +133,7 @@ Do not rewrite this as “I personally created more than 400 reports” unless a
   - matter-centric SharePoint platform;
   - legal technology and business automation;
   - reusable architecture, external collaboration, governance, and workflow design.
-- The Supreme Court workflow is intended to replace the generic SharePoint & Microsoft 365 portfolio item when its case-study content is ready.
+- The Supreme Court workflow case study is now implemented as a specific portfolio item, replacing the previous generic SharePoint & Microsoft 365 umbrella entry.
 
 ### Escala
 
@@ -141,7 +141,7 @@ Do not rewrite this as “I personally created more than 400 reports” unless a
 - Approved future showcase direction:
   - water-sensor alert to Condo Control automation;
   - Microsoft 365, SharePoint, records governance, OCR/search, hardware, vendor coordination, and operational support where appropriate.
-- The water-sensor to Condo Control automation is intended to become a specific case study rather than remaining buried inside a generic Microsoft 365 umbrella.
+- The water-sensor to Condo Control automation case study is now implemented as a specific portfolio item.
 
 ### RTH Tech Services Inc.
 
@@ -181,13 +181,12 @@ Do not rewrite this as “I personally created more than 400 reports” unless a
 - Do not substantially expand or make new architectural claims until Rohan confirms the final positioning.
 - It remains a strong candidate for a flagship experience/capability case study because of the scale and depth of the legal reporting work.
 
-### SharePoint & Microsoft 365 Solutions
+### Legal and building-operations workflow case studies
 
-- Status: To be replaced by more specific case studies.
-- Planned replacements:
-  - JFK Law LLP Supreme Court workflow solution;
-  - Escala water-sensor to Condo Control automation.
-- Do not build more generic umbrella copy unless needed temporarily for navigation continuity.
+- Status: Implemented as specific case studies replacing the previous generic SharePoint & Microsoft 365 umbrella item.
+- Implemented replacements:
+  - JFK Law LLP Supreme Court of Canada Decision Monitor;
+  - Escala Residences Water Sensor Automation.
 
 ### Infrastructure, Remote Management & Resilience
 

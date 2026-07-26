@@ -19,6 +19,8 @@
  */
 export type ProjectStatus =
   | 'Production — actively evolving'
+  | 'Production — operational system'
+  | 'Production — in use and maintained'
   | 'Under review'
   | 'To be determined';
 
@@ -27,6 +29,8 @@ export interface CaseStudy {
   category: string;
   title: string;
   summary: string;
+  /** Optional hero image path in public/images/. */
+  image?: string;
   /** Optional short project-status label shown near the introduction. */
   status?: ProjectStatus;
   whatItSolves: string[];
@@ -55,6 +59,7 @@ export const caseStudies: CaseStudy[] = [
     category: 'Desktop Application',
     title: 'TaskDesk',
     status: 'Production — actively evolving',
+    image: '/images/work-taskdesk.jpg',
     summary:
       'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow management across clients and projects.',
     context:
@@ -96,6 +101,7 @@ export const caseStudies: CaseStudy[] = [
     category: 'Financial Systems',
     title: 'Fiscal Desk',
     status: 'Production — actively evolving',
+    image: '/images/work-fiscal-desk.jpg',
     summary:
       'A custom invoicing and financial-record application, built on PostgreSQL, for professional-services billing — tracking time, fees, disbursements, tax treatment, billing narratives, and generating multi-page invoices.',
     context:
@@ -140,6 +146,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'reporting',
     category: 'Reporting & Analytics',
     title: 'Enterprise Reporting & Forecasting',
+    image: '/images/work-reporting.jpg',
     summary:
       'A portfolio of SQL Server Reporting Services solutions for legal and professional-services environments, including financial forecasting, matter analysis, operational reporting and executive dashboards.',
     whatItSolves: [
@@ -175,47 +182,161 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: 'sharepoint',
-    category: 'Microsoft 365',
-    title: 'SharePoint & Microsoft 365 Solutions',
+    slug: 'jfk-scc-monitor',
+    category: 'Legal Workflow Automation',
+    title: 'JFK Law LLP — Supreme Court of Canada Decision Monitor',
+    status: 'Production — operational system',
     summary:
-      'Governance, document-management and workflow solutions built using SharePoint Online, Power Automate, Microsoft 365 and custom formatting or SPFx components — an umbrella of related work spanning several organizations.',
+      'A production internal monitoring workflow designed and implemented by RTH Tech Services Inc. for JFK Law LLP to detect relevant Supreme Court of Canada publications and alert legal users on an hourly cadence.',
+    context:
+      'Legal teams needed a repeatable way to monitor Supreme Court of Canada publications for matter-relevant changes without relying on manual feed checks throughout the day.',
     whatItSolves: [
-      'Document libraries with inconsistent permissions and no clear ownership of what should be approved for external use.',
-      'No searchable, governed record of approved templates, forms or reference documents.',
-      'Manual routing of documents for review and approval, with status tracked in email.',
-      'Financial and compliance records without a clear, enforced retention structure.',
+      'Manual monitoring of SCC publications is repetitive and easy to miss during busy matter work.',
+      'Teams need reusable criteria for different matters, practice areas, and legal topics, not one-off keyword searches.',
+      'Initial triage needs enough detail to assess relevance quickly before opening internal systems.',
     ],
-    stack: ['SharePoint Online', 'Power Automate', 'Microsoft 365', 'SPFx', 'PowerShell'],
+    stack: [
+      'SharePoint Online',
+      'Microsoft Lists',
+      'SharePoint document libraries',
+      'Power Automate',
+      'RSS',
+      'Microsoft 365',
+      'AI-assisted summarization',
+    ],
+    role: 'I designed and implemented this solution through RTH Tech Services Inc. for JFK Law LLP.',
+    constraints: [
+      'The monitor is a keyword and triage workflow, not a replacement for legal research or professional legal judgement.',
+      'Public descriptions must exclude internal tenant URLs, list identifiers, private matter names, and prompt details.',
+    ],
     features: [
       {
-        title: 'Approved Source Register',
-        body: 'A governed, searchable register of approved documents and templates, replacing informal shared drives with clear ownership and version control.',
+        title: 'Hourly source monitoring',
+        body: 'The workflow checks Supreme Court of Canada Applications for Leave and Judgments feeds every hour.',
       },
       {
-        title: 'OCR & search workflows',
-        body: 'Automated OCR intake so scanned documents become searchable content rather than opaque files sitting in a library.',
+        title: 'Reusable scan profiles',
+        body: 'Users create Scan Profiles with keywords, document categories, optional outcome/status filters, recipients, and an optional AI-summary setting.',
       },
       {
-        title: 'Financial-record retention',
-        body: 'A retention structure enforcing how long financial records are kept and when they are archived, aligned to policy rather than habit.',
+        title: 'Internal knowledge retention',
+        body: 'The system stores source documents in a SharePoint document library and maintains searchable historical feed items, extracted text, profiles, and scan results in the internal SharePoint site.',
+      },
+      {
+        title: 'Triage-ready notifications',
+        body: 'When a profile match is found, the email can include case name and docket number, document type, outcome/status, jurisdiction, the SCC document link, and an AI-generated plain-language summary when enabled.',
+      },
+    ],
+    decisions: [
+      {
+        title: 'Profile-driven matching',
+        body: 'I used reusable Scan Profiles so legal users can define monitoring rules by matter, party, topic, legislation, legal concept, practice area, or geography without rebuilding the automation.',
+      },
+      {
+        title: 'Email-first triage',
+        body: 'Notifications are structured to support a quick relevance assessment from the inbox before opening the internal SharePoint site.',
       },
     ],
     sections: [
       {
-        heading: 'Governance model',
-        body: 'Each solution in this umbrella follows the same underlying model: a defined ownership structure for content, explicit approval workflows built in Power Automate, and permission structures that are reviewed rather than inherited by accident. This keeps the pattern consistent even as it is applied to different document types across organizations.',
+        heading: 'How monitoring works in practice',
+        body: 'The monitor runs every hour, evaluates new SCC feed items against active Scan Profiles, stores the underlying records in SharePoint, and keeps historical matches reviewable for follow-up and auditing.',
       },
       {
-        heading: 'Selected automations',
-        body: 'Beyond the Approved Source Register, the umbrella includes document-approval routing, automated retention and archival flows, and several SPFx components delivering custom formatting where out-of-the-box SharePoint views were insufficient.',
+        heading: 'Operational boundary',
+        body: 'This tool helps with monitoring and triage. It does not replace legal research workflows, legal analysis, or professional judgement.',
       },
     ],
+    outcomes: [
+      'Reusable matter-specific monitoring rules can be maintained by legal users through Scan Profiles.',
+      'Matched notifications provide enough context for a brief relevance decision without first opening the internal site.',
+      'Historical matches remain reviewable inside the SharePoint environment.',
+    ],
+    confidentialityNote:
+      'This case study describes the operational design at a public-safe level and intentionally excludes internal tenant URLs, private matter information, and implementation secrets.',
+  },
+  {
+    slug: 'escala-water-sensor-automation',
+    category: 'Building Operations Automation',
+    title: 'Escala Residences — Water Sensor Automation',
+    status: 'Production — in use and maintained',
+    summary:
+      'A production automation maintained by RTH Tech Services Inc. that converts building water-leak sensor emails into service requests within seconds and automatically closes matching requests when return-to-normal alerts arrive.',
+    context:
+      'Before automation, leak alerts arrived as plain emails in a shared mailbox. Concierge and property-management staff had to read each message, identify location details, find contact information, and manually create service requests around the clock.',
+    whatItSolves: [
+      'Manual alert handling was slower and inconsistent during high-volume or after-hours periods.',
+      'Service request details depended on individual interpretation of plain-text sensor emails.',
+      'Closing resolved events required separate follow-up even when return-to-normal alerts were available.',
+    ],
+    stack: [
+      'Microsoft 365 shared mailbox',
+      'Power Automate',
+      'Building water-leak sensor system',
+      'Condo Control',
+      'Operational logging',
+      'Version-controlled scripts and documentation',
+    ],
+    role: 'I designed, implemented, and maintain this production workflow through RTH Tech Services Inc.',
+    constraints: [
+      'The parser depends on vendor email formatting.',
+      'Common-area sensors do not have resident contacts.',
+      'Units without a designated contact still generate a service request with a note.',
+      'The current configuration is property-specific.',
+      'Fallback depends on original mailbox alerts remaining available.',
+    ],
+    features: [
+      {
+        title: 'Automated alert-to-request path',
+        body: 'When a leak alert email arrives, the workflow parses device, location, unit, and alert time, records the event, looks up the affected unit/contact, and creates a pre-populated service request in seconds.',
+      },
+      {
+        title: 'Automatic recovery closure',
+        body: 'When a return-to-normal email arrives, the matching open service request is located and closed automatically with a note.',
+      },
+      {
+        title: 'Exception and fallback handling',
+        body: 'If any step cannot complete, designated on-call staff receive an exception email, while original mailbox alerts remain as the fallback record for manual processing.',
+      },
+      {
+        title: 'No new concierge interface',
+        body: 'Concierge continues working in the existing service-request queue and interface rather than learning a separate day-to-day tool.',
+      },
+    ],
+    decisions: [
+      {
+        title: 'Keep the operational queue unchanged',
+        body: 'I integrated with the existing property-management request queue so operational adoption stays low-friction.',
+      },
+      {
+        title: 'Preserve manual fallback by design',
+        body: 'Original sensor emails remain in the shared mailbox, allowing staff to revert to the prior manual process without reconfiguration.',
+      },
+    ],
+    sections: [
+      {
+        heading: 'Alert flow',
+        body: 'The workflow receives sensor email alerts, parses key fields, writes an operational-log entry, maps the event to resident-contact context where available, and opens a pre-populated service request for concierge follow-up.',
+      },
+      {
+        heading: 'Roadmap',
+        body: 'Planned improvements include managed secret storage, stronger common-area labeling, more resilient operational-log reporting, scheduled parsing tests, and broader configuration parameterization.',
+      },
+    ],
+    outcomes: [
+      'Service requests are created within seconds of sensor alert emails.',
+      'Request formatting is consistent across alert events.',
+      'Resolved sensor events can be closed automatically when return-to-normal messages arrive.',
+      'Operational history is auditable through mailbox records, workflow run history, and the event log.',
+    ],
+    confidentialityNote:
+      'This case study excludes resident information, unit identifiers, tenant details, credentials, internal endpoints, and other implementation secrets.',
   },
   {
     slug: 'infrastructure',
     category: 'Infrastructure',
     title: 'Infrastructure, Remote Management & Resilience',
+    image: '/images/work-infrastructure.jpg',
     summary:
       'Practical infrastructure solutions covering remote administration, database platforms, backup workflows, monitoring, recovery planning and resilient access to distributed systems.',
     whatItSolves: [
