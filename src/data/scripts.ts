@@ -67,7 +67,6 @@ export const scripts: Script[] = [
       'Standardized author/company/version metadata; no embedded secrets or private endpoints detected.',
     validationDetail: 'PowerShell parse and local report-generation test passed.',
     safety: `${RESPONSIBLE_USE} Review generated reports before sharing — system inventories can contain computer names, usernames, serial numbers, installed software and IP addresses.`,
-    riskLevel: 'low',
   },
   {
     id: 'get-systemreport-html',
@@ -82,7 +81,6 @@ export const scripts: Script[] = [
       'Standardized author/company/version metadata; no embedded secrets or private endpoints detected.',
     validationDetail: 'PowerShell parse and local HTML-generation test passed.',
     safety: `${RESPONSIBLE_USE} The generated report captures local system detail — review it before sharing.`,
-    riskLevel: 'low',
   },
   {
     id: 'invoke-domainhealthcheck',
@@ -96,7 +94,6 @@ export const scripts: Script[] = [
     review: 'Standardized metadata; examples use public documentation domains and resolvers.',
     validationDetail: 'PowerShell parse passed; live-network test pending.',
     safety: `${RESPONSIBLE_USE} Runs outbound network queries against the domain you supply.`,
-    riskLevel: 'low',
   },
   {
     id: 'measure-diskthroughput',
@@ -112,7 +109,6 @@ export const scripts: Script[] = [
     validationDetail:
       'PowerShell parse and missing-drive/CSV safety path passed; full throughput test intentionally pending.',
     safety: `${RESPONSIBLE_USE} Creates and deletes large temporary benchmark files in a dedicated work folder — confirm free space before running.`,
-    riskLevel: 'medium',
   },
   {
     id: 'scan-portrange',
@@ -128,7 +124,6 @@ export const scripts: Script[] = [
     validationDetail: 'PowerShell parse and two-port loopback smoke test passed.',
     safety:
       'Use only against systems you own or have explicit written permission to test. Unauthorized port scanning may breach acceptable-use policy or law. Requires PowerShell 7 or later.',
-    riskLevel: 'high',
   },
   {
     id: 'get-processsnapshot-csv',
@@ -143,7 +138,6 @@ export const scripts: Script[] = [
       'Standardized author/company/version metadata; no embedded secrets or private endpoints detected.',
     validationDetail: 'PowerShell parse and local CSV-generation test passed.',
     safety: `${RESPONSIBLE_USE} Exported process data can reveal usernames and installed software.`,
-    riskLevel: 'low',
   },
   {
     id: 'watch-routertraffic-upnp',
@@ -157,7 +151,6 @@ export const scripts: Script[] = [
     review: 'Removed embedded router address; unicast fallback is now explicit and optional.',
     validationDetail: 'PowerShell parse passed; compatible-router test pending.',
     safety: `${RESPONSIBLE_USE} Requires a UPnP-capable router with the service enabled.`,
-    riskLevel: 'low',
   },
   {
     id: 'watch-pinguntiloffline',
@@ -171,7 +164,6 @@ export const scripts: Script[] = [
     review: 'Removed embedded home-network target; target is now a mandatory parameter.',
     validationDetail: 'PowerShell parse and offline-target/logging test passed.',
     safety: `${RESPONSIBLE_USE} Runs continuously until the target stops responding or you interrupt it.`,
-    riskLevel: 'low',
   },
   {
     id: 'batch-compress-images',
@@ -186,7 +178,6 @@ export const scripts: Script[] = [
       'Added publication metadata, argument validation, deterministic ordering, and protection against reprocessing its own output tree.',
     validationDetail: 'Python compile, JPEG/PNG round trip, and repeat-run tests passed.',
     safety: `${RESPONSIBLE_USE} Writes to a separate output tree and does not modify source images.`,
-    riskLevel: 'low',
   },
   {
     id: 'sql-dependency-graph',
@@ -201,7 +192,6 @@ export const scripts: Script[] = [
       'Added publication metadata, normalized public filename and examples, literal filtering, escaped tooltips, and self-contained UTF-8 HTML output.',
     validationDetail: 'Python compile and two-edge standalone graph-generation test passed.',
     safety: `${RESPONSIBLE_USE} Reads a CSV you supply; the generated HTML embeds your object names.`,
-    riskLevel: 'low',
   },
 ];
 
