@@ -261,14 +261,14 @@ The best first message should include:
   - a Reports Gallery;
   - a combination of a short umbrella page and detailed report entries.
 
-### SharePoint & Microsoft 365 Solutions
+### Legal and building-operations workflow case studies
 
-The generic umbrella item should eventually be replaced by more specific work:
+The previous generic SharePoint/Microsoft 365 umbrella item has now been replaced by:
 
 1. JFK Law LLP Supreme Court workflow solution
 2. Escala water-sensor to Condo Control automation
 
-Do not remove the existing item until replacement routes and content are ready.
+Maintain these as specific case studies with factual boundaries, constraints, and confidentiality-safe implementation detail.
 
 ### Infrastructure, Remote Management & Resilience
 
@@ -398,7 +398,7 @@ Before committing future content:
 
 - JFK Supreme Court workflow
 - Escala water-sensor to Condo Control automation
-- replace the generic SharePoint/Microsoft 365 item
+- replace the generic SharePoint/Microsoft 365 item **(implemented)**
 
 ### Release 3 — Production product stories
 

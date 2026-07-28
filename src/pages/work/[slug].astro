@@ -10,7 +10,7 @@ export function getStaticPaths() {
 }
 
 const { study } = Astro.props;
-const heroImage = `/images/work-${study.slug}.jpg`;
+const heroImage = study.image;
 ---
 
 <BaseLayout title={`${study.title} — RTH Tech Services Inc.`} description={study.summary} active="work">
@@ -18,12 +18,28 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     <a class="back" href="/work/">&larr; All work</a>
     <p class="rth-eyebrow"><span>{study.category}</span></p>
     <h1>{study.title}</h1>
-    <p class="summary">{study.summary}</p>
+    {study.status && (
+      <div class="status-badge" aria-label={`Project status: ${study.status}`}>
+        <span class="status-dot" aria-hidden="true"></span>
+        {study.status}
+      </div>
+    )}
+    <p class={`summary${study.context ? '' : ' summary--no-context'}`}>{study.summary}</p>
+    {study.context && (
+      <p class="context">{study.context}</p>
+    )}
   </section>
 
   <section class="rth-container hero-wrap">
     <div class="hero">
-      <img src={heroImage} alt={`${study.title} — screenshot`} fetchpriority="high" />
+      {heroImage ? (
+        <img src={heroImage} alt={`${study.title} — screenshot`} fetchpriority="high" />
+      ) : (
+        <div class="hero-fallback" role="img" aria-label={`${study.title} (${study.category})`}>
+          <div class="hero-fallback-title">{study.title}</div>
+          <div class="hero-fallback-category">{study.category}</div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -42,6 +58,22 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     </div>
   </section>
 
+  {study.role && (
+    <section class="rth-container role-section">
+      <h2>My role</h2>
+      <p class="role-body">{study.role}</p>
+    </section>
+  )}
+
+  {study.constraints && study.constraints.length > 0 && (
+    <section class="rth-container constraints-section">
+      <h2>Constraints</h2>
+      <ul class="solves">
+        {study.constraints.map((c) => <li>{c}</li>)}
+      </ul>
+    </section>
+  )}
+
   <section class="rth-container highlights">
     <h2>Highlights</h2>
     <div class="feature-grid">
@@ -56,6 +88,20 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     </div>
   </section>
 
+  {study.decisions && study.decisions.length > 0 && (
+    <section class="rth-container decisions-section">
+      <h2>Key decisions</h2>
+      <div class="decision-list">
+        {study.decisions.map((d) => (
+          <div class="decision">
+            <div class="decision-title">{d.title}</div>
+            <p>{d.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
   <section class="rth-container freeform">
     {
       study.sections.map((sec) => (
@@ -66,6 +112,32 @@ const heroImage = `/images/work-${study.slug}.jpg`;
       ))
     }
   </section>
+
+  {study.outcomes && study.outcomes.length > 0 && (
+    <section class="rth-container outcomes-section">
+      <h2>Outcomes</h2>
+      <ul class="solves">
+        {study.outcomes.map((o) => <li>{o}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {study.screenshots && study.screenshots.length > 0 && (
+    <section class="rth-container screenshots-section">
+      <h2>Screenshots</h2>
+      <div class="screenshot-grid">
+        {study.screenshots.map((s) => (
+          <figure class="screenshot">
+            <img src={s.src} alt={s.alt} loading="lazy" />
+            {s.caption && <figcaption>{s.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+      {study.confidentialityNote && (
+        <p class="confidentiality-note">{study.confidentialityNote}</p>
+      )}
+    </section>
+  )}
 
   <section class="cta-band">
     <div class="rth-container band-inner">
@@ -113,13 +185,53 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     font-weight: 600;
   }
 
+  /* --- Project status badge --- */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px 4px 10px;
+    margin-bottom: 18px;
+  }
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 5px rgba(92, 193, 255, 0.7);
+    flex-shrink: 0;
+  }
+
   .summary {
     font-size: 16.5px;
     line-height: 1.7;
     color: var(--text-bio);
     max-width: 70ch;
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  /* When no context paragraph follows, preserve the original 40px gap to the hero. */
+  .summary--no-context {
+    margin-bottom: 40px;
+  }
+
+  .context {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-bio);
+    max-width: 74ch;
     margin: 0 0 40px;
   }
+
+  /* When no context paragraph follows, the intro bottom spacing comes from the
+     .summary--no-context modifier class above. */
 
   /* --- Hero image --- */
   .hero-wrap {
@@ -137,6 +249,32 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .hero-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: clamp(18px, 3.2vw, 34px);
+    background:
+      radial-gradient(100% 70% at 0% 0%, rgba(92, 193, 255, 0.16) 0%, transparent 70%),
+      radial-gradient(80% 60% at 100% 100%, rgba(143, 0, 255, 0.14) 0%, transparent 65%),
+      var(--surface-card-alt);
+  }
+  .hero-fallback-title {
+    font-family: var(--font-ui);
+    font-size: clamp(20px, 3vw, 30px);
+    line-height: 1.25;
+    color: var(--text-primary);
+    font-weight: 600;
+    max-width: 28ch;
+  }
+  .hero-fallback-category {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-faint);
   }
 
   /* --- What it solves / stack --- */
@@ -188,6 +326,23 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     gap: 10px;
   }
 
+  /* --- Role --- */
+  .role-section {
+    padding-bottom: 64px;
+  }
+  .role-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-bio);
+    max-width: 74ch;
+    margin: 0;
+  }
+
+  /* --- Constraints --- */
+  .constraints-section {
+    padding-bottom: 64px;
+  }
+
   /* --- Highlights --- */
   .highlights {
     padding-bottom: 80px;
@@ -220,6 +375,33 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     margin: 0;
   }
 
+  /* --- Key decisions --- */
+  .decisions-section {
+    padding-bottom: 80px;
+  }
+  .decision-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .decision {
+    border-left: 2px solid var(--blue);
+    padding-left: 18px;
+  }
+  .decision-title {
+    font-family: var(--font-ui);
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  .decision p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    margin: 0;
+  }
+
   /* --- Freeform sections --- */
   .freeform {
     padding-bottom: 88px;
@@ -237,6 +419,47 @@ const heroImage = `/images/work-${study.slug}.jpg`;
     color: var(--text-bio);
     margin: 0;
     max-width: 78ch;
+  }
+
+  /* --- Outcomes --- */
+  .outcomes-section {
+    padding-bottom: 80px;
+  }
+
+  /* --- Screenshots --- */
+  .screenshots-section {
+    padding-bottom: 80px;
+  }
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 28px;
+    margin-bottom: 20px;
+  }
+  .screenshot {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface-card-alt);
+  }
+  .screenshot img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .screenshot figcaption {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 10px 14px;
+    line-height: 1.5;
+  }
+  .confidentiality-note {
+    font-size: 13px;
+    color: var(--text-faint);
+    font-style: italic;
+    margin: 0;
+    max-width: 74ch;
   }
 
   /* --- Bottom CTA band --- */
@@ -275,6 +498,9 @@ const heroImage = `/images/work-${study.slug}.jpg`;
       gap: 40px;
     }
     .feature-grid {
+      grid-template-columns: 1fr;
+    }
+    .screenshot-grid {
       grid-template-columns: 1fr;
     }
   }
