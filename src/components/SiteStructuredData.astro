@@ -20,7 +20,12 @@ const structuredData = {
       name: 'RTH Tech Services Inc.',
       url: `${site}/`,
       logo: `${site}/assets/rth-logo.png`,
-      email: 'rohan@rthtechservices.com',
+      // No email property: enquiries go through the contact form, not a published address.
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Business enquiries',
+        url: `${site}/contact/`,
+      },
       founder: { '@id': `${site}/#rohan-hare` },
       address: {
         '@type': 'PostalAddress',

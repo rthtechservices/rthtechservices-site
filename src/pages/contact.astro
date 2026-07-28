@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const EMAIL = 'rohan@rthtechservices.com';
-const SUBJECT = encodeURIComponent('Project enquiry');
+// Contact runs through a Microsoft Forms embed rather than a published address,
+// so the email isn't sitting in the markup for scrapers.
+const FORM_URL =
+  'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=_3niHIv0WUmG1enxanaOaiKVvEAaK2RNnzAvaDbHsqFUNjA0MTRPMDUzNEE1SEs1OFcyQkJWWDdUSS4u&embed=true';
 
 const details = [
-  { label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
   {
     label: 'LinkedIn',
     value: 'linkedin.com/in/rohanhare',
@@ -29,7 +30,8 @@ const details = [
       <p class="lede">
         I&rsquo;m open to consulting, contract work and selected technical projects. The most useful
         first message is a short description of the operational problem you&rsquo;re trying to solve,
-        the systems involved and any important timing or constraints.
+        the systems involved and any important timing or constraints. Use the form and it comes
+        straight to me.
       </p>
 
       <dl class="details">
@@ -58,11 +60,10 @@ const details = [
 
     <div class="panel">
       <h2>Start the conversation</h2>
-      <p>
-        Email is the fastest way to reach me. Include a short description of the problem, your
-        timeline and any relevant context about the systems or people involved.
-      </p>
-      <a class="rth-cta" href={`mailto:${EMAIL}?subject=${SUBJECT}`}>Email me directly</a>
+      <iframe
+        src={FORM_URL}
+        title="Contact form for RTH Tech Services Inc."
+        allowfullscreen></iframe>
       <p class="reply">
         I normally reply within one business day and can usually arrange an initial conversation
         within two to three business days.
@@ -160,11 +161,12 @@ const details = [
     margin: 0 0 12px;
   }
 
-  .panel p {
-    font-size: 14.5px;
-    line-height: 1.7;
-    color: var(--text-muted);
-    margin: 0 0 24px;
+  .panel iframe {
+    display: block;
+    width: 100%;
+    height: 640px;
+    border: 0;
+    border-radius: calc(var(--radius) - 8px);
   }
 
   .panel .reply {
