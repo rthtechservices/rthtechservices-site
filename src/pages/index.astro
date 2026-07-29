@@ -57,27 +57,26 @@ const experience = [
     </div>
   </section>
 
-  <section
-    class="rth-container experience rth-artwork rth-artwork--blue-center-top"
-    aria-labelledby="experience-heading"
-  >
-    <div class="section-head experience-head">
-      <div>
-        <p class="section-kicker">Experience in context</p>
-        <h2 id="experience-heading">Different environments. The same practical standard.</h2>
+  <div class="rth-artwork rth-artwork--blue-center-top">
+    <section class="rth-container experience" aria-labelledby="experience-heading">
+      <div class="section-head experience-head">
+        <div>
+          <p class="section-kicker">Experience in context</p>
+          <h2 id="experience-heading">Different environments. The same practical standard.</h2>
+        </div>
       </div>
-    </div>
-    <div class="experience-grid">
-      {
-        experience.map((item) => (
-          <article class="experience-item">
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+      <div class="experience-grid">
+        {
+          experience.map((item) => (
+            <article class="experience-item">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 
   <section class="rth-container latest">
     <div class="section-head">
@@ -206,6 +205,7 @@ const experience = [
 
   /* --- Experience --- */
   .experience {
+    padding-top: 40px;
     padding-bottom: 92px;
   }
 
@@ -316,6 +316,7 @@ const experience = [
       gap: 36px;
     }
     .experience {
+      padding-top: 32px;
       padding-bottom: 64px;
     }
     .glow {
