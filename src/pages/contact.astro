@@ -24,60 +24,67 @@ const details = [
   description="Discuss a project with Rohan Hare of RTH Tech Services Inc. — consulting and development services in Vancouver, BC and remote."
   active="contact"
 >
-  <section class="rth-container hero rth-artwork rth-artwork--blue-right-bottom">
-    <div>
-      <p class="eyebrow">Contact</p>
-      <h1>Let&rsquo;s discuss a project.</h1>
-      <p class="lede">
-        I&rsquo;m open to consulting, contract work and selected technical projects. The most useful
-        first message is a short description of the operational problem you&rsquo;re trying to solve,
-        the systems involved and any important timing or constraints. Use the form and it comes
-        straight to me.
-      </p>
+  <div class="contact-surface rth-artwork rth-artwork--blue-right-bottom">
+    <section class="rth-container hero">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1>Let&rsquo;s discuss a project.</h1>
+        <p class="lede">
+          I&rsquo;m open to consulting, contract work and selected technical projects. The most useful
+          first message is a short description of the operational problem you&rsquo;re trying to solve,
+          the systems involved and any important timing or constraints. Use the form and it comes
+          straight to me.
+        </p>
 
-      <dl class="details">
-        {
-          details.map((d) => (
-            <div>
-              <dt>{d.label}</dt>
-              <dd>
-                {d.href ? (
-                  <a
-                    href={d.href}
-                    target={d.external ? '_blank' : undefined}
-                    rel={d.external ? 'noopener noreferrer' : undefined}
-                  >
-                    {d.value}
-                  </a>
-                ) : (
-                  d.value
-                )}
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
+        <dl class="details">
+          {
+            details.map((d) => (
+              <div>
+                <dt>{d.label}</dt>
+                <dd>
+                  {d.href ? (
+                    <a
+                      href={d.href}
+                      target={d.external ? '_blank' : undefined}
+                      rel={d.external ? 'noopener noreferrer' : undefined}
+                    >
+                      {d.value}
+                    </a>
+                  ) : (
+                    d.value
+                  )}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
 
-    <div class="panel">
-      <h2>Start the conversation</h2>
-      <iframe
-        src={FORM_EMBED_URL}
-        title="Contact form for RTH Tech Services Inc."
-        loading="lazy"></iframe>
-      <p class="form-option">
-        Prefer more space?
-        <a href={FORM_URL} target="_blank" rel="noopener noreferrer">Open the form in a new tab</a>.
-      </p>
-      <p class="reply">
-        I normally reply within one business day and can usually arrange an initial conversation
-        within two to three business days.
-      </p>
-    </div>
-  </section>
+      <div class="panel">
+        <h2>Start the conversation</h2>
+        <iframe
+          src={FORM_EMBED_URL}
+          title="Contact form for RTH Tech Services Inc."
+          loading="lazy"></iframe>
+        <p class="form-option">
+          Prefer more space?
+          <a href={FORM_URL} target="_blank" rel="noopener noreferrer">Open the form in a new tab</a>.
+        </p>
+        <p class="reply">
+          I normally reply within one business day and can usually arrange an initial conversation
+          within two to three business days.
+        </p>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
+  .contact-surface {
+    margin-bottom: -96px;
+    padding-bottom: 96px;
+  }
+
   .hero {
     padding-top: 64px;
     padding-bottom: 100px;

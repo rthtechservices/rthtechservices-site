@@ -146,29 +146,29 @@ const howIWork = [
     </div>
   </section>
 
-  <section
-    class="rth-container section-block rth-artwork rth-artwork--purple-center-top"
-    aria-labelledby="through-line-heading"
-  >
-    <div class="section-intro">
-      <p class="eyebrow">The career through-line</p>
-      <h2 id="through-line-heading">Broad experience, built one connected layer at a time.</h2>
-      <p>
-        My background is broad, but it is not random. Each stage added another part of the same core
-        capability: understanding operational systems well enough to improve them responsibly.
-      </p>
-    </div>
-    <div class="career-grid">
-      {
-        careerStages.map((item) => (
-          <article class="content-card">
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <div class="rth-artwork rth-artwork--purple-center-top">
+    <section class="rth-container section-block" aria-labelledby="through-line-heading">
+      <div class="section-intro">
+        <p class="eyebrow">The career through-line</p>
+        <h2 id="through-line-heading">Broad experience, built one connected layer at a time.</h2>
+        <p>
+          My background is broad, but it is not random. Each stage added another part of the same
+          core capability: understanding operational systems well enough to improve them
+          responsibly.
+        </p>
+      </div>
+      <div class="career-grid">
+        {
+          careerStages.map((item) => (
+            <article class="content-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 
   <section class="rth-container section-block" aria-labelledby="environments-heading">
     <div class="section-intro">
