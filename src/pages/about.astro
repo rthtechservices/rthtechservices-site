@@ -146,7 +146,10 @@ const howIWork = [
     </div>
   </section>
 
-  <section class="rth-container section-block" aria-labelledby="through-line-heading">
+  <section
+    class="rth-container section-block rth-artwork rth-artwork--purple-center-top"
+    aria-labelledby="through-line-heading"
+  >
     <div class="section-intro">
       <p class="eyebrow">The career through-line</p>
       <h2 id="through-line-heading">Broad experience, built one connected layer at a time.</h2>
@@ -341,9 +344,24 @@ const howIWork = [
   }
 
   .section-intro {
-    border-top: 1px solid var(--border-faint);
+    position: relative;
     padding-top: 40px;
     margin-bottom: 32px;
+  }
+
+  .section-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(92, 193, 255, 0.75),
+      rgba(143, 0, 255, 0.3) 38%,
+      var(--border-faint) 72%,
+      transparent
+    );
+    box-shadow: 0 0 14px rgba(92, 193, 255, 0.12);
   }
 
   .section-intro h2 {
@@ -520,6 +538,9 @@ const howIWork = [
     .section-block,
     .how {
       padding-bottom: 64px;
+    }
+    .glow {
+      inset: 0;
     }
     .career-grid,
     .environment-grid,

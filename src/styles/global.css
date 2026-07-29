@@ -63,6 +63,35 @@ img {
   width: 100%;
 }
 
+/* Approved section artwork. Keep it selective: these images mark a major
+   transition or add depth to an otherwise single-surface page. */
+.rth-artwork {
+  background-color: var(--bg-base);
+  background-image: var(--rth-artwork);
+  background-position: var(--rth-artwork-position, center);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.rth-artwork--blue-center-top {
+  --rth-artwork:
+    linear-gradient(to bottom, rgba(8, 8, 10, 0.18), var(--bg-base)),
+    url('/assets/Background-Blue-Center-Top.jpg');
+  --rth-artwork-position: center top;
+}
+
+.rth-artwork--blue-right-bottom {
+  --rth-artwork: url('/assets/Background-Blue-Right-Bottom.jpg');
+  --rth-artwork-position: right bottom;
+}
+
+.rth-artwork--purple-center-top {
+  --rth-artwork:
+    linear-gradient(to bottom, rgba(8, 8, 10, 0.4), var(--bg-base)),
+    url('/assets/Background-Purple-Center-Top.jpg');
+  --rth-artwork-position: center top;
+}
+
 /* Skip link — keyboard users land here first. */
 .rth-skip {
   position: absolute;
