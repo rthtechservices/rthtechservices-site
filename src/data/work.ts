@@ -49,7 +49,6 @@ export const workItems: WorkItem[] = [
     summary:
       'A portfolio of SQL Server Reporting Services solutions covering financial forecasting, matter analysis, operational reporting, and executive dashboards.',
     href: '/work/reporting/',
-    image: '/images/work-reporting.jpg',
     showOnHome: true,
     tags: ['SSRS', 'Forecasting', 'Dashboards'],
   },
@@ -80,7 +79,6 @@ export const workItems: WorkItem[] = [
     summary:
       'Practical infrastructure work covering remote administration, database platforms, backup workflows, monitoring and resilient access to distributed systems.',
     href: '/work/infrastructure/',
-    image: '/images/work-infrastructure.jpg',
     showOnHome: false,
     tags: ['Infrastructure', 'Monitoring', 'Backup & Recovery'],
   },

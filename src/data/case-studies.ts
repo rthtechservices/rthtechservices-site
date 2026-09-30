@@ -146,7 +146,6 @@ export const caseStudies: CaseStudy[] = [
     slug: 'reporting',
     category: 'Reporting & Analytics',
     title: 'Enterprise Reporting & Forecasting',
-    image: '/images/work-reporting.jpg',
     summary:
       'A portfolio of SQL Server Reporting Services solutions for legal and professional-services environments, including financial forecasting, matter analysis, operational reporting and executive dashboards.',
     whatItSolves: [
@@ -177,7 +176,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: 'Selected reports in this portfolio',
-        body: 'The full set spans a matter profitability forecast, timekeeper utilization summary, executive financial dashboard, client-facing billing package, and several operational and data-quality reports — each documented individually in the Reports Gallery with its business question, audience and methodology.',
+        body: 'The full set spans a matter profitability forecast, timekeeper utilization summary, executive financial dashboard, client-facing billing package, and several operational and data-quality reports — examples of the kinds of reporting this work covers.',
       },
     ],
   },
@@ -336,7 +335,6 @@ export const caseStudies: CaseStudy[] = [
     slug: 'infrastructure',
     category: 'Infrastructure',
     title: 'Infrastructure, Remote Management & Resilience',
-    image: '/images/work-infrastructure.jpg',
     summary:
       'Practical infrastructure solutions covering remote administration, database platforms, backup workflows, monitoring, recovery planning and resilient access to distributed systems.',
     whatItSolves: [
