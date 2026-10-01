@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const shapes = [
+  {
+    title: 'A defined project',
+    body: 'A reporting build-out, a SharePoint or Microsoft 365 platform, or an automation with a clear start and finish. The reporting I built for two law firms from scratch each took about twelve months; the Supreme Court monitor and the water-sensor workflow were smaller, contained builds.',
+    see: { label: 'Reporting case study', href: '/work/reporting/' },
+  },
+  {
+    title: 'Ongoing support and improvement',
+    body: 'Recurring work for an organization that wants one person who already knows the environment. Most of my work comes through repeat business and referrals, including a client relationship that has run for more than a decade, and I manage day-to-day IT for a property-management client.',
+    see: { label: 'Escala automation', href: '/work/escala-water-sensor-automation/' },
+  },
+  {
+    title: 'Assessment and discovery',
+    body: 'Before anything is built: understanding the current process, mapping where data lives and how it moves, and writing down requirements, risks and options. This is often the right first step when the real problem is not yet clear.',
+    see: { label: 'How I work', href: '/about/#how-heading' },
+  },
+  {
+    title: 'A custom internal tool',
+    body: 'A small application built around how your team actually works when off-the-shelf software does not fit. I use this approach in my own practice: TaskDesk and Fiscal Desk are in daily production use and still evolving.',
+    see: { label: 'TaskDesk', href: '/work/taskdesk/' },
+  },
+];
+
+const steps = [
+  {
+    title: 'You send a short message',
+    body: 'Use the contact form. The most useful first message covers the operational problem, the systems or people involved, any timing, and important constraints. A paragraph is plenty.',
+  },
+  {
+    title: 'I reply within one business day',
+    body: 'I will tell you whether it looks like a good fit and what I would want to understand next.',
+  },
+  {
+    title: 'We have an initial conversation',
+    body: 'I can normally arrange this within two to three business days. It is a working conversation about the problem, not a sales presentation.',
+  },
+  {
+    title: 'You get a clear next step',
+    body: 'Usually a short written summary of what I understood, the options, and what I would suggest doing first, so you can decide with the facts in front of you.',
+  },
+];
+
+const fit = [
+  'The problem crosses boundaries: data and workflow, reporting and business interpretation, infrastructure and access, or technology and the people who have to live with it afterward.',
+  'You want one accountable person who can analyze the problem, build the solution and explain it. I am an owner-operated practice, so I work best on engagements that one person can own from end to end.',
+  'You value a supportable result over an impressive one: documentation, a clear handoff, and a system your team can keep running.',
+];
+
+const candid = [
+  'I will tell you what is proven and what is not. For clients, the AI work I have delivered so far is the AI-assisted summaries in the Supreme Court monitor. Everything else I am doing with AI is exploratory, and I will say so.',
+  'Client information stays out of public material. Case studies on this site are written without tenant details, matter names, resident or personal data, or credentials.',
+  'Figures I publish are my own counts and are marked as approximate where they are estimates.',
+];
+
+const needs = [
+  'A named person who can answer questions and make decisions.',
+  'Access to the systems involved, scoped to what the work requires.',
+  'Examples of the current process: the report people use today, the spreadsheet that holds it together, the email thread that describes the problem.',
+  'Honest constraints: budget, timing, security rules, and anything that has been tried before.',
+];
+---
+
+<BaseLayout
+  title="Working with Rohan Hare — RTH Tech Services Inc."
+  description="How I work with clients: the kinds of engagements I take on, how a conversation starts, and what to expect from RTH Tech Services Inc."
+  active="working"
+>
+  <section class="rth-container hero">
+    <p class="eyebrow">Working with me</p>
+    <h1>How an engagement usually works.</h1>
+    <p class="lede">
+      I am open to consulting, contract work and selected technical projects. This page covers the
+      kinds of work I take on, how a conversation starts, and what I will ask of you, so you can
+      decide whether it is worth getting in touch.
+    </p>
+  </section>
+
+  <div class="rth-artwork rth-artwork--purple-center-top">
+    <section class="rth-container block" aria-labelledby="shapes-heading">
+      <div class="intro">
+        <h2 id="shapes-heading">Ways we can work together</h2>
+        <p>Most work falls into one of four shapes. They often lead into one another.</p>
+      </div>
+      <div class="shape-grid">
+        {
+          shapes.map((s) => (
+            <article class="card">
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              <a class="card-link" href={s.see.href}>{s.see.label} &rarr;</a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+
+  <section class="rth-container block" aria-labelledby="steps-heading">
+    <div class="intro">
+      <h2 id="steps-heading">How a conversation starts</h2>
+    </div>
+    <ol class="steps">
+      {
+        steps.map((s) => (
+          <li>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="rth-container block two-col" aria-labelledby="fit-heading">
+    <div>
+      <div class="intro">
+        <h2 id="fit-heading">Where I am most useful</h2>
+      </div>
+      <ul class="dots">
+        {fit.map((f) => <li>{f}</li>)}
+      </ul>
+    </div>
+    <div>
+      <div class="intro">
+        <h2>Where I will be candid</h2>
+      </div>
+      <ul class="dots">
+        {candid.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="rth-container block" aria-labelledby="needs-heading">
+    <div class="intro">
+      <h2 id="needs-heading">What helps from your side</h2>
+    </div>
+    <ul class="dots narrow">
+      {needs.map((n) => <li>{n}</li>)}
+    </ul>
+  </section>
+
+  <section class="cta-band">
+    <div class="rth-container band-inner">
+      <div>
+        <div class="band-title">Have a problem that sits between technology and operations?</div>
+        <div class="band-sub">
+          I normally reply within one business day and can usually arrange an initial conversation
+          within two to three business days.
+        </div>
+      </div>
+      <div class="band-actions">
+        <a class="rth-cta" href="/contact/">Discuss a project</a>
+        <a class="text-link" href="/resume/">Résumé</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: 64px;
+    padding-bottom: 56px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--font-ui);
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+  .lede {
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--text-bio);
+    max-width: 70ch;
+    margin: 0;
+  }
+
+  .block {
+    padding-bottom: 80px;
+  }
+  .intro {
+    position: relative;
+    padding-top: 36px;
+    margin-bottom: 28px;
+  }
+  .intro::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(92, 193, 255, 0.75),
+      rgba(143, 0, 255, 0.3) 38%,
+      var(--border-faint) 72%,
+      transparent
+    );
+  }
+  .intro h2 {
+    font-family: var(--font-ui);
+    font-size: clamp(22px, 3vw, 27px);
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .intro p {
+    margin: 0;
+    max-width: 70ch;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .shape-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-card);
+    padding: 24px 24px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card h3,
+  .steps h3 {
+    font-family: var(--font-ui);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 9px;
+  }
+  .card p,
+  .steps p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .card-link {
+    margin-top: auto;
+    padding-top: 16px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .card-link:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    counter-reset: step;
+  }
+  .steps li {
+    counter-increment: step;
+    border-top: 2px solid rgba(255, 255, 255, 0.12);
+    padding-top: 16px;
+  }
+  .steps li::before {
+    content: counter(step);
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+  .dots {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+  .dots.narrow {
+    max-width: 78ch;
+  }
+  .dots li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+  .dots li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 6px rgba(92, 193, 255, 0.55);
+  }
+
+  .cta-band {
+    border-top: 1px solid var(--border-faint);
+    background: var(--surface-card);
+  }
+  .band-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  .band-title {
+    font-family: var(--font-ui);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .band-sub {
+    margin-top: 6px;
+    max-width: 62ch;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .band-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .text-link {
+    text-decoration: none;
+    color: #e7e6f0;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+    padding-bottom: 3px;
+  }
+  .text-link:hover {
+    border-bottom-color: var(--blue);
+    color: var(--text-primary);
+  }
+  .text-link:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 1080px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 859px) {
+    .hero {
+      padding-top: 48px;
+      padding-bottom: 40px;
+    }
+    .block {
+      padding-bottom: 56px;
+    }
+    .shape-grid,
+    .steps,
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+    .two-col {
+      gap: 8px;
+    }
+    .band-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

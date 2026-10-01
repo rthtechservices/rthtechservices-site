@@ -139,6 +139,21 @@ const heroImage = study.image;
     </section>
   )}
 
+  {study.links && study.links.length > 0 && (
+    <section class="rth-container links-section">
+      <h2>Links</h2>
+      <ul class="solves">
+        {study.links.map((l) => (
+          <li>
+            <a href={l.href} target="_blank" rel="noopener noreferrer">
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
   <section class="cta-band">
     <div class="rth-container band-inner">
       <div>
@@ -426,13 +441,21 @@ const heroImage = study.image;
     padding-bottom: 80px;
   }
 
+  /* --- Links --- */
+  .links-section {
+    padding-bottom: 80px;
+  }
+  .links-section a {
+    color: var(--blue);
+  }
+
   /* --- Screenshots --- */
   .screenshots-section {
     padding-bottom: 80px;
   }
   .screenshot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr));
     gap: 28px;
     margin-bottom: 20px;
   }
@@ -443,10 +466,13 @@ const heroImage = study.image;
     overflow: hidden;
     background: var(--surface-card-alt);
   }
+  /* Natural size, capped at the card width, so small crops are not upscaled. */
   .screenshot img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
     display: block;
+    margin: 0 auto;
   }
   .screenshot figcaption {
     font-size: 13px;

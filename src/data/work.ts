@@ -1,10 +1,7 @@
 /**
- * The six "latest work" items. Ported verbatim from the handoff's
- * site-data.js `workItems`, with prototype filenames mapped to real routes.
- *
- * Copy is final-intent per the handoff, EXCEPT TaskDesk and Fiscal Desk —
- * those summaries are deliberately high-level because the technical detail
- * was never confirmed. Fill those in before launch rather than inventing them.
+ * Work items shown on /work/ and, where `showOnHome` is set, in the homepage
+ * "Latest work" grid. Each item with an `href` under /work/ needs a matching
+ * case study in case-studies.ts.
  */
 export interface WorkItem {
   id: string;
@@ -23,9 +20,9 @@ export const workItems: WorkItem[] = [
   {
     id: 'taskdesk',
     title: 'TaskDesk',
-    tagline: 'Structured task tracking and operational workflow',
+    tagline: 'Email and meetings turned into tracked tasks, time and billing records',
     summary:
-      'A desktop productivity application, built in Python with a PostgreSQL backend, for structured task tracking and operational workflow.',
+      'A production desktop application with an Android companion, built in Python on PostgreSQL, that turns client email and meeting transcripts into tracked tasks and logged time, with AI decisions kept reviewable.',
     href: '/work/taskdesk/',
     image: '/images/work-taskdesk.jpg',
     showOnHome: true,
@@ -34,9 +31,9 @@ export const workItems: WorkItem[] = [
   {
     id: 'fiscaldesk',
     title: 'Fiscal Desk',
-    tagline: 'Invoicing, disbursements and billing narratives',
+    tagline: 'Invoicing, disbursements and bank reconciliation',
     summary:
-      'A custom invoicing and financial-record application, built on PostgreSQL, for generating service invoices and tracking disbursements and billing narratives.',
+      'A production application, built in Python on PostgreSQL, that issues numbered invoices from reviewed time and disbursements and reconciles bank transactions against their supporting documents.',
     href: '/work/fiscal-desk/',
     image: '/images/work-fiscal-desk.jpg',
     showOnHome: true,
@@ -44,13 +41,33 @@ export const workItems: WorkItem[] = [
   },
   {
     id: 'reporting',
-    title: 'Enterprise Reporting & Forecasting',
-    tagline: 'SSRS solutions for professional-services environments',
+    title: 'Legal Reporting & Analytics on Elite 3E',
+    tagline: 'SSRS reporting for three law firms',
     summary:
-      'A portfolio of SQL Server Reporting Services solutions covering financial forecasting, matter analysis, operational reporting, and executive dashboards.',
+      'SQL Server and SSRS reporting against Elite 3E data: built from scratch at two firms and rewritten from the ground up for a third firm’s migration, across roughly 339 reports.',
     href: '/work/reporting/',
     showOnHome: true,
-    tags: ['SSRS', 'Forecasting', 'Dashboards'],
+    tags: ['SSRS', 'SQL Server', 'Elite 3E'],
+  },
+  {
+    id: 'ssrs-vantage',
+    title: 'SSRS Vantage — Report Server Management Tool',
+    tagline: 'One application for report moves, exports and backups',
+    summary:
+      'A custom .NET desktop application that replaced manual steps and VBScripts for promoting, exporting, backing up and comparing SSRS reports, and for reviewing schedules and subscriptions.',
+    href: '/work/ssrs-vantage/',
+    showOnHome: false,
+    tags: ['.NET', 'SSRS', 'Administration'],
+  },
+  {
+    id: 'sharepoint-intranets',
+    title: 'SharePoint Intranets & Microsoft 365 Platforms',
+    tagline: 'Intranets, governance and workflow for legal and property management',
+    summary:
+      'Intranet portals on SharePoint Online covering more than 100 site collections, with information architecture, permissions, governance and workflow automation.',
+    href: '/work/sharepoint-intranets/',
+    showOnHome: false,
+    tags: ['SharePoint Online', 'Power Automate', 'SPFx'],
   },
   {
     id: 'jfk-scc-monitor',
@@ -71,6 +88,26 @@ export const workItems: WorkItem[] = [
     href: '/work/escala-water-sensor-automation/',
     showOnHome: true,
     tags: ['Microsoft 365', 'Power Automate', 'Property Management'],
+  },
+  {
+    id: 'filedesk',
+    title: 'FileDesk — Safe File Consolidation',
+    tagline: 'A deterministic engine with an advisory-only local model',
+    summary:
+      'An active build that consolidates files from many drives. Hashes decide duplicates, a local language model only suggests, and nothing is removed without a verified match, a recorded plan and an explicit commit.',
+    href: '/work/filedesk/',
+    showOnHome: false,
+    tags: ['Python', 'SQLite', 'Local LLM'],
+  },
+  {
+    id: 'sql-analyzer',
+    title: 'RTH Utility SQL Analyzer',
+    tagline: 'Early design: a reporting knowledge base for SSRS estates',
+    summary:
+      'An exploratory workbench, in early design, for cataloguing SSRS reports, dataset SQL and schema dependencies so related reports can be compared on evidence.',
+    href: '/work/sql-analyzer/',
+    showOnHome: false,
+    tags: ['SQL Server', 'SSRS', 'Exploratory'],
   },
   {
     id: 'infrastructure',
