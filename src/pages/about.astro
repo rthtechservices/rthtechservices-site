@@ -1,21 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
 
 const careerStages = [
   {
+    nodeLabel: '2005',
     title: 'Support & systems administration',
+    kicker: '2005 – 2010 · Ford Motor Company, Tourism Whistler',
     body: 'The early years built the habits that still matter: reproduce the problem, inspect the environment, understand dependencies, and fix the cause rather than the symptom.',
   },
   {
+    nodeLabel: '2011',
     title: 'Data, SQL & reporting',
+    kicker: '2011 – 2016 · Tourism Whistler, Harper Grey LLP',
     body: 'Database analysis grew into SQL Server, SSRS and the work of turning business questions into reliable definitions, queries and reporting people can trust.',
   },
   {
+    nodeLabel: '2016',
     title: 'Enterprise operations & delivery',
+    kicker: '2016 – 2024 · Powerex, a subsidiary of BC Hydro',
     body: 'Enterprise IT added formal change, risk, resilience, stakeholder coordination, documentation, testing and the reality that technically correct is not always operationally successful.',
   },
   {
+    nodeLabel: '2016',
     title: 'Consulting & product development',
+    kicker: '2016 – today · RTH Tech Services Inc.',
     body: 'Independent consulting brought the pieces together: clarify the need, choose a supportable architecture, build the solution, explain it clearly and remain accountable for how it behaves.',
   },
 ];
@@ -80,24 +89,29 @@ const credentials = [
 
 const howIWork = [
   {
+    icon: 'search',
     title: 'Business analysis first',
-    body: 'Every engagement starts with understanding the actual operational problem, not just the requested feature, so the solution addresses root causes.',
+    body: 'Every engagement starts with the actual operational problem, not just the requested feature, so the solution addresses root causes.',
   },
   {
+    icon: 'layers',
     title: 'Practical architecture',
-    body: "The right-sized solution for the organization — not the most impressive architecture, and not enterprise tooling the team can't realistically maintain.",
+    body: "The right-sized solution: not the most impressive architecture, and not enterprise tooling the team can't realistically maintain.",
   },
   {
+    icon: 'ledger',
     title: 'Traceable decisions',
-    body: 'Requirements, assumptions, changes and operational decisions are documented so the solution can be understood later rather than reconstructed from folklore.',
+    body: 'Requirements, assumptions and changes are documented, so the solution can be understood later rather than reconstructed from folklore.',
   },
   {
+    icon: 'handoff',
     title: 'Built for handoff',
-    body: 'Documentation and governance are part of delivery, not an afterthought — systems should remain supportable after the engagement ends.',
+    body: 'Documentation and governance are part of delivery, so systems stay supportable after the engagement ends.',
   },
   {
+    icon: 'chat',
     title: 'Useful communication',
-    body: 'Technical detail matters, but it has to be translated into risks, options, decisions and next actions that the audience can actually use.',
+    body: 'Technical detail becomes risks, options, decisions and next actions that the audience can actually use.',
   },
 ];
 ---
@@ -162,16 +176,7 @@ const howIWork = [
           responsibly.
         </p>
       </div>
-      <div class="career-grid">
-        {
-          careerStages.map((item) => (
-            <article class="content-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))
-        }
-      </div>
+      <ProcessFlow variant="line" steps={careerStages} label="Career through-line, 2005 to today" />
     </section>
   </div>
 
@@ -244,16 +249,7 @@ const howIWork = [
       <p class="eyebrow">Working principles</p>
       <h2 id="how-heading">How I work</h2>
     </div>
-    <div class="how-grid">
-      {
-        howIWork.map((item) => (
-          <article class="how-item">
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
-        ))
-      }
-    </div>
+    <ProcessFlow steps={howIWork} numbered={false} label="How I work" />
   </section>
 </BaseLayout>
 
@@ -387,22 +383,7 @@ const howIWork = [
     color: var(--text-muted);
   }
 
-  .career-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
-  }
-
-  .content-card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface-card);
-    padding: 24px 22px;
-  }
-
-  .content-card h3,
-  .environment-item h3,
-  .how-item h3 {
+  .environment-item h3 {
     font-family: var(--font-ui);
     font-size: 16.5px;
     font-weight: 600;
@@ -410,9 +391,7 @@ const howIWork = [
     margin: 0 0 9px;
   }
 
-  .content-card p,
-  .environment-item p,
-  .how-item p {
+  .environment-item p {
     font-size: 14px;
     line-height: 1.65;
     color: var(--text-muted);
@@ -516,24 +495,6 @@ const howIWork = [
     color: var(--text-body);
   }
 
-  .how-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-  }
-
-  .how-item {
-    padding-top: 18px;
-    border-top: 2px solid rgba(255, 255, 255, 0.12);
-  }
-
-  @media (max-width: 1080px) {
-    .career-grid,
-    .how-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   @media (max-width: 859px) {
     .hero {
       padding-top: 48px;
@@ -548,11 +509,9 @@ const howIWork = [
     .glow {
       inset: 0;
     }
-    .career-grid,
     .environment-grid,
     .experience-list,
-    .roles-credentials-grid,
-    .how-grid {
+    .roles-credentials-grid {
       grid-template-columns: 1fr;
     }
   }

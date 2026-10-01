@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { caseStudies } from '../../data/case-studies';
+import ProcessFlow from '../../components/ProcessFlow.astro';
 
 export function getStaticPaths() {
   return caseStudies.map((study) => ({
@@ -49,6 +50,26 @@ const heroImage = study.image;
       )}
     </div>
   </section>
+
+  {study.stats && study.stats.length > 0 && (
+    <section class="rth-container stats-section" aria-label="Key figures">
+      <dl class="stats">
+        {study.stats.map((st) => (
+          <div class="stat">
+            <dt>{st.value}</dt>
+            <dd>{st.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )}
+
+  {study.flow && (
+    <section class="rth-container flow-section" aria-labelledby="flow-heading">
+      <h2 id="flow-heading">{study.flow.heading}</h2>
+      <ProcessFlow steps={study.flow.steps as any} label={study.flow.heading} />
+    </section>
+  )}
 
   <section class="rth-container two-col">
     <div>
@@ -611,6 +632,60 @@ const heroImage = study.image;
   /* --- Outcomes --- */
   .outcomes-section {
     padding-bottom: 80px;
+  }
+
+  /* --- Key figures --- */
+  .stats-section {
+    padding-bottom: 56px;
+  }
+  .stats {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    border-top: 1px solid var(--border-faint);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .stat {
+    padding: 22px 20px 22px 0;
+  }
+  .stat + .stat {
+    padding-left: 20px;
+    border-left: 1px solid var(--border-faint);
+  }
+  .stat dt {
+    font-family: var(--font-ui);
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+  }
+  .stat dd {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 859px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .stat:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .stat:nth-child(n + 3) {
+      border-top: 1px solid var(--border-faint);
+    }
+  }
+
+  /* --- Process flow --- */
+  .flow-section {
+    padding-bottom: 72px;
+  }
+  .flow-section h2 {
+    margin-bottom: 28px;
   }
 
   /* --- Links --- */

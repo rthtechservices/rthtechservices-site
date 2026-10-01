@@ -1,25 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProcessFlow from '../components/ProcessFlow.astro';
+import { icons } from '../data/icons';
 
 const shapes = [
   {
     title: 'A defined project',
+    icon: 'project',
     body: 'A reporting build-out, a SharePoint or Microsoft 365 platform, or an automation with a clear start and finish. The reporting I built for two law firms from scratch each took about twelve months; the Supreme Court monitor and the water-sensor workflow were smaller, contained builds.',
     see: { label: 'Reporting case study', href: '/work/reporting/' },
   },
   {
     title: 'Ongoing support and improvement',
+    icon: 'repeat',
     body: 'Recurring work for an organization that wants one person who already knows the environment. Most of my work comes through repeat business and referrals, including a client relationship that has run for more than a decade, and I manage day-to-day IT for a property-management client.',
     see: { label: 'Escala automation', href: '/work/escala-water-sensor-automation/' },
   },
   {
     title: 'Assessment and discovery',
+    icon: 'search',
     body: 'Before anything is built: understanding the current process, mapping where data lives and how it moves, and writing down requirements, risks and options. This is often the right first step when the real problem is not yet clear.',
     see: { label: 'How I work', href: '/about/#how-heading' },
   },
   {
     title: 'A custom internal tool',
+    icon: 'tool',
     body: 'A small application built around how your team actually works when off-the-shelf software does not fit. I use this approach in my own practice: TaskDesk and Fiscal Desk are in daily production use and still evolving.',
     see: { label: 'TaskDesk', href: '/work/taskdesk/' },
   },
@@ -27,27 +32,23 @@ const shapes = [
 
 const steps = [
   {
-    title: 'You send a short message',
-    tag: 'Contact form',
-    icon: 'form',
+    title: 'Send a message via the contact form',
+    icon: 'mail',
     body: 'A short paragraph is plenty: the operational problem, the systems or people involved, any timing, and important constraints.',
   },
   {
-    title: 'I reply',
-    tag: 'Within one business day',
-    icon: 'reply',
+    title: 'I reply within one business day',
+    icon: 'clock',
     body: 'I will tell you whether it looks like a good fit and what I would want to understand next.',
   },
   {
-    title: 'We talk it through',
-    tag: 'Normally within 2–3 business days',
-    icon: 'talk',
+    title: 'We talk it through, normally within 2–3 business days',
+    icon: 'chat',
     body: 'A working conversation about the problem, not a sales presentation.',
   },
   {
-    title: 'You get a clear next step',
-    tag: 'Short written summary',
-    icon: 'summary',
+    title: 'You get a short written summary',
+    icon: 'document',
     body: 'What I understood, the options, and what I would suggest doing first, so you can decide with the facts in front of you.',
   },
 ];
@@ -97,6 +98,20 @@ const needs = [
         {
           shapes.map((s) => (
             <article class="card">
+              <svg
+                class="card-icon"
+                viewBox="0 0 24 24"
+                width="34"
+                height="34"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+                set:html={icons[s.icon as keyof typeof icons]}
+              />
               <h3>{s.title}</h3>
               <p>{s.body}</p>
               <a class="card-link" href={s.see.href}>{s.see.label} &rarr;</a>
@@ -237,6 +252,11 @@ const needs = [
     padding: 24px 24px 20px;
     display: flex;
     flex-direction: column;
+  }
+  .card-icon {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--blue);
   }
   .card h3 {
     font-family: var(--font-ui);

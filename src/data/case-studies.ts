@@ -50,6 +50,10 @@ export interface CaseStudy {
   screenshots?: { src: string; alt: string; caption?: string }[];
   /** Explains any demonstration or transformed data used in screenshots or examples. */
   confidentialityNote?: string;
+  /** A short process diagram shown above the detail. Icons are keys of src/data/icons.ts. */
+  flow?: { heading: string; steps: { title: string; body: string; icon: string }[] };
+  /** Headline numbers shown as a strip above the detail. Keep them to approved, supportable figures. */
+  stats?: { value: string; label: string }[];
   /** Public links, such as a source repository. Only link repositories that are public. */
   links?: { label: string; href: string }[];
 }
@@ -65,6 +69,16 @@ export const caseStudies: CaseStudy[] = [
       'A desktop application with an Android companion that turns client email and meeting transcripts into tracked tasks, logged time and billing-ready records. Python and PostgreSQL, in production use in my own consulting practice.',
     context:
       'Consulting work generates a continuous stream of tasks, open threads, source files and partial progress across several clients at once. The task managers I evaluated treated each task as an isolated item. They had no queryable data model for the relationships that matter here: a task belongs to a project, a project belongs to a client, and the value is in the trail of emails, meeting decisions, notes and time that builds up around it.',
+    flow: {
+      heading: 'From email to billing record',
+      steps: [
+        { icon: 'mail', title: 'Email and meetings arrive', body: 'Messages and Teams meeting transcripts are collected on a schedule.' },
+        { icon: 'checklist', title: 'They become tasks and notes', body: 'Requests turn into tasks, notes and work-log entries, each linked to its source.' },
+        { icon: 'check', title: 'AI decisions are reviewed', body: 'Suggested closures and links wait in the AI Inbox to be approved, edited or undone.' },
+        { icon: 'clock', title: 'Time is recorded', body: 'A timer or manual entry captures minutes, notes and a billable flag.' },
+        { icon: 'invoice', title: 'Work is invoiced', body: 'Finished work is grouped into reports and billed through Fiscal Desk.' },
+      ],
+    },
     whatItSolves: [
       'Task status scattered across inboxes, spreadsheets and memory, with no single record of what was asked, what was done and what is waiting on someone else.',
       'Meeting decisions and email requests that never become tracked work, or become it days later and without their source.',
@@ -173,6 +187,16 @@ export const caseStudies: CaseStudy[] = [
       'A desktop application for business and personal financial records that also issues my consulting invoices. It turns reviewed time from TaskDesk and client disbursements into numbered invoices, and reconciles bank transactions against their supporting documents. Python and PostgreSQL, in production use.',
     context:
       'Professional-services billing mixes time-based fees, pass-through disbursements and a tax treatment that differs between them. The invoice also has to stay connected to the time entries and supporting documents behind it, and the books have to reconcile against bank activity. The products I evaluated treated these as separate problems, so I built one application around the whole chain from recorded time to reconciled deposit.',
+    flow: {
+      heading: 'From recorded hour to reconciled deposit',
+      steps: [
+        { icon: 'clock', title: 'Time is recorded', body: 'Work is logged in TaskDesk against a client, task and billable rate.' },
+        { icon: 'document', title: 'Narratives are reviewed', body: 'Every line needs a reviewed description. AI may draft wording but cannot change minutes.' },
+        { icon: 'invoice', title: 'The invoice is issued', body: 'Numbered inside a database transaction, with GST on services and the service fee only.' },
+        { icon: 'mail', title: 'Copies are delivered', body: 'A client PDF, an accountant PDF, an Outlook draft and a SharePoint copy.' },
+        { icon: 'bank', title: 'The deposit is reconciled', body: 'The payment is matched to the invoice and its supporting documents.' },
+      ],
+    },
     whatItSolves: [
       'Invoices assembled by hand from time records, receipts and email, with billing narratives written from memory.',
       'Disbursements paid on a client’s behalf that are billed late, billed twice or not billed at all.',
@@ -288,6 +312,13 @@ export const caseStudies: CaseStudy[] = [
       'SQL Server and SSRS reporting for three law firms against Thomson Reuters Elite 3E data: financial, matter, timekeeper, WIP, accounts-receivable and billing reporting, built from scratch at two firms and rewritten from the ground up at a third during its move to Elite 3E.',
     context:
       'Law firms run on time, billing and collections data held in an ERP. Partners, practice groups and accounting staff need accurate, repeatable answers from it: what is unbilled, what is outstanding, how each timekeeper and practice group is performing. Two of these firms had no reporting when I started. The third had a large catalog built on the old Elite Enterprise 3.7 database that could not simply be carried over when the firm moved to Elite 3E.',
+    stats: [
+      { value: '339', label: 'SSRS reports across three law firms' },
+      { value: '~58,000', label: 'lines of SQL behind them' },
+      { value: '~776', label: 'people who use the reports' },
+      { value: '200+', label: 'reports rewritten for the Elite 3E migration' },
+      { value: '600+', label: 'invoices in the monthly billing export' },
+    ],
     whatItSolves: [
       'No repeatable reporting for AR, WIP, billing, timekeeper statistics and firm performance, so each answer meant a fresh manual export.',
       'A reporting catalog tied to the Enterprise 3.7 database, which could not be pointed at 3E, whose schema has more than 10,000 tables compared with a few hundred.',
@@ -421,6 +452,11 @@ export const caseStudies: CaseStudy[] = [
       'Intranet portals and collaboration platforms on SharePoint Online for legal and property-management organizations: information architecture, permissions, governance and workflow automation, replacing older intranets or, in one case, no intranet at all.',
     context:
       'A firm intranet has to be easy to find things on, safe with confidential material and manageable by the people who own it. The organizations I work with had older, hard-to-maintain intranets, or none, and wanted something their staff would actually use.',
+    stats: [
+      { value: '100+', label: 'site collections' },
+      { value: '~400', label: 'users across the portals' },
+      { value: 'Several hundred', label: 'pages of content' },
+    ],
     whatItSolves: [
       'Information spread across file shares, email and out-of-date intranet pages.',
       'Permissions that depended on individual people rather than a design.',
