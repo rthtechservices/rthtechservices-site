@@ -317,7 +317,6 @@ export const caseStudies: CaseStudy[] = [
       { value: '~58,000', label: 'lines of SQL behind them' },
       { value: '~776', label: 'people who use the reports' },
       { value: '200+', label: 'reports rewritten for the Elite 3E migration' },
-      { value: '600+', label: 'invoices in the monthly billing export' },
     ],
     whatItSolves: [
       'No repeatable reporting for AR, WIP, billing, timekeeper statistics and firm performance, so each answer meant a fresh manual export.',
@@ -342,7 +341,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'Custom billing exporter',
-        body: 'A custom exporter prepares the monthly upload of more than 600 invoices to Harper Grey’s largest client. I rewrote it when the client changed its required upload format, replacing a third-party vendor script.',
+        body: 'A custom exporter prepares the monthly invoice upload to Harper Grey’s largest client. I rewrote it when the client changed its required upload format, replacing a third-party vendor script.',
       },
     ],
     decisions: [
@@ -452,11 +451,6 @@ export const caseStudies: CaseStudy[] = [
       'Intranet portals and collaboration platforms on SharePoint Online for legal and property-management organizations: information architecture, permissions, governance and workflow automation, replacing older intranets or, in one case, no intranet at all.',
     context:
       'A firm intranet has to be easy to find things on, safe with confidential material and manageable by the people who own it. The organizations I work with had older, hard-to-maintain intranets, or none, and wanted something their staff would actually use.',
-    stats: [
-      { value: '100+', label: 'site collections' },
-      { value: '~400', label: 'users across the portals' },
-      { value: 'Several hundred', label: 'pages of content' },
-    ],
     whatItSolves: [
       'Information spread across file shares, email and out-of-date intranet pages.',
       'Permissions that depended on individual people rather than a design.',
