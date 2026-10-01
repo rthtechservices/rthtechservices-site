@@ -4,12 +4,14 @@ This repository contains the public website for RTH Tech Services Inc. It is bot
 
 ## Read first
 
+The documents below are intentionally not in this public repo. They live in the sibling folder `../rthtechservices-site-files/` (see `docs/README.md`).
+
 Before changing public content or structure, read:
 
-1. `docs/PROFILE_SOURCE_OF_TRUTH.md`
-2. `docs/CONTENT_STRATEGY.md`
+1. `../rthtechservices-site-files/docs/PROFILE_SOURCE_OF_TRUTH.md`
+2. `../rthtechservices-site-files/docs/CONTENT_STRATEGY.md`
 3. The current page or data file being changed
-4. `docs/AI_SITE_WORKFLOW.md` for the expected developer/reviewer process
+4. `../rthtechservices-site-files/docs/AI_SITE_WORKFLOW.md` for the expected developer/reviewer process
 
 The profile source of truth overrides stale LinkedIn copy, old website copy, chat memory, and model inference.
 

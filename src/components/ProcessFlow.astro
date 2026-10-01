@@ -1,0 +1,381 @@
+---
+/**
+ * Process / timeline graphic.
+ *
+ *  - variant "wave": numbered (or icon) nodes joined by a gradient wave; cards alternate
+ *    above and below.
+ *  - variant "line": a straight gradient axis (used for timelines); cards have a coloured
+ *    title bar and a text box.
+ *
+ * On phones both become a vertical timeline. Pure HTML/CSS plus one decorative inline SVG,
+ * so text stays real and uses the site's fonts and tokens.
+ */
+import { icons, type FlowIcon } from '../data/icons';
+export type { FlowIcon };
+
+export interface FlowStep {
+  title: string;
+  body: string;
+  icon?: FlowIcon;
+  /** Text inside the node instead of the step number (e.g. a year). */
+  nodeLabel?: string;
+  /** Small line above the body, e.g. "2005–2010 · Where". */
+  kicker?: string;
+}
+
+interface Props {
+  steps: FlowStep[];
+  label: string;
+  variant?: 'wave' | 'line';
+  /** When false, the node shows the step's icon instead of a number (and the card omits it). */
+  numbered?: boolean;
+}
+
+const { steps, label, variant = 'wave', numbered = true } = Astro.props as Props;
+const n = steps.length;
+
+// Evenly spaced from the site's blue to its purple.
+const from = [92, 193, 255];
+const to = [143, 0, 255];
+const hex = (i: number) => {
+  const t = n === 1 ? 0 : i / (n - 1);
+  return (
+    '#' +
+    from
+      .map((f, k) => Math.round(f + (to[k] - f) * t).toString(16).padStart(2, '0'))
+      .join('')
+  );
+};
+
+// Geometry (fractions of the full width). Cards are wider than their column: neighbours in
+// the same row are two columns apart, so a card can span nearly 2 columns without touching.
+const gap = 0.03;
+const cardW = Math.min(0.42, (2.5 / n - gap) / 1.5);
+const geo = steps.map((_, i) => {
+  const centre = (i + 0.5) / n;
+  const left = Math.min(Math.max(centre - cardW / 2, 0), 1 - cardW);
+  return {
+    ml: (((left - i / n) * n) * 100).toFixed(3) + '%', // card left edge relative to its column
+    w: (cardW * n * 100).toFixed(3) + '%',
+    tick: (((centre - left) / cardW) * 100).toFixed(3) + '%',
+  };
+});
+
+// Wave path through the node centres (viewBox 1000 x 110, midline y=55).
+const mid = 55;
+const xs = steps.map((_, i) => ((i + 0.5) / n) * 1000);
+let d = `M${xs[0].toFixed(1)} ${mid}`;
+for (let i = 0; i < n - 1; i++) {
+  const dx = xs[i + 1] - xs[i];
+  const off = i % 2 === 0 ? 64 : -64;
+  d += ` C ${(xs[i] + dx * 0.18).toFixed(1)} ${mid + off}, ${(xs[i + 1] - dx * 0.18).toFixed(1)} ${mid + off}, ${xs[i + 1].toFixed(1)} ${mid}`;
+}
+const linePath = `M0 ${mid} L1000 ${mid}`;
+
+const gradId = `flow-grad-${variant}-${n}`;
+---
+
+<div class={`flow flow--${variant}`} style={`--n: ${n}`}>
+  <ol class="flow-list" aria-label={label}>
+    <li class="wave-item" aria-hidden="true">
+      <svg class="wave" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id={gradId} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
+            <stop offset="0" stop-color="#5cc1ff"></stop>
+            <stop offset="1" stop-color="#8f00ff"></stop>
+          </linearGradient>
+        </defs>
+        <path class="wave-glow" d={variant === 'wave' ? d : linePath} style={`stroke: url(#${gradId})`}></path>
+        <path class="wave-line" d={variant === 'wave' ? d : linePath} style={`stroke: url(#${gradId})`}></path>
+      </svg>
+      {variant === 'line' && <span class="line-end"></span>}
+    </li>
+    {
+      steps.map((s, i) => (
+        <li
+          class={`step ${i % 2 === 0 ? 'below' : 'above'}`}
+          style={`--c: ${hex(i)}; --ml: ${geo[i].ml}; --cw: ${geo[i].w}; --tick: ${geo[i].tick}; --col: ${i + 1}`}
+        >
+          <div class={`node${!numbered && !s.nodeLabel ? ' node--glyph' : ''}`} aria-hidden="true">
+            {numbered || s.nodeLabel ? (
+              <span>{s.nodeLabel ?? i + 1}</span>
+            ) : (
+              s.icon && (
+                <svg
+                  viewBox="0 0 24 24"
+                  width="34"
+                  height="34"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={icons[s.icon]}
+                />
+              )
+            )}
+          </div>
+
+          <div class="card">
+            {variant === 'line' ? (
+              <>
+                <h3 class="bar">{s.title}</h3>
+                <div class="box">
+                  {s.kicker && <p class="kicker">{s.kicker}</p>}
+                  <p>{s.body}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                {numbered && s.icon && (
+                  <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    width="36"
+                    height="36"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                    set:html={icons[s.icon]}
+                  />
+                )}
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .flow {
+    position: relative;
+  }
+  .wave-item {
+    display: none;
+  }
+  .flow-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* --- Phone: vertical timeline --- */
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    column-gap: 16px;
+    padding-bottom: 20px;
+  }
+  .step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 29px;
+    top: 60px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(var(--c), rgba(255, 255, 255, 0.1));
+  }
+  .node {
+    grid-column: 1;
+    grid-row: 1;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--surface-card-alt);
+    border: 3px solid var(--c);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--c) 35%, transparent);
+    font-family: var(--font-ui);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .node--glyph {
+    color: var(--c);
+  }
+  .flow--line .node {
+    font-size: 15px;
+  }
+  .card {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--c);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    padding: 18px 18px 16px;
+    color: var(--c);
+  }
+  .icon {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+  }
+  .card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* Timeline cards: coloured title bar over a text box. */
+  .flow--line .card {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .flow--line .card .bar {
+    margin: 0;
+    padding: 9px 14px;
+    border: 1px solid var(--c);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: color-mix(in srgb, var(--c) 20%, #0f0e14);
+    font-size: 15px;
+    text-align: center;
+  }
+  .flow--line .box {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    background: var(--surface-card);
+  }
+  .card .kicker {
+    margin: 0 0 8px;
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--c);
+  }
+
+  /* --- Desktop: axis with cards alternating above and below --- */
+  @media (min-width: 860px) {
+    .flow {
+      --wave-h: 110px;
+    }
+    .wave-item {
+      display: block;
+      grid-column: 1 / -1;
+      grid-row: 2;
+      position: relative;
+    }
+    .wave {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .wave-line,
+    .wave-glow {
+      fill: none;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .wave-line {
+      stroke-width: 3px;
+    }
+    .wave-glow {
+      stroke-width: 10px;
+      opacity: 0.14;
+    }
+    .line-end {
+      display: block;
+      position: absolute;
+      right: 1px;
+      top: calc(50% - 8px);
+      width: 14px;
+      height: 14px;
+      border-top: 3px solid #8f00ff;
+      border-right: 3px solid #8f00ff;
+      transform: rotate(45deg);
+    }
+
+    .flow-list {
+      display: grid;
+      /* No column gap: node centres must sit exactly at (i + 0.5) / n of the width. */
+      grid-template-columns: repeat(var(--n), 1fr);
+      /* Top cards | axis | bottom cards. Row heights follow the tallest card in each row. */
+      grid-template-rows: auto var(--wave-h) auto;
+    }
+    .step {
+      grid-column: var(--col);
+      grid-row: 1 / span 3;
+      grid-template-columns: 1fr;
+      grid-template-rows: subgrid;
+      padding-bottom: 0;
+      column-gap: 0;
+    }
+    .step::before {
+      display: none;
+    }
+    .node {
+      grid-column: 1;
+      grid-row: 2;
+      justify-self: center;
+      align-self: center;
+      width: 76px;
+      height: 76px;
+      font-size: 28px;
+      z-index: 1;
+    }
+    .flow--line .node {
+      font-size: 17px;
+    }
+    .card {
+      grid-column: 1;
+      width: var(--cw);
+      margin-left: var(--ml);
+    }
+    .step.below .card {
+      grid-row: 3;
+      align-self: start;
+      margin-top: 16px;
+    }
+    .step.above .card {
+      grid-row: 1;
+      align-self: end;
+      margin-bottom: 16px;
+    }
+    /* Short connector between card and node, at the node's x position. */
+    .card::after {
+      content: '';
+      position: absolute;
+      left: var(--tick);
+      width: 2px;
+      height: 16px;
+      margin-left: -1px;
+      background: var(--c);
+    }
+    .step.below .card::after {
+      bottom: 100%;
+    }
+    .step.above .card::after {
+      top: 100%;
+    }
+  }
+
+  @media (min-width: 860px) and (max-width: 1200px) {
+    .card p {
+      font-size: 13px;
+    }
+  }
+</style>
