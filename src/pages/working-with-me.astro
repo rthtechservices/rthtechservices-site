@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
 
 const shapes = [
   {
@@ -27,19 +28,27 @@ const shapes = [
 const steps = [
   {
     title: 'You send a short message',
-    body: 'Use the contact form. The most useful first message covers the operational problem, the systems or people involved, any timing, and important constraints. A paragraph is plenty.',
+    tag: 'Contact form',
+    icon: 'form',
+    body: 'A short paragraph is plenty: the operational problem, the systems or people involved, any timing, and important constraints.',
   },
   {
-    title: 'I reply within one business day',
+    title: 'I reply',
+    tag: 'Within one business day',
+    icon: 'reply',
     body: 'I will tell you whether it looks like a good fit and what I would want to understand next.',
   },
   {
-    title: 'We have an initial conversation',
-    body: 'I can normally arrange this within two to three business days. It is a working conversation about the problem, not a sales presentation.',
+    title: 'We talk it through',
+    tag: 'Normally within 2–3 business days',
+    icon: 'talk',
+    body: 'A working conversation about the problem, not a sales presentation.',
   },
   {
     title: 'You get a clear next step',
-    body: 'Usually a short written summary of what I understood, the options, and what I would suggest doing first, so you can decide with the facts in front of you.',
+    tag: 'Short written summary',
+    icon: 'summary',
+    body: 'What I understood, the options, and what I would suggest doing first, so you can decide with the facts in front of you.',
   },
 ];
 
@@ -102,16 +111,7 @@ const needs = [
     <div class="intro">
       <h2 id="steps-heading">How a conversation starts</h2>
     </div>
-    <ol class="steps">
-      {
-        steps.map((s) => (
-          <li>
-            <h3>{s.title}</h3>
-            <p>{s.body}</p>
-          </li>
-        ))
-      }
-    </ol>
+    <ProcessFlow steps={steps} label="How a conversation starts" />
   </section>
 
   <section class="rth-container block two-col" aria-labelledby="fit-heading">
@@ -238,16 +238,14 @@ const needs = [
     display: flex;
     flex-direction: column;
   }
-  .card h3,
-  .steps h3 {
+  .card h3 {
     font-family: var(--font-ui);
     font-size: 17px;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0 0 9px;
   }
-  .card p,
-  .steps p {
+  .card p {
     margin: 0;
     font-size: 14.5px;
     line-height: 1.7;
@@ -265,30 +263,6 @@ const needs = [
   .card-link:focus-visible {
     outline: 2px solid var(--blue);
     outline-offset: 3px;
-  }
-
-  .steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    counter-reset: step;
-  }
-  .steps li {
-    counter-increment: step;
-    border-top: 2px solid rgba(255, 255, 255, 0.12);
-    padding-top: 16px;
-  }
-  .steps li::before {
-    content: counter(step);
-    display: block;
-    font-family: var(--font-ui);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--blue);
-    margin-bottom: 8px;
   }
 
   .two-col {
@@ -374,12 +348,6 @@ const needs = [
     outline-offset: 3px;
   }
 
-  @media (max-width: 1080px) {
-    .steps {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   @media (max-width: 859px) {
     .hero {
       padding-top: 48px;
@@ -389,7 +357,6 @@ const needs = [
       padding-bottom: 56px;
     }
     .shape-grid,
-    .steps,
     .two-col {
       grid-template-columns: 1fr;
     }
