@@ -33,7 +33,14 @@ const heroImage = study.image;
   <section class="rth-container hero-wrap">
     <div class="hero">
       {heroImage ? (
-        <img src={heroImage} alt={`${study.title} — screenshot`} fetchpriority="high" />
+        <button
+          type="button"
+          class="zoom"
+          aria-label={`Enlarge image: ${study.title}`}
+          data-caption={study.title}
+        >
+          <img src={heroImage} alt={`${study.title} — screenshot`} fetchpriority="high" />
+        </button>
       ) : (
         <div class="hero-fallback" role="img" aria-label={`${study.title} (${study.category})`}>
           <div class="hero-fallback-title">{study.title}</div>
@@ -128,7 +135,14 @@ const heroImage = study.image;
       <div class="screenshot-grid">
         {study.screenshots.map((s) => (
           <figure class="screenshot">
-            <img src={s.src} alt={s.alt} loading="lazy" />
+            <button
+              type="button"
+              class="zoom"
+              aria-label="Enlarge image"
+              data-caption={s.caption ?? ''}
+            >
+              <img src={s.src} alt={s.alt} loading="lazy" />
+            </button>
             {s.caption && <figcaption>{s.caption}</figcaption>}
           </figure>
         ))}
@@ -154,6 +168,15 @@ const heroImage = study.image;
     </section>
   )}
 
+  <dialog class="lightbox" aria-label="Image preview">
+    <div class="lightbox-bar">
+      <span class="lightbox-hint">Click the image to switch between fit and actual size</span>
+      <button type="button" class="lightbox-close">Close</button>
+    </div>
+    <div class="lightbox-stage"><img alt="" /></div>
+    <p class="lightbox-caption"></p>
+  </dialog>
+
   <section class="cta-band">
     <div class="rth-container band-inner">
       <div>
@@ -166,6 +189,35 @@ const heroImage = study.image;
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Click-to-enlarge preview using the native <dialog> element (Esc closes it).
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.lightbox');
+  if (dialog) {
+    const preview = dialog.querySelector('img') as HTMLImageElement;
+    const caption = dialog.querySelector('.lightbox-caption') as HTMLElement;
+    const stage = dialog.querySelector('.lightbox-stage') as HTMLElement;
+
+    document.querySelectorAll<HTMLButtonElement>('button.zoom').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const thumb = btn.querySelector('img') as HTMLImageElement;
+        preview.src = thumb.currentSrc || thumb.src;
+        preview.alt = thumb.alt;
+        caption.textContent = btn.dataset.caption ?? '';
+        caption.hidden = !caption.textContent;
+        dialog.classList.remove('actual');
+        dialog.showModal();
+        stage.scrollTo(0, 0);
+      });
+    });
+
+    preview.addEventListener('click', () => dialog.classList.toggle('actual'));
+    dialog.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target === dialog || target === stage || target.closest('.lightbox-close')) dialog.close();
+    });
+  }
+</script>
 
 <style>
   .intro {
@@ -264,6 +316,126 @@ const heroImage = study.image;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* --- Click-to-enlarge --- */
+  .zoom {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    font: inherit;
+    color: inherit;
+  }
+  .zoom::after {
+    content: 'Click to enlarge';
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    background: rgba(8, 8, 16, 0.82);
+    border: 1px solid var(--border);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--text-primary);
+    opacity: 0;
+    transition: opacity var(--ease);
+    pointer-events: none;
+  }
+  .zoom:hover::after,
+  .zoom:focus-visible::after {
+    opacity: 1;
+  }
+  .zoom:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+  }
+  @media (hover: none) {
+    .zoom::after {
+      opacity: 1;
+    }
+  }
+
+  .lightbox {
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-card-alt);
+    color: var(--text-body);
+    max-width: 96vw;
+    max-height: 94vh;
+    overflow: hidden;
+  }
+  .lightbox::backdrop {
+    background: rgba(4, 4, 10, 0.88);
+  }
+  .lightbox[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .lightbox-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .lightbox-hint {
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+  .lightbox-close {
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface-card);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .lightbox-close:hover {
+    border-color: var(--blue);
+  }
+  .lightbox-close:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .lightbox-stage {
+    overflow: auto;
+    min-height: 0;
+  }
+  .lightbox-stage img {
+    display: block;
+    margin: 0 auto;
+    max-width: calc(96vw - 2px);
+    max-height: calc(94vh - 110px);
+    width: auto;
+    height: auto;
+    cursor: zoom-in;
+  }
+  .lightbox.actual .lightbox-stage img {
+    max-width: none;
+    max-height: none;
+    cursor: zoom-out;
+  }
+  .lightbox-caption {
+    margin: 0;
+    padding: 10px 14px;
+    border-top: 1px solid var(--border-faint);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  :global(body:has(.lightbox[open])) {
+    overflow: hidden;
   }
   .hero-fallback {
     width: 100%;
