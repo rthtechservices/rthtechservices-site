@@ -4,9 +4,9 @@ Read and follow `AGENTS.md` before making changes.
 
 For content work, also read:
 
-- `docs/PROFILE_SOURCE_OF_TRUTH.md`
-- `docs/CONTENT_STRATEGY.md`
-- `docs/AI_SITE_WORKFLOW.md`
+- `../rthtechservices-site-files/docs/PROFILE_SOURCE_OF_TRUTH.md`
+- `../rthtechservices-site-files/docs/CONTENT_STRATEGY.md`
+- `../rthtechservices-site-files/docs/AI_SITE_WORKFLOW.md`
 
 Key rules:
 

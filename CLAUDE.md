@@ -1,9 +1,9 @@
 # Claude Instructions — RTH Tech Services Website
 
 @AGENTS.md
-@docs/PROFILE_SOURCE_OF_TRUTH.md
-@docs/CONTENT_STRATEGY.md
-@docs/AI_SITE_WORKFLOW.md
+@../rthtechservices-site-files/docs/PROFILE_SOURCE_OF_TRUTH.md
+@../rthtechservices-site-files/docs/CONTENT_STRATEGY.md
+@../rthtechservices-site-files/docs/AI_SITE_WORKFLOW.md
 
 ## Claude-specific role
 
@@ -24,4 +24,4 @@ When asked to implement:
 - run the build and report failures precisely;
 - create or update a draft pull request rather than merging.
 
-The repository documentation is the durable memory. Do not rely on remembered conversation details when a repository source exists.
+The durable memory is the documentation in the sibling folder `../rthtechservices-site-files/` (kept out of this public repo; see `docs/README.md`). Do not rely on remembered conversation details when a repository source exists.
